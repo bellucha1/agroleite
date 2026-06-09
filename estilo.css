@@ -9,6 +9,7 @@
 body{
     background:#f5efe6;
     color:#3e2723;
+    line-height:1.5;
 }
 
 /* NAVBAR */
@@ -24,10 +25,12 @@ nav a{
     margin:0 15px;
     font-weight:bold;
     transition:0.3s;
+    display:inline-block;
 }
 
 nav a:hover{
     color:#d7ccc8;
+    transform:scale(1.05);
 }
 
 /* BANNER */
@@ -40,11 +43,11 @@ nav a:hover{
 
 .banner h1{
     font-size:48px;
+    margin-bottom:10px;
 }
 
 .banner p{
     font-size:18px;
-    margin-top:10px;
 }
 
 /* CONTAINER */
@@ -63,15 +66,18 @@ nav a:hover{
     margin-bottom:20px;
 }
 
+/* TÍTULOS */
 .card h1,
 .card h2,
 .card h3{
     color:#4e342e;
+    margin-bottom:10px;
 }
 
 /* TEXTO */
 p, li, td{
     color:#5d4037;
+    margin-bottom:10px;
 }
 
 /* BOTÕES */
@@ -84,10 +90,12 @@ button{
     cursor:pointer;
     transition:0.3s;
     font-size:15px;
+    margin-top:10px;
 }
 
 button:hover{
     background:#3e2723;
+    transform:scale(1.03);
 }
 
 /* TABELAS */
@@ -95,6 +103,7 @@ table{
     width:100%;
     border-collapse:collapse;
     margin-top:10px;
+    background:white;
 }
 
 th, td{
@@ -114,6 +123,11 @@ input, select{
     margin:8px 0;
     border:1px solid #ccc;
     border-radius:6px;
+    outline:none;
+}
+
+input:focus, select:focus{
+    border-color:#6d4c41;
 }
 
 /* FOOTER */
