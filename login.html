@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGROLEITE - Acesso</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#2E7D32,#81C784);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    width:400px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+h1{
+    color:#2E7D32;
+    margin-bottom:20px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.cliente{
+    background:#4CAF50;
+    color:white;
+}
+
+.funcionario{
+    background:#1565C0;
+    color:white;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+#areaFuncionario{
+    display:none;
+}
+
+.erro{
+    color:red;
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AGROLEITE</h1>
+
+    <div id="inicio">
+        <button class="cliente" onclick="cliente()">
+            SOU CLIENTE
+        </button>
+
+        <button class="funcionario" onclick="mostrarFuncionario()">
+            SOU FUNCIONÁRIO
+        </button>
+    </div>
+
+    <div id="areaFuncionario">
+
+        <input type="text" id="chave" placeholder="Chave de acesso">
+
+        <input type="password" id="senha" placeholder="Senha">
+
+        <input type="text" id="codigo" placeholder="Código">
+
+        <input type="text" id="frase"
+        placeholder="Digite a frase de segurança">
+
+        <button class="funcionario" onclick="validarFuncionario()">
+            PROSSEGUIR
+        </button>
+
+        <button onclick="voltar()">
+            VOLTAR
+        </button>
+
+        <div class="erro" id="erro"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+function cliente(){
+    window.location.href = "index.html";
+}
+
+function mostrarFuncionario(){
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("areaFuncionario").style.display = "block";
+}
+
+function voltar(){
+    document.getElementById("inicio").style.display = "block";
+    document.getElementById("areaFuncionario").style.display = "none";
+}
+
+function validarFuncionario(){
+
+    const chave = document.getElementById("chave").value;
+    const senha = document.getElementById("senha").value;
+    const codigo = document.getElementById("codigo").value;
+    const frase = document.getElementById("frase").value.trim().toUpperCase();
+
+    // Credenciais de exemplo
+    const chaveCorreta = "AGROLEITE2025";
+    const senhaCorreta = "FUNC123";
+    const codigoCorreto = "0000";
+    const fraseCorreta = "VACA JERSEY TEM O LEITE MAIS GORDO";
+
+    if(
+        chave === chaveCorreta &&
+        senha === senhaCorreta &&
+        codigo === codigoCorreto &&
+        frase === fraseCorreta
+    ){
+        window.location.href = "index.html";
+    }else{
+        document.getElementById("erro").innerText =
+        "Dados incorretos. Verifique as informações.";
+    }
+}
+
+</script>
+
+</body>
+</html>
