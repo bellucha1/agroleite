@@ -45,16 +45,51 @@
 
             <h3>🛠️ Adicionar Serviços ao Agendamento</h3>
             
-            <label for="selServico">Selecione o Serviço:</label>
             <select id="selServico" onchange="atualizarDadosServico()">
-                <option value="">Parto (bovino, equino...)</option>
-                <option value="">Nutrição</option>
-                <option value="">STrat. para ejeção de placenta</option>
-                <option value="">Acessoria Agronômica</option>
-                <option value="">Consultas</option>
-                <option value="">Entrega de fertilizantes</option>
-                <option value="">Outro(s)</option>
-            </select>
+    <option value="">Selecione um serviço</option>
+
+    <option value="Parto"
+            data-preco="350"
+            data-tempo="3">
+        Parto (bovino, equino...)
+    </option>
+
+    <option value="Nutricao"
+            data-preco="200"
+            data-tempo="2">
+        Nutrição
+    </option>
+
+    <option value="Placenta"
+            data-preco="150"
+            data-tempo="1">
+        Trat. para ejeção de placenta
+    </option>
+
+    <option value="Agronomia"
+            data-preco="300"
+            data-tempo="2">
+        Assessoria Agronômica
+    </option>
+
+    <option value="Consulta"
+            data-preco="100"
+            data-tempo="1">
+        Consultas
+    </option>
+
+    <option value="Fertilizantes"
+            data-preco="80"
+            data-tempo="1">
+        Entrega de fertilizantes
+    </option>
+
+    <option value="Outros"
+            data-preco="0"
+            data-tempo="0">
+        Outro(s)
+    </option>
+</select>
 
             <div style="display: flex; gap: 15px; margin-top: 5px;">
                 <div style="flex: 1;">
