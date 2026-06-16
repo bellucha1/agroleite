@@ -7,14 +7,14 @@
 
 /* FUNDO GERAL */
 body{
-    background:#f5efe6;
-    color:#3e2723;
+    background:#F7F3EF;
+    color:#5D4037;
     line-height:1.5;
 }
 
 /* NAVBAR */
 nav{
-    background:#4e342e;
+    background:#A1887F;
     padding:15px;
     text-align:center;
 }
@@ -29,14 +29,14 @@ nav a{
 }
 
 nav a:hover{
-    color:#d7ccc8;
+    color:#F5F5F5;
     transform:scale(1.05);
 }
 
 /* BANNER */
 .banner{
-    background:linear-gradient(135deg,#6d4c41,#3e2723);
-    color:white;
+    background:linear-gradient(135deg,#D7CCC8,#A1887F);
+    color:#4E342E;
     text-align:center;
     padding:60px 20px;
 }
@@ -59,31 +59,32 @@ nav a:hover{
 
 /* CARD */
 .card{
-    background:white;
+    background:#FFFFFF;
     padding:25px;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
     margin-bottom:20px;
+    border:1px solid #E0D7D1;
 }
 
 /* TÍTULOS */
 .card h1,
 .card h2,
 .card h3{
-    color:#4e342e;
+    color:#6D4C41;
     margin-bottom:10px;
 }
 
 /* TEXTO */
 p, li, td{
-    color:#5d4037;
+    color:#795548;
     margin-bottom:10px;
 }
 
 /* BOTÕES */
 button{
-    background:#6d4c41;
-    color:white;
+    background:#BCAAA4;
+    color:#4E342E;
     border:none;
     padding:12px 18px;
     border-radius:8px;
@@ -91,10 +92,12 @@ button{
     transition:0.3s;
     font-size:15px;
     margin-top:10px;
+    font-weight:bold;
 }
 
 button:hover{
-    background:#3e2723;
+    background:#A1887F;
+    color:white;
     transform:scale(1.03);
 }
 
@@ -107,13 +110,14 @@ table{
 }
 
 th, td{
-    border:1px solid #d7ccc8;
+    border:1px solid #D7CCC8;
     padding:10px;
     text-align:left;
 }
 
 th{
-    background:#efebe9;
+    background:#EFEBE9;
+    color:#5D4037;
 }
 
 /* INPUTS */
@@ -121,18 +125,19 @@ input, select{
     width:100%;
     padding:10px;
     margin:8px 0;
-    border:1px solid #ccc;
+    border:1px solid #D7CCC8;
     border-radius:6px;
     outline:none;
 }
 
 input:focus, select:focus{
-    border-color:#6d4c41;
+    border-color:#A1887F;
+    box-shadow:0 0 5px rgba(161,136,127,0.3);
 }
 
 /* FOOTER */
 footer{
-    background:#4e342e;
+    background:#A1887F;
     color:white;
     text-align:center;
     padding:20px;
@@ -141,6 +146,6 @@ footer{
 
 /* ERRO */
 .erro{
-    color:red;
+    color:#C62828;
     font-weight:bold;
 }
