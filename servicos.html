@@ -1,11 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="estilo.css">
-    <title>SisCristóvão - Cadastro de Serviços</title>
+    <title>AGROLEITE - Cadastro de Serviços</title>
 </head>
+
 <body>
+
     <nav>
         <a href="home.html">Home</a>
         <a href="clientes.html">Clientes</a>
@@ -16,51 +19,91 @@
 
     <header class="banner">
         <h1>Gestão de Serviços</h1>
-        <p>Cadastre e configure o catálogo de assistência técnica do laboratório</p>
+        <p>Cadastre e gerencie os serviços oferecidos aos produtores rurais</p>
     </header>
 
     <div class="container">
+
         <div class="card">
+
             <h2>Novo Serviço</h2>
+
             <form action="/salvar-servico" method="POST">
+
                 <label for="descricao">Descrição do Serviço:</label>
-                <input type="text" id="descricao" name="descricao" placeholder="Ex: Formatação e Instalação de Sistema Operacional" required>
-                
-                <label for="preco">Preço / Custo de Materiais (R$):</label>
-                <input type="number" step="0.01" id="preco" name="preco" placeholder="0.00" required>
-                
-                <label for="tempo_estimado">Tempo Estimado (em horas):</label>
-                <input type="number" id="tempo_estimado" name="tempo_estimado" placeholder="Ex: 2" min="1" required>
-                
+                <input type="text"
+                       id="descricao"
+                       name="descricao"
+                       placeholder="Ex: Análise da Qualidade do Leite"
+                       required>
+
+                <label for="preco">Valor do Serviço (R$):</label>
+                <input type="number"
+                       step="0.01"
+                       id="preco"
+                       name="preco"
+                       placeholder="0.00"
+                       required>
+
+                <label for="tempo_estimado">Tempo Estimado (horas):</label>
+                <input type="number"
+                       id="tempo_estimado"
+                       name="tempo_estimado"
+                       placeholder="Ex: 2"
+                       min="1"
+                       required>
+
                 <button type="submit">Salvar Serviço</button>
+
             </form>
+
         </div>
 
-        <div class="card" style="margin-top: 20px;">
+        <div class="card" style="margin-top:20px;">
+
             <h2>Serviços Disponíveis</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
-                Catálogo de atividades técnicas executadas pelos alunos no laboratório do São Cristóvão.
+
+            <p style="font-size:0.9rem; margin-bottom:10px;">
+                Catálogo de serviços e atendimentos disponíveis para produtores e propriedades rurais cadastradas no AGROLEITE.
             </p>
+
             <table>
+
                 <thead>
                     <tr>
                         <th>Descrição</th>
-                        <th>Preço (R$)</th>
+                        <th>Valor (R$)</th>
                         <th>Tempo Estimado</th>
                     </tr>
                 </thead>
+
                 <tbody id="lista-servicos">
-                    </tbody>
+                </tbody>
+
             </table>
+
         </div>
+
     </div>
 
+    <footer>
+        <div>
+            <p>&copy; 2026 AGROLEITE - Sistema de Gestão Rural</p>
+            <p>Desenvolvido para o setor agropecuário 🐄</p>
+        </div>
+    </footer>
+
     <script>
+
         fetch('/listar-servicos')
             .then(res => res.json())
             .then(servicos => {
-                const corpoTabela = document.getElementById('lista-servicos');
+
+                const corpoTabela =
+                    document.getElementById('lista-servicos');
+
                 servicos.forEach(s => {
+
                     corpoTabela.innerHTML += `
                         <tr>
                             <td><strong>${s.descricao}</strong></td>
@@ -68,15 +111,14 @@
                             <td>${s.tempo_estimado}h</td>
                         </tr>`;
                 });
-            })
-            .catch(err => console.error("Erro ao listar serviços:", err));
-    </script>
-</body>
 
-<footer class="rodape">
-    <div class="container-rodape">
-        <p>&copy; 2026 SisCristóvão - Sistema de Controle de Serviços</p>
-        <p>Desenvolvido para fins didáticos - Alunos do São Cristóvão</p>
-    </div>
-</footer>
+            })
+            .catch(err =>
+                console.error("Erro ao listar serviços:", err));
+
+    </script>
+
+</body>
 </html>
+```
+
