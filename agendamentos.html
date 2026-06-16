@@ -31,14 +31,15 @@
 
             <label for="selCliente">Cliente / Solicitante:</label>
             <select id="selCliente">
-                <option value="">Selecione o Cliente...</option>
+                <option value="">João Victor</option>
+                <option value="">Isabella Juliana</option>
+                <option value="">Pedro Emanuel</option>
+                <option value="">Roselaine Clei</option>
             </select>
 
             <label for="data_agendamento">Data e Hora do Atendimento:</label>
             <input type="datetime-local" id="data_agendamento" required>
 
-            <label for="responsavel">Aluno / Equipe Responsável:</label>
-            <input type="text" id="responsavel" placeholder="Ex: Grupo 2 (Ana e Pedro)" required>
 
             <hr>
 
@@ -46,7 +47,13 @@
             
             <label for="selServico">Selecione o Serviço:</label>
             <select id="selServico" onchange="atualizarDadosServico()">
-                <option value="">Selecione um serviço...</option>
+                <option value="">Parto (bovino, equino...)</option>
+                <option value="">Nutrição</option>
+                <option value="">STrat. para ejeção de placenta</option>
+                <option value="">Acessoria Agronômica</option>
+                <option value="">Consultas</option>
+                <option value="">Entrega de fertilizantes</option>
+                <option value="">Outro(s)</option>
             </select>
 
             <div style="display: flex; gap: 15px; margin-top: 5px;">
