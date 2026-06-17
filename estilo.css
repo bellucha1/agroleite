@@ -41,9 +41,30 @@ nav a:hover{
     padding:60px 20px;
 }
 
+/* TÍTULO AGROLEITE COM EFEITO VACA */
+
 .banner h1{
-    font-size:48px;
-    margin-bottom:10px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 64px;
+    font-weight: 800;
+    text-transform: uppercase;
+
+    background:
+        radial-gradient(circle at 20% 30%, #6D4C41 0 12%, transparent 13%),
+        radial-gradient(circle at 75% 25%, #8D6E63 0 10%, transparent 11%),
+        radial-gradient(circle at 40% 75%, #6D4C41 0 15%, transparent 16%),
+        radial-gradient(circle at 85% 80%, #8D6E63 0 12%, transparent 13%),
+        #D7CCC8;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    text-shadow:
+        3px 3px 0 #5D4037,
+        6px 6px 10px rgba(0,0,0,0.2);
+
+    letter-spacing: 3px;
 }
 
 .banner p{
