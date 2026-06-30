@@ -30,35 +30,63 @@
 
             <form action="/salvar-servico" method="POST">
 
-                <label for="descricao">Descrição do Serviço:</label>
-                <input type="text"
-                       id="descricao"
-                       name="descricao"
-                       placeholder="Ex: Análise da Qualidade do Leite"
-                       required>
+               <script>
 
-                <label for="preco">Valor do Serviço (R$):</label>
-                <input type="number"
-                       step="0.01"
-                       id="preco"
-                       name="preco"
-                       placeholder="0.00"
-                       required>
+const catalogoServicos = [
 
-                <label for="tempo_estimado">Tempo Estimado (horas):</label>
-                <input type="number"
-                       id="tempo_estimado"
-                       name="tempo_estimado"
-                       placeholder="Ex: 2"
-                       min="1"
-                       required>
+    {
+        descricao: "Análise da Qualidade do Leite",
+        preco: 120.00,
+        tempo: 2
+    },
 
-                <button type="submit">Salvar Serviço</button>
+    {
+        descricao: "Coleta de Amostras",
+        preco: 80.00,
+        tempo: 1
+    },
 
-            </form>
+    {
+        descricao: "Visita Técnica",
+        preco: 250.00,
+        tempo: 4
+    },
 
-        </div>
+    {
+        descricao: "Consultoria em Nutrição Animal",
+        preco: 350.00,
+        tempo: 5
+    },
 
+    {
+        descricao: "Diagnóstico da Propriedade",
+        preco: 450.00,
+        tempo: 6
+    },
+
+    {
+        descricao: "Treinamento de Ordenha",
+        preco: 300.00,
+        tempo: 3
+    }
+
+];
+
+const tabela = document.getElementById("lista-servicos");
+
+catalogoServicos.forEach(servico => {
+
+    tabela.innerHTML += `
+        <tr>
+            <td><strong>${servico.descricao}</strong></td>
+            <td>R$ ${servico.preco.toFixed(2)}</td>
+            <td>${servico.tempo}h</td>
+        </tr>
+    `;
+
+});
+
+</script>
         <div class="card" style="margin-top:20px;">
 
             <h2>Serviços Disponíveis</h2>
