@@ -62,7 +62,6 @@ app.post('/salvar-cliente', (req, res) => {
     
     db.run(sql, [nome, cpf, telefone], (err) => {
         if (err) return res.status(500).send("Erro ao salvar cliente: " + err.message);
-        // Redireciona de volta para a página de listagem/cadastro
         res.redirect('/clientes.html');
     });
 });
