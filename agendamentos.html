@@ -1,149 +1,364 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="estilo.css">
-    <title>AgroLeite - Lançar Agendamento</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AGROLEITE - Agendamentos</title>
+
+<link rel="stylesheet" href="estilo.css">
+
 </head>
+
 <body>
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="clientes.html">Clientes</a>
-        <a href="servicos.html">Serviços</a>
-        <a href="agendamentos.html">Agendamentos</a>
-        <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
-    </nav>
 
-    <header class="banner">
-        <h1>Controle de Agendamentos</h1>
-        <p>Abra ordens de serviço e reserve horários para atendimento</p>
-    </header>
+<nav>
+    <a href="home.html">Home</a>
+    <a href="clientes.html">Clientes</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="agendamentos.html">Agendamentos</a>
+    <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
+</nav>
 
-    <div class="container">
-        <div style="margin-bottom: 20px;">
-            <button onclick="window.location.href='consulta_agendamentos.html'" style="background: #555; width: auto; padding: 10px 20px;">
-                🔍 Ver Histórico de Agendamentos
-            </button>
-        </div>
+<header class="banner">
+    <h1>Controle de Agendamentos</h1>
+    <p>Cadastre atendimentos para os clientes</p>
+</header>
 
-        <div class="card">
-            <h2>Nova Ordem de Serviço / Agendamento</h2>
+<div class="container">
 
-            <label for="selCliente">Cliente / Solicitante:</label>
-            <select id="selCliente">
-                <option value="">João Victor</option>
-                <option value="">Isabella Juliana</option>
-                <option value="">Pedro Emanuel</option>
-                <option value="">Roselaine Clei</option>
-            </select>
+<div class="card">
 
-            <label for="data_agendamento">Data e Hora do Atendimento:</label>
-            <input type="datetime-local" id="data_agendamento" required>
+<h2>Novo Agendamento</h2>
 
+<label>Cliente</label>
 
-            <hr>
+<select id="cliente">
 
-            <h3>🛠️ Adicionar Serviços ao Agendamento</h3>
-            
-            <select id="selServico" onchange="atualizarDadosServico()">
-    <option value="">Selecione um serviço</option>
+    <option>João Victor</option>
+    <option>Isabella Juliana</option>
+    <option>Pedro Emanuel</option>
+    <option>Roselaine Clei</option>
 
-    <option value="Parto"
-            data-preco="350"
-            data-tempo="3">
-        Parto (bovino, equino...)
-    </option>
-
-    <option value="Nutricao"
-            data-preco="200"
-            data-tempo="2">
-        Nutrição
-    </option>
-
-    <option value="Placenta"
-            data-preco="150"
-            data-tempo="1">
-        Trat. para ejeção de placenta
-    </option>
-
-    <option value="Agronomia"
-            data-preco="300"
-            data-tempo="2">
-        Assessoria Agronômica
-    </option>
-
-    <option value="Consulta"
-            data-preco="100"
-            data-tempo="1">
-        Consultas
-    </option>
-
-    <option value="Fertilizantes"
-            data-preco="80"
-            data-tempo="1">
-        Entrega de fertilizantes
-    </option>
-
-    <option value="Outros"
-            data-preco="0"
-            data-tempo="0">
-        Outro(s)
-    </option>
 </select>
 
-            <div style="display: flex; gap: 15px; margin-top: 5px;">
-                <div style="flex: 1;">
-                    <label>Preço Sugerido (R$):</label>
-                    <input type="number" id="txtPreco" readonly style="background: #eee;">
-                </div>
-                <div style="flex: 1;">
-                    <label>Tempo Est. (Horas):</label>
-                    <input type="number" id="txtTempo" readonly style="background: #eee;">
-                </div>
-            </div>
+<br><br>
 
-            <button type="button" onclick="adicionarServicoNaLista()" style="background-color: var(--primary-blue); margin-top: 15px;">
-                ➕ Incluir Serviço no Agendamento
-            </button>
-        </div>
+<label>Data</label>
 
-        <div class="card" style="margin-top: 20px;">
-            <h2>Serviços Inclusos neste Agendamento</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Serviço</th>
-                        <th>Tempo Est.</th>
-                        <th>Preço (R$)</th>
-                    </tr>
-                </thead>
-                <tbody id="lista-servicos-agendados">
-                    </tbody>
-            </table>
+<input type="date" id="data">
 
-            <div style="text-align: right; margin-top: 15px;">
-                <h3 id="txtTotal">Total Geral: R$ 0.00</h3>
-                <h4 id="txtTempoTotal" style="color: var(--accent-red);">Tempo Total Estimado: 0h</h4>
-            </div>
+<br><br>
 
-            <button type="button" onclick="finalizarAgendamento()" style="margin-top: 15px; background-color: var(--accent-red);">
-                💾 Salvar e Confirmar Agendamento
-            </button>
-        </div>
-    </div>
+<label>Hora</label>
 
-    <script>
-        let listaServicosDb = [];
-        let carrinhoServicos = [];
-        let totalGeral = 0;
-        let tempoTotalGeral = 0;
+<input type="time" id="hora">
 
-        // Carrega os dados iniciais do banco ao abrir a página
-        window.onload = function() {
-            // Buscar clientes para o Select
-            fetch('/listar-clientes')
-                .then(res => res.json())
-                .then(clientes => {
-                    const sel = document.getElementById('selCliente');
-                    clientes.forEach(c => {
-                        sel.innerHTML += `<option value="${c.id}">${c.nome} (${c.cpf})
+<hr>
+
+<h2>Adicionar Serviço</h2>
+
+<label>Serviço</label>
+
+<select id="servico" onchange="selecionarServico()">
+
+<option value="">Selecione...</option>
+
+<option value="0">
+Análise da Qualidade do Leite
+</option>
+
+<option value="1">
+Coleta de Amostras
+</option>
+
+<option value="2">
+Visita Técnica
+</option>
+
+<option value="3">
+Consultoria em Nutrição Animal
+</option>
+
+<option value="4">
+Diagnóstico da Propriedade
+</option>
+
+<option value="5">
+Treinamento de Ordenha
+</option>
+
+<option value="6">
+Avaliação Sanitária do Rebanho
+</option>
+
+<option value="7">
+Planejamento Alimentar
+</option>
+
+</select>
+
+<br><br>
+
+<label>Valor (R$)</label>
+
+<input
+type="text"
+id="valor"
+readonly>
+
+<br><br>
+
+<label>Tempo Estimado</label>
+
+<input
+type="text"
+id="tempo"
+readonly>
+
+<br><br>
+
+<button onclick="adicionarServico()">
+
+Adicionar Serviço
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Serviços do Agendamento</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Serviço</th>
+
+<th>Valor</th>
+
+<th>Tempo</th>
+
+</tr>
+
+</thead>
+
+<tbody id="lista">
+
+</tbody>
+
+</table>
+
+<br>
+
+<h3 id="total">
+
+Total: R$ 0,00
+
+</h3>
+
+<h3 id="tempoTotal">
+
+Tempo Total: 0 horas
+
+</h3>
+
+<br>
+
+<button onclick="salvarAgendamento()">
+
+Salvar Agendamento
+
+</button>
+
+</div>
+
+</div><script>
+
+const catalogo = [
+
+    {
+        nome:"Análise da Qualidade do Leite",
+        preco:120,
+        tempo:2
+    },
+
+    {
+        nome:"Coleta de Amostras",
+        preco:80,
+        tempo:1
+    },
+
+    {
+        nome:"Visita Técnica",
+        preco:250,
+        tempo:4
+    },
+
+    {
+        nome:"Consultoria em Nutrição Animal",
+        preco:350,
+        tempo:5
+    },
+
+    {
+        nome:"Diagnóstico da Propriedade",
+        preco:450,
+        tempo:6
+    },
+
+    {
+        nome:"Treinamento de Ordenha",
+        preco:300,
+        tempo:3
+    },
+
+    {
+        nome:"Avaliação Sanitária do Rebanho",
+        preco:180,
+        tempo:2
+    },
+
+    {
+        nome:"Planejamento Alimentar",
+        preco:280,
+        tempo:3
+    }
+
+];
+
+let carrinho = [];
+
+function selecionarServico(){
+
+    const indice = document.getElementById("servico").value;
+
+    if(indice===""){
+        document.getElementById("valor").value="";
+        document.getElementById("tempo").value="";
+        return;
+    }
+
+    document.getElementById("valor").value =
+        "R$ " + catalogo[indice].preco.toFixed(2);
+
+    document.getElementById("tempo").value =
+        catalogo[indice].tempo + " hora(s)";
+}
+
+function adicionarServico(){
+
+    const indice=document.getElementById("servico").value;
+
+    if(indice===""){
+        alert("Selecione um serviço.");
+        return;
+    }
+
+    carrinho.push(catalogo[indice]);
+
+    atualizarTabela();
+
+}
+
+function atualizarTabela(){
+
+    let tbody=document.getElementById("lista");
+
+    tbody.innerHTML="";
+
+    let total=0;
+
+    let horas=0;
+
+    carrinho.forEach(servico=>{
+
+        total+=servico.preco;
+
+        horas+=servico.tempo;
+
+        tbody.innerHTML+=`
+
+        <tr>
+
+            <td>${servico.nome}</td>
+
+            <td>R$ ${servico.preco.toFixed(2)}</td>
+
+            <td>${servico.tempo} h</td>
+
+        </tr>
+
+        `;
+
+    });
+
+    document.getElementById("total").innerHTML=
+    "Total: R$ "+total.toFixed(2);
+
+    document.getElementById("tempoTotal").innerHTML=
+    "Tempo Total: "+horas+" hora(s)";
+
+}
+
+function salvarAgendamento(){
+
+    const cliente=document.getElementById("cliente").value;
+
+    const data=document.getElementById("data").value;
+
+    const hora=document.getElementById("hora").value;
+
+    if(cliente==="" || data==="" || hora===""){
+
+        alert("Preencha todos os campos.");
+
+        return;
+
+    }
+
+    if(carrinho.length===0){
+
+        alert("Adicione pelo menos um serviço.");
+
+        return;
+
+    }
+
+    const agendamento={
+
+        cliente:cliente,
+
+        data:data,
+
+        hora:hora,
+
+        servicos:carrinho
+
+    };
+
+    let lista=
+        JSON.parse(localStorage.getItem("agendamentos")) || [];
+
+    lista.push(agendamento);
+
+    localStorage.setItem(
+        "agendamentos",
+        JSON.stringify(lista)
+    );
+
+    alert("Agendamento salvo com sucesso!");
+
+    location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
