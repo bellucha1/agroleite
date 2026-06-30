@@ -1,24 +1,155 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
 <meta charset="UTF-8">
-<link rel="stylesheet" href="estilo.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>AGROLEITE - Home</title>
 
+<link rel="stylesheet" href="estilo.css">
+
 <style>
-/* botões do menu arredondados */
+
+body{
+    background:#f8f4ef;
+}
+
+nav{
+    text-align:center;
+    padding:15px;
+}
+
 nav a{
-    background:#6d4c41;
-    padding:8px 15px;
-    border-radius:20px;
-    display:inline-block;
+    background:#6D4C41;
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:25px;
     margin:5px;
+    display:inline-block;
+    transition:.3s;
+    font-weight:bold;
 }
 
 nav a:hover{
-    background:#3e2723;
-    color:#fff;
+    background:#3E2723;
+    transform:scale(1.05);
 }
+
+.hero{
+
+    text-align:center;
+    padding:40px;
+
+}
+
+.hero img{
+
+    width:180px;
+    margin-bottom:20px;
+
+}
+
+.hero h1{
+
+    color:#4E342E;
+    font-size:42px;
+
+}
+
+.hero p{
+
+    color:#6D4C41;
+    font-size:20px;
+
+}
+
+.painel{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+    padding:40px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+    text-align:center;
+
+    padding:30px;
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.card h2{
+
+    color:#5D4037;
+
+}
+
+.card p{
+
+    margin:15px 0;
+
+}
+
+.card button{
+
+    background:#6D4C41;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+.card button:hover{
+
+    background:#3E2723;
+
+}
+
+footer{
+
+    margin-top:50px;
+
+    background:#4E342E;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
 </style>
 
 </head>
@@ -26,47 +157,124 @@ nav a:hover{
 <body>
 
 <nav>
-    <a href="index.html">Login</a>
-    <a href="home.html">Home</a>
-    <a href="clientes.html">Clientes</a>
-    <a href="servicos.html">Serviços</a>
-    <a href="agendamentos.html">Agendamentos</a>
-     <a href="sobre.html">Sobre</a>
-    <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
+
+<a href="index.html">Login</a>
+<a href="clientes.html">Clientes</a>
+<a href="servicos.html">Serviços</a>
+<a href="agendamentos.html">Agendamentos</a>
+<a href="consulta_agendamentos.html">Consulta</a>
+<a href="sobre.html">Sobre</a>
+
 </nav>
 
-<header class="banner">
+<section class="hero">
 
-    <img src="imagens/logo-agroleite.jpg"
-         alt="Logo AGROLEITE"
-         class="logo-agroleite">
+<img src="imagens/logo-agroleite.jpg">
 
-    <p>Controle inteligente para o campo</p>
+<h1>Bem-vindo ao AGROLEITE</h1>
 
-</header>
+<p>
 
-<div class="container">
+Sistema de Gestão Rural para Produtores de Leite
 
-    <div class="card">
-        <h2>Bem-vindo ao AGROLEITE</h2>
+</p>
 
-        <p>
-            Nosso objetivo é trazer segurança e confiança para o campo.
-        </p>
+</section>
 
-        <button onclick="window.location.href='sobre.html'">
-            Saiba mais
-        </button>
-    </div>
+<section class="painel">
+
+<div class="card">
+
+<h2>👨‍🌾 Clientes</h2>
+
+<p>
+
+Cadastre e gerencie todos os produtores.
+
+</p>
+
+<button onclick="location.href='clientes.html'">
+
+Acessar
+
+</button>
 
 </div>
 
+<div class="card">
+
+<h2>🛠 Serviços</h2>
+
+<p>
+
+Consulte os serviços disponíveis.
+
+</p>
+
+<button onclick="location.href='servicos.html'">
+
+Acessar
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📅 Agendamentos</h2>
+
+<p>
+
+Agende visitas e atendimentos.
+
+</p>
+
+<button onclick="location.href='agendamentos.html'">
+
+Acessar
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📋 Histórico</h2>
+
+<p>
+
+Consulte todos os agendamentos.
+
+</p>
+
+<button onclick="location.href='consulta_agendamentos.html'">
+
+Consultar
+
+</button>
+
+</div>
+
+</section>
+
 <footer>
-    <div>
-        <p>&copy; 2026 AGROLEITE - Sistema de Gestão Rural</p>
-        <p>Desenvolvido para o setor agropecuário 🐄</p>
-    </div>
+
+<h3>AGROLEITE</h3>
+
+<p>
+
+Controle Inteligente para o Campo 🐄
+
+</p>
+
+<p>
+
+© 2026 Todos os direitos reservados.
+
+</p>
+
 </footer>
 
 </body>
+
 </html>
