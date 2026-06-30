@@ -1,10 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="estilo.css">
-    <title>AGROLEITE - Cadastro de Serviços</title>
+    <title>AGROLEITE - Catálogo de Serviços</title>
 </head>
 
 <body>
@@ -18,95 +18,32 @@
     </nav>
 
     <header class="banner">
-        <h1>Gestão de Serviços</h1>
-        <p>Cadastre e gerencie os serviços oferecidos aos produtores rurais</p>
+        <h1>Catálogo de Serviços</h1>
+        <p>Serviços oferecidos pelo AGROLEITE</p>
     </header>
 
     <div class="container">
 
         <div class="card">
 
-            <h2>Novo Serviço</h2>
-
-            <form action="/salvar-servico" method="POST">
-
-               <script>
-
-const catalogoServicos = [
-
-    {
-        descricao: "Análise da Qualidade do Leite",
-        preco: 120.00,
-        tempo: 2
-    },
-
-    {
-        descricao: "Coleta de Amostras",
-        preco: 80.00,
-        tempo: 1
-    },
-
-    {
-        descricao: "Visita Técnica",
-        preco: 250.00,
-        tempo: 4
-    },
-
-    {
-        descricao: "Consultoria em Nutrição Animal",
-        preco: 350.00,
-        tempo: 5
-    },
-
-    {
-        descricao: "Diagnóstico da Propriedade",
-        preco: 450.00,
-        tempo: 6
-    },
-
-    {
-        descricao: "Treinamento de Ordenha",
-        preco: 300.00,
-        tempo: 3
-    }
-
-];
-
-const tabela = document.getElementById("lista-servicos");
-
-catalogoServicos.forEach(servico => {
-
-    tabela.innerHTML += `
-        <tr>
-            <td><strong>${servico.descricao}</strong></td>
-            <td>R$ ${servico.preco.toFixed(2)}</td>
-            <td>${servico.tempo}h</td>
-        </tr>
-    `;
-
-});
-
-</script>
-        <div class="card" style="margin-top:20px;">
-
             <h2>Serviços Disponíveis</h2>
 
-            <p style="font-size:0.9rem; margin-bottom:10px;">
-                Catálogo de serviços e atendimentos disponíveis para produtores e propriedades rurais cadastradas no AGROLEITE.
+            <p style="margin-bottom:20px;">
+                Os valores abaixo são fixos e serão preenchidos automaticamente
+                quando o serviço for selecionado no agendamento.
             </p>
 
             <table>
 
                 <thead>
                     <tr>
-                        <th>Descrição</th>
+                        <th>Serviço</th>
                         <th>Valor (R$)</th>
                         <th>Tempo Estimado</th>
                     </tr>
                 </thead>
 
-                <tbody id="lista-servicos">
-                </tbody>
+                <tbody id="lista-servicos"></tbody>
 
             </table>
 
@@ -115,38 +52,80 @@ catalogoServicos.forEach(servico => {
     </div>
 
     <footer>
-        <div>
-            <p>&copy; 2026 AGROLEITE - Sistema de Gestão Rural</p>
-            <p>Desenvolvido para o setor agropecuário 🐄</p>
-        </div>
+        <p>&copy; 2026 AGROLEITE - Sistema de Gestão Rural</p>
+        <p>Desenvolvido para o setor agropecuário 🐄</p>
     </footer>
 
     <script>
 
-        fetch('/listar-servicos')
-            .then(res => res.json())
-            .then(servicos => {
+        const catalogoServicos = [
 
-                const corpoTabela =
-                    document.getElementById('lista-servicos');
+            {
+                descricao: "Análise da Qualidade do Leite",
+                preco: 120.00,
+                tempo: "2 horas"
+            },
 
-                servicos.forEach(s => {
+            {
+                descricao: "Coleta de Amostras",
+                preco: 80.00,
+                tempo: "1 hora"
+            },
 
-                    corpoTabela.innerHTML += `
-                        <tr>
-                            <td><strong>${s.descricao}</strong></td>
-                            <td>R$ ${s.preco.toFixed(2)}</td>
-                            <td>${s.tempo_estimado}h</td>
-                        </tr>`;
-                });
+            {
+                descricao: "Visita Técnica",
+                preco: 250.00,
+                tempo: "4 horas"
+            },
 
-            })
-            .catch(err =>
-                console.error("Erro ao listar serviços:", err));
+            {
+                descricao: "Consultoria em Nutrição Animal",
+                preco: 350.00,
+                tempo: "5 horas"
+            },
+
+            {
+                descricao: "Diagnóstico da Propriedade",
+                preco: 450.00,
+                tempo: "6 horas"
+            },
+
+            {
+                descricao: "Treinamento de Ordenha",
+                preco: 300.00,
+                tempo: "3 horas"
+            },
+
+            {
+                descricao: "Avaliação Sanitária do Rebanho",
+                preco: 180.00,
+                tempo: "2 horas"
+            },
+
+            {
+                descricao: "Planejamento Alimentar",
+                preco: 280.00,
+                tempo: "3 horas"
+            }
+
+        ];
+
+        const tabela = document.getElementById("lista-servicos");
+
+        catalogoServicos.forEach(servico => {
+
+            tabela.innerHTML += `
+                <tr>
+                    <td>${servico.descricao}</td>
+                    <td>R$ ${servico.preco.toFixed(2)}</td>
+                    <td>${servico.tempo}</td>
+                </tr>
+            `;
+
+        });
 
     </script>
 
 </body>
-</html>
-```
 
+</html>
