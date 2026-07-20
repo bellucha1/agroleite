@@ -1,187 +1,703 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AGROLEITE - Acesso</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+<title>AGROLEITE - Dashboard</title>
 
-body{
-    background:linear-gradient(135deg,#3E2723,#6D4C41,#A1887F);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
 
-.container{
-    background:#EFEBE9;
-    padding:30px;
-    width:400px;
-    border-radius:15px;
-    box-shadow:0 8px 20px rgba(62,39,35,0.4);
-    text-align:center;
-    border:2px solid #8D6E63;
-}
+<link rel="stylesheet" href="css/estilo.css">
 
-h1{
-    color:#4E342E;
-    margin-bottom:20px;
-    font-size:32px;
-    font-weight:bold;
-}
 
-button{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-    transition:0.3s;
-}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-button:hover{
-    opacity:0.9;
-    transform:scale(1.02);
-}
 
-.cliente{
-    background:#8D6E63;
-    color:white;
-}
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
-.funcionario{
-    background:#5D4037;
-    color:white;
-}
 
-input{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:1px solid #A1887F;
-    border-radius:6px;
-    background:#F5F5F5;
-    color:#3E2723;
-}
-
-input:focus{
-    outline:none;
-    border-color:#6D4C41;
-    box-shadow:0 0 6px rgba(109,76,65,0.4);
-}
-
-#areaFuncionario{
-    display:none;
-}
-
-.erro{
-    color:#6D0000;
-    margin-top:10px;
-    font-weight:bold;
-}
-
-button:last-child{
-    background:#BCAAA4;
-    color:#3E2723;
-}
-    </style>
 </head>
+
 
 <body>
 
-<div class="container">
 
-    <h1>AGROLEITE</h1>
+<div class="layout">
 
-    <div id="inicio">
-        <button class="cliente" onclick="cliente()">
-            SOU CLIENTE
-        </button>
 
-        <button class="funcionario" onclick="mostrarFuncionario()">
-            SOU FUNCIONÁRIO
-        </button>
-    </div>
 
-    <div id="areaFuncionario">
+<!-- MENU LATERAL -->
 
-        <input type="text" id="chave" placeholder="Chave de acesso">
+<aside class="sidebar">
 
-        <input type="password" id="senha" placeholder="Senha">
 
-        <input type="text" id="codigo" placeholder="Código">
+<div class="logo">
 
-        <input type="text" id="frase"
-        placeholder="Digite a frase de segurança">
+<div class="animal">
+🐄
+</div>
 
-        <button class="funcionario" onclick="validarFuncionario()">
-            PROSSEGUIR
-        </button>
+<h1>AGROLEITE</h1>
 
-        <button onclick="voltar()">
-            VOLTAR
-        </button>
-
-        <div class="erro" id="erro"></div>
-
-    </div>
+<span>
+Controle Inteligente para o Campo
+</span>
 
 </div>
 
-<script>
 
-function cliente(){
-    window.location.href = "home.html";
-}
 
-function mostrarFuncionario(){
-    document.getElementById("inicio").style.display = "none";
-    document.getElementById("areaFuncionario").style.display = "block";
-}
+<nav class="menu">
 
-function voltar(){
-    document.getElementById("inicio").style.display = "block";
-    document.getElementById("areaFuncionario").style.display = "none";
-}
 
-function validarFuncionario(){
+<a href="home.html" class="ativo">
 
-    const chave = document.getElementById("chave").value;
-    const senha = document.getElementById("senha").value;
-    const codigo = document.getElementById("codigo").value;
-    const frase = document.getElementById("frase").value.trim().toUpperCase();
+<span class="material-symbols-outlined">
+home
+</span>
 
-    // Credenciais de exemplo
-    const chaveCorreta = "ISABELLA";
-    const senhaCorreta = "0000";
-    const codigoCorreto = "0000";
-    const fraseCorreta = "VACA JERSEY TEM O LEITE MAIS GORDO";
+Dashboard
 
-    if(
-        chave === chaveCorreta &&
-        senha === senhaCorreta &&
-        codigo === codigoCorreto &&
-        frase === fraseCorreta
-    ){
-        window.location.href = "home.html";
-    }else{
-        document.getElementById("erro").innerText =
-        "Dados incorretos. Verifique as informações.";
-    }
-}
+</a>
 
-</script>
+
+
+<a href="clientes.html">
+
+<span class="material-symbols-outlined">
+group
+</span>
+
+Clientes
+
+</a>
+
+
+
+<a href="servicos.html">
+
+<span class="material-symbols-outlined">
+build
+</span>
+
+Serviços
+
+</a>
+
+
+
+<a href="agendamentos.html">
+
+<span class="material-symbols-outlined">
+calendar_month
+</span>
+
+Agendamentos
+
+</a>
+
+
+
+<a href="consulta_agendamentos.html">
+
+<span class="material-symbols-outlined">
+assignment
+</span>
+
+Consultas
+
+</a>
+
+
+
+<a href="sobre.html">
+
+<span class="material-symbols-outlined">
+info
+</span>
+
+Sobre
+
+</a>
+
+
+
+<a href="index.html">
+
+<span class="material-symbols-outlined">
+logout
+</span>
+
+Sair
+
+</a>
+
+
+</nav>
+
+
+</aside>
+
+
+
+
+
+
+<!-- CONTEÚDO -->
+
+<main class="main">
+
+
+
+
+
+<!-- TOPO -->
+
+
+<header class="topbar">
+
+
+<div>
+
+<h2>
+Dashboard
+</h2>
+
+
+<p>
+Gestão da propriedade leiteira
+</p>
+
+
+</div>
+
+
+
+<div class="usuario">
+
+
+<div class="usuario-info">
+
+<strong>
+Administrador
+</strong>
+
+<span>
+Funcionário
+</span>
+
+</div>
+
+
+<div class="avatar">
+
+A
+
+</div>
+
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+<div class="container">
+
+
+
+
+
+
+
+<!-- BANNER -->
+
+
+<section class="banner fade">
+
+
+<div>
+
+<h1>
+Bem-vindo ao AGROLEITE 🐄
+</h1>
+
+
+<p>
+
+Controle clientes, serviços e agendamentos
+da sua propriedade em um único sistema.
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- INDICADORES -->
+
+
+<section class="indicadores">
+
+
+
+<div class="indicador">
+
+
+<div class="icone">
+
+👨‍🌾
+
+</div>
+
+
+<div>
+
+<h3>
+0
+</h3>
+
+<p>
+Clientes cadastrados
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="indicador">
+
+
+<div class="icone">
+
+🛠
+
+</div>
+
+
+<div>
+
+<h3>
+0
+</h3>
+
+<p>
+Serviços disponíveis
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="indicador">
+
+
+<div class="icone">
+
+📅
+
+</div>
+
+
+<div>
+
+<h3>
+0
+</h3>
+
+<p>
+Agendamentos
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="indicador">
+
+
+<div class="icone">
+
+🐄
+
+</div>
+
+
+<div>
+
+<h3>
+0
+</h3>
+
+<p>
+Produção leiteira
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- MÓDULOS -->
+
+
+<h2 class="texto-verde mb-20">
+
+Módulos do Sistema
+
+</h2>
+
+
+
+<section class="cards">
+
+
+
+
+
+<div class="card">
+
+
+<div class="icone">
+👨‍🌾
+</div>
+
+
+<h2>
+Clientes
+</h2>
+
+
+<p>
+Cadastre produtores e consulte informações.
+</p>
+
+
+<a href="clientes.html"
+class="btn btn-verde">
+
+Acessar →
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="icone">
+🛠
+</div>
+
+
+<h2>
+Serviços
+</h2>
+
+
+<p>
+Gerencie os serviços oferecidos.
+</p>
+
+
+<a href="servicos.html"
+class="btn btn-verde">
+
+Acessar →
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="icone">
+📅
+</div>
+
+
+<h2>
+Agendamentos
+</h2>
+
+
+<p>
+Organize visitas e atendimentos.
+</p>
+
+
+<a href="agendamentos.html"
+class="btn btn-verde">
+
+Acessar →
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="icone">
+📋
+</div>
+
+
+<h2>
+Consultas
+</h2>
+
+
+<p>
+Visualize históricos e registros.
+</p>
+
+
+<a href="consulta_agendamentos.html"
+class="btn btn-verde">
+
+Acessar →
+
+</a>
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PAINÉIS -->
+
+
+<div class="mt-20">
+
+
+
+<section class="painel">
+
+
+<h2>
+📅 Próximos Agendamentos
+</h2>
+
+
+<div class="lista">
+
+
+<div class="item-lista">
+
+Fazenda Esperança
+
+<span class="status status-pendente">
+Pendente
+</span>
+
+</div>
+
+
+
+<div class="item-lista">
+
+Sítio Primavera
+
+<span class="status status-ativo">
+Confirmado
+</span>
+
+</div>
+
+
+
+<div class="item-lista">
+
+Fazenda Bela Vista
+
+<span class="status status-finalizado">
+Finalizado
+</span>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section class="painel">
+
+
+<h2>
+📢 Avisos do Sistema
+</h2>
+
+
+
+<div class="lista">
+
+
+<div class="item-lista">
+
+✔ Sistema funcionando normalmente
+
+</div>
+
+
+
+<div class="item-lista">
+
+🐄 Novo módulo em desenvolvimento
+
+</div>
+
+
+
+<div class="item-lista">
+
+📅 Verifique os próximos atendimentos
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+</div>
+
+
+
+
+
+
+
+<footer>
+
+<strong>
+AGROLEITE
+</strong>
+
+<br>
+
+Controle Inteligente para o Campo
+
+<br>
+
+© 2026 Todos os direitos reservados.
+
+</footer>
+
+
+
+
+
+
+
+</div>
+
+
+</main>
+
+
+
+</div>
+
 
 </body>
+
 </html>
