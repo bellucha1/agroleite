@@ -1,184 +1,380 @@
+/* =====================================================
+   AGROLEITE - SISTEMA DE GESTÃO RURAL
+   ESTILO GLOBAL - PARTE 1
+===================================================== */
+
+
+/* ================= RESET ================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:'Poppins',Arial,sans-serif;
 }
 
-/* FUNDO GERAL */
+
 body{
-    background:#F7F3EF;
-    color:#5D4037;
-    line-height:1.5;
+
+    background:#F5F7F5;
+
+    color:#333;
+
+    min-height:100vh;
+
 }
 
-/* NAVBAR */
-nav{
-    background:#A1887F;
-    padding:15px;
-    text-align:center;
+
+/* ================= VARIÁVEIS ================= */
+
+:root{
+
+    --verde-escuro:#1B5E20;
+
+    --verde:#2E7D32;
+
+    --verde-claro:#66BB6A;
+
+    --marrom:#6D4C41;
+
+    --bege:#F5F2EB;
+
+    --branco:#FFFFFF;
+
+    --cinza:#ECEFF1;
+
+    --vermelho:#C62828;
+
+    --sombra:
+    0 8px 25px rgba(0,0,0,.08);
+
 }
 
-nav a{
-    color:#fff;
+
+
+/* ================= LINKS ================= */
+
+
+a{
+
     text-decoration:none;
-    margin:0 15px;
-    font-weight:bold;
-    transition:0.3s;
-    display:inline-block;
+
 }
 
-nav a:hover{
-    color:#F5F5F5;
-    transform:scale(1.05);
+
+
+/* =====================================================
+   ESTRUTURA PRINCIPAL
+===================================================== */
+
+
+.layout{
+
+    display:flex;
+
+    min-height:100vh;
+
 }
 
-/* BANNER */
-.banner{
-    background:linear-gradient(135deg,#D7CCC8,#A1887F);
-    color:#4E342E;
-    text-align:center;
-    padding:60px 20px;
-}
 
-/* TÍTULO AGROLEITE COM EFEITO VACA */
 
-.banner h1{
-    font-family: 'Baloo 2', cursive;
-    font-size: 64px;
-    font-weight: 800;
-    text-transform: uppercase;
+/* =====================================================
+   MENU LATERAL
+===================================================== */
+
+
+.sidebar{
+
+    width:260px;
+
+    height:100vh;
 
     background:
-        radial-gradient(circle at 20% 30%, #6D4C41 0 12%, transparent 13%),
-        radial-gradient(circle at 75% 25%, #8D6E63 0 10%, transparent 11%),
-        radial-gradient(circle at 40% 75%, #6D4C41 0 15%, transparent 16%),
-        radial-gradient(circle at 85% 80%, #8D6E63 0 12%, transparent 13%),
-        #D7CCC8;
+    linear-gradient(
+    180deg,
+    var(--verde-escuro),
+    var(--verde)
+    );
 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 
-    text-shadow:
-        3px 3px 0 #5D4037,
-        6px 6px 10px rgba(0,0,0,0.2);
-
-    letter-spacing: 3px;
-}
-
-.banner p{
-    font-size:18px;
-}
-
-/* CONTAINER */
-.container{
-    max-width:1000px;
-    margin:40px auto;
-    padding:20px;
-}
-
-/* CARD */
-.card{
-    background:#FFFFFF;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
-    margin-bottom:20px;
-    border:1px solid #E0D7D1;
-}
-
-/* TÍTULOS */
-.card h1,
-.card h2,
-.card h3{
-    color:#6D4C41;
-    margin-bottom:10px;
-}
-
-/* TEXTO */
-p, li, td{
-    color:#795548;
-    margin-bottom:10px;
-}
-
-/* BOTÕES */
-button{
-    background:#BCAAA4;
-    color:#4E342E;
-    border:none;
-    padding:12px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    transition:0.3s;
-    font-size:15px;
-    margin-top:10px;
-    font-weight:bold;
-}
-
-button:hover{
-    background:#A1887F;
     color:white;
-    transform:scale(1.03);
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    padding:25px 18px;
+
+    z-index:1000;
+
 }
 
-/* TABELAS */
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:10px;
-    background:white;
-}
 
-th, td{
-    border:1px solid #D7CCC8;
-    padding:10px;
-    text-align:left;
-}
 
-th{
-    background:#EFEBE9;
-    color:#5D4037;
-}
+/* LOGO */
 
-/* INPUTS */
-input, select{
-    width:100%;
-    padding:10px;
-    margin:8px 0;
-    border:1px solid #D7CCC8;
-    border-radius:6px;
-    outline:none;
-}
+.logo{
 
-input:focus, select:focus{
-    border-color:#A1887F;
-    box-shadow:0 0 5px rgba(161,136,127,0.3);
-}
-
-/* FOOTER */
-footer{
-    background:#A1887F;
-    color:white;
     text-align:center;
-    padding:20px;
-    margin-top:40px;
+
+    margin-bottom:40px;
+
 }
 
-/* ERRO */
-.erro{
-    color:#C62828;
+
+
+.logo .animal{
+
+    font-size:45px;
+
+}
+
+
+
+.logo h1{
+
+    font-size:28px;
+
+    letter-spacing:1px;
+
+}
+
+
+
+.logo span{
+
+    font-size:13px;
+
+    opacity:.8;
+
+}
+
+
+
+/* MENU */
+
+.menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+
+.menu a{
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:14px 15px;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+    font-weight:500;
+
+}
+
+
+
+.menu a:hover{
+
+    background:
+    rgba(255,255,255,.15);
+
+    transform:translateX(5px);
+
+}
+
+
+
+.menu a.ativo{
+
+    background:white;
+
+    color:var(--verde-escuro);
+
+}
+
+
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
+
+
+.main{
+
+    margin-left:260px;
+
+    width:calc(100% - 260px);
+
+}
+
+
+
+/* =====================================================
+   BARRA SUPERIOR
+===================================================== */
+
+
+.topbar{
+
+    height:80px;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 35px;
+
+    box-shadow:var(--sombra);
+
+}
+
+
+
+/* TITULO */
+
+.topbar h2{
+
+    color:var(--verde-escuro);
+
+    font-size:24px;
+
+}
+
+
+
+.topbar p{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+
+
+/* USUÁRIO */
+
+.usuario{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+
+.avatar{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:var(--verde);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
     font-weight:bold;
-}
-.banner{
-    width:100%;
-    margin:0;
-    padding:0;
-    overflow:hidden;
+
 }
 
-.banner-logo{
+
+
+.usuario-info{
+
+    text-align:right;
+
+}
+
+
+
+.usuario-info strong{
+
     display:block;
-    width:100%;
-    height:auto;
+
+    color:#333;
+
+}
+
+
+
+.usuario-info span{
+
+    font-size:12px;
+
+    color:#777;
+
+}
+
+
+
+/* =====================================================
+   ÁREA DE CONTEÚDO
+===================================================== */
+
+
+.container{
+
+    padding:35px;
+
+}
+
+
+
+/* TITULOS */
+
+.titulo-pagina{
+
+    margin-bottom:25px;
+
+}
+
+
+
+.titulo-pagina h1{
+
+    color:var(--verde-escuro);
+
+    font-size:32px;
+
+}
+
+
+
+.titulo-pagina p{
+
+    color:#666;
+
+    margin-top:5px;
+
 }
