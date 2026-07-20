@@ -938,3 +938,608 @@ a{
     color:#C62828;
 
 }
+/* =====================================================
+   AGROLEITE - ESTILO GLOBAL
+   PARTE 3 - FINAL
+===================================================== */
+
+
+/* =====================================================
+   LISTAS E PAINÉIS
+===================================================== */
+
+
+.painel{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:var(--sombra);
+
+    margin-bottom:30px;
+
+}
+
+
+.painel h2{
+
+    color:var(--verde-escuro);
+
+    margin-bottom:20px;
+
+}
+
+
+
+.lista{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.item-lista{
+
+    background:#F5F7F5;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    transition:.3s;
+
+}
+
+
+
+.item-lista:hover{
+
+    background:#E8F5E9;
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+
+.status{
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+
+
+.status-ativo{
+
+    background:#E8F5E9;
+
+    color:#1B5E20;
+
+}
+
+
+
+.status-pendente{
+
+    background:#FFF3E0;
+
+    color:#E65100;
+
+}
+
+
+
+.status-finalizado{
+
+    background:#E3F2FD;
+
+    color:#1565C0;
+
+}
+
+
+
+
+/* =====================================================
+   BOTÕES DE AÇÃO DA TABELA
+===================================================== */
+
+
+.acao{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+
+
+.btn-editar{
+
+    background:#1565C0;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+
+.btn-excluir{
+
+    background:#C62828;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+
+.btn-editar:hover,
+
+.btn-excluir:hover{
+
+    opacity:.8;
+
+}
+
+
+
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+
+footer{
+
+    margin-top:40px;
+
+    padding:25px;
+
+    text-align:center;
+
+    color:#777;
+
+}
+
+
+
+footer strong{
+
+    color:var(--verde-escuro);
+
+}
+
+
+
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+
+    rgba(0,0,0,.5);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:2000;
+
+}
+
+
+
+.modal-conteudo{
+
+    background:white;
+
+    width:450px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+}
+
+
+
+.modal-conteudo h2{
+
+    color:var(--verde-escuro);
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+/* =====================================================
+   ANIMAÇÕES
+===================================================== */
+
+
+.fade{
+
+    animation:aparecer .5s ease;
+
+}
+
+
+
+@keyframes aparecer{
+
+
+from{
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+}
+
+
+to{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+}
+
+
+
+.slide{
+
+    animation:slide .5s ease;
+
+}
+
+
+
+@keyframes slide{
+
+
+from{
+
+    transform:translateX(-30px);
+
+    opacity:0;
+
+}
+
+
+to{
+
+    transform:translateX(0);
+
+    opacity:1;
+
+}
+
+
+}
+
+
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+
+.loading{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:5px solid #ddd;
+
+    border-top-color:var(--verde);
+
+    animation:girar 1s linear infinite;
+
+}
+
+
+
+@keyframes girar{
+
+to{
+
+    transform:rotate(360deg);
+
+}
+
+}
+
+
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+
+@media(max-width:1000px){
+
+
+.sidebar{
+
+    width:80px;
+
+    padding:20px 10px;
+
+}
+
+
+
+.logo h2,
+
+.logo span,
+
+.menu a span{
+
+    display:none;
+
+}
+
+
+
+.menu a{
+
+    justify-content:center;
+
+}
+
+
+
+.main{
+
+    margin-left:80px;
+
+    width:calc(100% - 80px);
+
+}
+
+
+
+.form-linha{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.inferior{
+
+    grid-template-columns:1fr;
+
+}
+
+
+}
+
+
+
+
+@media(max-width:700px){
+
+
+
+.sidebar{
+
+    position:relative;
+
+    width:100%;
+
+    height:auto;
+
+}
+
+
+
+.layout{
+
+    display:block;
+
+}
+
+
+
+.main{
+
+    margin-left:0;
+
+    width:100%;
+
+}
+
+
+
+.topbar{
+
+    flex-direction:column;
+
+    height:auto;
+
+    gap:15px;
+
+    padding:20px;
+
+}
+
+
+
+.container{
+
+    padding:20px;
+
+}
+
+
+
+.banner{
+
+    height:220px;
+
+    padding:25px;
+
+}
+
+
+
+.banner h1{
+
+    font-size:30px;
+
+}
+
+
+
+.cards,
+
+.indicadores{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.formulario{
+
+    padding:20px;
+
+}
+
+
+}
+
+
+
+
+
+/* =====================================================
+   UTILITÁRIOS
+===================================================== */
+
+
+.texto-verde{
+
+    color:var(--verde);
+
+}
+
+
+
+.texto-marrom{
+
+    color:var(--marrom);
+
+}
+
+
+
+.mt-20{
+
+    margin-top:20px;
+
+}
+
+
+
+.mb-20{
+
+    margin-bottom:20px;
+
+}
+
+
+
+.centralizar{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.esconder{
+
+    display:none;
+
+}
