@@ -378,3 +378,563 @@ a{
     margin-top:5px;
 
 }
+/* =====================================================
+   AGROLEITE - ESTILO GLOBAL
+   PARTE 2
+===================================================== */
+
+
+/* =====================================================
+   CARDS DE INDICADORES
+===================================================== */
+
+
+.indicadores{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.indicador{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:var(--sombra);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    transition:.3s;
+
+}
+
+
+
+.indicador:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+
+.indicador .icone{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:18px;
+
+    background:#E8F5E9;
+
+    color:var(--verde);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+}
+
+
+
+.indicador h3{
+
+    font-size:28px;
+
+    color:var(--verde-escuro);
+
+}
+
+
+
+.indicador p{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+
+
+
+/* =====================================================
+   BANNER PRINCIPAL
+===================================================== */
+
+
+.banner{
+
+    background:
+
+    linear-gradient(
+    rgba(0,0,0,.45),
+    rgba(0,0,0,.45)
+    ),
+
+    url("../imagensagroleite/banner-agroleite.png");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    height:260px;
+
+    border-radius:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:40px;
+
+    color:white;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.banner h1{
+
+    font-size:42px;
+
+}
+
+
+
+.banner p{
+
+    margin-top:10px;
+
+    font-size:18px;
+
+}
+
+
+
+
+/* =====================================================
+   CARDS DO SISTEMA
+===================================================== */
+
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:var(--sombra);
+
+    transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+
+.card .icone{
+
+    font-size:45px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.card h2{
+
+    color:var(--verde-escuro);
+
+    margin-bottom:10px;
+
+}
+
+
+
+.card p{
+
+    color:#666;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+
+.btn{
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    display:inline-block;
+
+}
+
+
+
+.btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+
+.btn-verde{
+
+    background:var(--verde);
+
+    color:white;
+
+}
+
+
+
+.btn-verde:hover{
+
+    background:var(--verde-escuro);
+
+}
+
+
+
+.btn-marrom{
+
+    background:var(--marrom);
+
+    color:white;
+
+}
+
+
+
+.btn-vermelho{
+
+    background:var(--vermelho);
+
+    color:white;
+
+}
+
+
+
+.btn-cinza{
+
+    background:#CFD8DC;
+
+    color:#333;
+
+}
+
+
+
+
+
+/* =====================================================
+   FORMULÁRIOS
+===================================================== */
+
+
+.formulario{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    box-shadow:var(--sombra);
+
+}
+
+
+
+.form-grupo{
+
+    margin-bottom:20px;
+
+}
+
+
+
+.form-grupo label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#444;
+
+}
+
+
+
+.form-grupo input,
+
+.form-grupo select,
+
+.form-grupo textarea{
+
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+
+
+.form-grupo textarea{
+
+    height:120px;
+
+    resize:none;
+
+}
+
+
+
+.form-grupo input:focus,
+
+.form-grupo select:focus,
+
+.form-grupo textarea:focus{
+
+    border-color:var(--verde);
+
+    box-shadow:
+    0 0 8px rgba(46,125,50,.25);
+
+}
+
+
+
+
+/* DUAS COLUNAS */
+
+.form-linha{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+
+
+
+/* =====================================================
+   TABELAS
+===================================================== */
+
+
+.tabela-container{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:var(--sombra);
+
+    overflow-x:auto;
+
+}
+
+
+
+.tabela{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+.tabela th{
+
+    background:#E8F5E9;
+
+    color:var(--verde-escuro);
+
+    padding:15px;
+
+    text-align:left;
+
+}
+
+
+
+.tabela td{
+
+    padding:15px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+
+
+.tabela tr:hover{
+
+    background:#FAFAFA;
+
+}
+
+
+
+
+/* =====================================================
+   PESQUISA
+===================================================== */
+
+
+.pesquisa{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    box-shadow:var(--sombra);
+
+    margin-bottom:25px;
+
+}
+
+
+
+.pesquisa input{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    font-size:16px;
+
+}
+
+
+
+
+
+/* =====================================================
+   ALERTAS
+===================================================== */
+
+
+.alerta{
+
+    padding:15px 20px;
+
+    border-radius:12px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.alerta-sucesso{
+
+    background:#E8F5E9;
+
+    color:#1B5E20;
+
+}
+
+
+
+.alerta-erro{
+
+    background:#FFEBEE;
+
+    color:#C62828;
+
+}
