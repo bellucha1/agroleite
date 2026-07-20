@@ -41,14 +41,25 @@ db.serialize(() => {
     )`);
 
     // 4. Tabela Detalhe: Itens do Agendamento (Relaciona os serviços aplicados a cada O.S.)
-    db.run(`CREATE TABLE IF NOT EXISTS itens_agendamento (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        agendamento_id INTEGER NOT NULL, 
-        servico_id INTEGER NOT NULL, 
-        preco_cobrado REAL NOT NULL,
-        FOREIGN KEY (agendamento_id) REFERENCES agendamentos (id),
-        FOREIGN KEY (servico_id) REFERENCES servicos (id)
-    )`);
+    db.rundb.run(`
+CREATE TABLE IF NOT EXISTS servicos (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    descricao TEXT NOT NULL,
+
+    categoria TEXT NOT NULL,
+
+    preco REAL NOT NULL,
+
+    tempo TEXT NOT NULL,
+
+    responsavel TEXT NOT NULL,
+
+    status TEXT NOT NULL
+
+)
+`);
 });
 
 /* ==========================================================================
