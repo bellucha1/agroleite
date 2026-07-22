@@ -1,1545 +1,902 @@
-/* =====================================================
-   AGROLEITE - SISTEMA DE GESTÃO RURAL
-   ESTILO GLOBAL - PARTE 1
-===================================================== */
+/* =========================================================
+   AGROLEITE - SISTEMA DE GESTÃO
+   STYLE.CSS PRINCIPAL
+   ========================================================= */
 
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+   ========================================================= */
 
-/* ================= RESET ================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',Arial,sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-
-body{
-
-    background:#F5F7F5;
-
-    color:#333;
-
-    min-height:100vh;
-
+html {
+    scroll-behavior: smooth;
 }
 
-
-/* ================= VARIÁVEIS ================= */
-
-:root{
-
-    --verde-escuro:#1B5E20;
-
-    --verde:#2E7D32;
-
-    --verde-claro:#66BB6A;
-
-    --marrom:#6D4C41;
-
-    --bege:#F5F2EB;
-
-    --branco:#FFFFFF;
-
-    --cinza:#ECEFF1;
-
-    --vermelho:#C62828;
-
-    --sombra:
-    0 8px 25px rgba(0,0,0,.08);
-
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f1eb;
+    color: #3e2723;
+    min-height: 100vh;
 }
 
+/* =========================================================
+   VARIÁVEIS DE CORES
+   ========================================================= */
 
+:root {
+    --verde-escuro: #1b5e20;
+    --verde: #2e7d32;
+    --verde-claro: #66bb6a;
 
-/* ================= LINKS ================= */
+    --marrom-escuro: #3e2723;
+    --marrom: #6d4c41;
+    --marrom-claro: #8d6e63;
 
+    --creme: #f4f1eb;
+    --branco: #ffffff;
+    --cinza: #666666;
+    --cinza-claro: #eeeeee;
 
-a{
-
-    text-decoration:none;
-
+    --sombra: 0 8px 25px rgba(62, 39, 35, 0.12);
 }
 
+/* =========================================================
+   LINKS
+   ========================================================= */
 
-
-/* =====================================================
-   ESTRUTURA PRINCIPAL
-===================================================== */
-
-
-.layout{
-
-    display:flex;
-
-    min-height:100vh;
-
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-
-
-/* =====================================================
-   MENU LATERAL
-===================================================== */
-
-
-.sidebar{
-
-    width:260px;
-
-    height:100vh;
-
-    background:
-    linear-gradient(
-    180deg,
-    var(--verde-escuro),
-    var(--verde)
-    );
-
-
-    color:white;
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    padding:25px 18px;
-
-    z-index:1000;
-
-}
-
-
-
-/* LOGO */
-
-.logo{
-
-    text-align:center;
-
-    margin-bottom:40px;
-
-}
-
-
-
-.logo .animal{
-
-    font-size:45px;
-
-}
-
-
-
-.logo h1{
-
-    font-size:28px;
-
-    letter-spacing:1px;
-
-}
-
-
-
-.logo span{
-
-    font-size:13px;
-
-    opacity:.8;
-
-}
-
-
-
-/* MENU */
-
-.menu{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
-
-}
-
-
-
-.menu a{
-
-    color:white;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    padding:14px 15px;
-
-    border-radius:12px;
-
-    transition:.3s;
-
-    font-weight:500;
-
-}
-
-
-
-.menu a:hover{
-
-    background:
-    rgba(255,255,255,.15);
-
-    transform:translateX(5px);
-
-}
-
-
-
-.menu a.ativo{
-
-    background:white;
-
-    color:var(--verde-escuro);
-
-}
-
-
-
-/* =====================================================
-   CONTEÚDO PRINCIPAL
-===================================================== */
-
-
-.main{
-
-    margin-left:260px;
-
-    width:calc(100% - 260px);
-
-}
-
-
-
-/* =====================================================
-   BARRA SUPERIOR
-===================================================== */
-
-
-.topbar{
-
-    height:80px;
-
-    background:white;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 35px;
-
-    box-shadow:var(--sombra);
-
-}
-
-
-
-/* TITULO */
-
-.topbar h2{
-
-    color:var(--verde-escuro);
-
-    font-size:24px;
-
-}
-
-
-
-.topbar p{
-
-    color:#777;
-
-    font-size:14px;
-
-}
-
-
-
-/* USUÁRIO */
-
-.usuario{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-
-
-.avatar{
-
-    width:45px;
-
-    height:45px;
-
-    border-radius:50%;
-
-    background:var(--verde);
-
-    color:white;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-weight:bold;
-
-}
-
-
-
-.usuario-info{
-
-    text-align:right;
-
-}
-
-
-
-.usuario-info strong{
-
-    display:block;
-
-    color:#333;
-
-}
-
-
-
-.usuario-info span{
-
-    font-size:12px;
-
-    color:#777;
-
-}
-
-
-
-/* =====================================================
-   ÁREA DE CONTEÚDO
-===================================================== */
-
-
-.container{
-
-    padding:35px;
-
-}
-
-
-
-/* TITULOS */
-
-.titulo-pagina{
-
-    margin-bottom:25px;
-
-}
-
-
-
-.titulo-pagina h1{
-
-    color:var(--verde-escuro);
-
-    font-size:32px;
-
-}
-
-
-
-.titulo-pagina p{
-
-    color:#666;
-
-    margin-top:5px;
-
-}
-/* =====================================================
-   AGROLEITE - ESTILO GLOBAL
-   PARTE 2
-===================================================== */
-
-
-/* =====================================================
-   CARDS DE INDICADORES
-===================================================== */
-
-
-.indicadores{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
-    gap:25px;
-
-    margin-bottom:35px;
-
-}
-
-
-
-.indicador{
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:25px;
-
-    box-shadow:var(--sombra);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
-    transition:.3s;
-
-}
-
-
-
-.indicador:hover{
-
-    transform:translateY(-8px);
-
-}
-
-
-
-.indicador .icone{
-
-    width:65px;
-
-    height:65px;
-
-    border-radius:18px;
-
-    background:#E8F5E9;
-
-    color:var(--verde);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:30px;
-
-}
-
-
-
-.indicador h3{
-
-    font-size:28px;
-
-    color:var(--verde-escuro);
-
-}
-
-
-
-.indicador p{
-
-    color:#777;
-
-    font-size:14px;
-
-}
-
-
-
-
-/* =====================================================
-   BANNER PRINCIPAL
-===================================================== */
-
-
-.banner{
-
-    background:
-
-    linear-gradient(
-    rgba(0,0,0,.45),
-    rgba(0,0,0,.45)
-    ),
-
-    url("../imagensagroleite/banner-agroleite.png");
-
-
-    background-size:cover;
-
-    background-position:center;
-
-    height:260px;
-
-    border-radius:25px;
-
-    display:flex;
-
-    align-items:center;
-
-    padding:40px;
-
-    color:white;
-
-    margin-bottom:35px;
-
-}
-
-
-
-.banner h1{
-
-    font-size:42px;
-
-}
-
-
-
-.banner p{
-
-    margin-top:10px;
-
-    font-size:18px;
-
-}
-
-
-
-
-/* =====================================================
-   CARDS DO SISTEMA
-===================================================== */
-
-
-.cards{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(250px,1fr));
-
-    gap:25px;
-
-}
-
-
-
-.card{
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:30px;
-
-    box-shadow:var(--sombra);
-
-    transition:.3s;
-
-}
-
-
-
-.card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-
-
-.card .icone{
-
-    font-size:45px;
-
-    margin-bottom:15px;
-
-}
-
-
-
-.card h2{
-
-    color:var(--verde-escuro);
-
-    margin-bottom:10px;
-
-}
-
-
-
-.card p{
-
-    color:#666;
-
-    margin-bottom:20px;
-
-}
-
-
-
-
-/* =====================================================
+/* =========================================================
    BOTÕES
-===================================================== */
+   ========================================================= */
 
-
-.btn{
-
-    border:none;
-
-    padding:12px 25px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-    transition:.3s;
-
-    display:inline-block;
-
+button,
+.btn {
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    border: none;
 }
 
-
-
-.btn:hover{
-
-    transform:translateY(-3px);
-
+.btn-principal {
+    display: inline-block;
+    background: var(--verde);
+    color: white;
+    padding: 13px 25px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-
-
-.btn-verde{
-
-    background:var(--verde);
-
-    color:white;
-
+.btn-principal:hover {
+    background: var(--verde-escuro);
+    transform: translateY(-2px);
 }
 
-
-
-.btn-verde:hover{
-
-    background:var(--verde-escuro);
-
+.btn-marrom {
+    display: inline-block;
+    background: var(--marrom);
+    color: white;
+    padding: 13px 25px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-
-
-.btn-marrom{
-
-    background:var(--marrom);
-
-    color:white;
-
+.btn-marrom:hover {
+    background: var(--marrom-escuro);
+    transform: translateY(-2px);
 }
 
-
-
-.btn-vermelho{
-
-    background:var(--vermelho);
-
-    color:white;
-
+.btn-excluir {
+    background: #c62828;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
-
-
-.btn-cinza{
-
-    background:#CFD8DC;
-
-    color:#333;
-
+.btn-excluir:hover {
+    background: #8e0000;
 }
 
+/* =========================================================
+   MENU LATERAL
+   ========================================================= */
 
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
 
+    position: fixed;
+    top: 0;
+    left: 0;
 
+    background:
+        linear-gradient(
+            180deg,
+            var(--verde-escuro),
+            var(--verde)
+        );
 
-/* =====================================================
-   FORMULÁRIOS
-===================================================== */
+    color: white;
 
+    padding: 25px 18px;
 
-.formulario{
+    z-index: 1000;
 
-    background:white;
-
-    padding:35px;
-
-    border-radius:20px;
-
-    box-shadow:var(--sombra);
-
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.12);
 }
 
+/* =========================================================
+   LOGO DO MENU
+   ========================================================= */
 
-
-.form-grupo{
-
-    margin-bottom:20px;
-
+.logo {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 35px;
 }
 
-
-
-.form-grupo label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
-    color:#444;
-
+.logo-icon {
+    font-size: 55px;
+    display: block;
+    margin-bottom: 5px;
 }
 
-
-
-.form-grupo input,
-
-.form-grupo select,
-
-.form-grupo textarea{
-
-
-    width:100%;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    border:1px solid #ddd;
-
-    outline:none;
-
-    font-size:15px;
-
-    transition:.3s;
-
+.logo h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-
-
-.form-grupo textarea{
-
-    height:120px;
-
-    resize:none;
-
+.logo p {
+    font-size: 11px;
+    margin-top: 5px;
+    opacity: 0.85;
 }
 
+/* =========================================================
+   MENU
+   ========================================================= */
 
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-.form-grupo input:focus,
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
-.form-grupo select:focus,
+    color: white;
 
-.form-grupo textarea:focus{
+    padding: 14px 16px;
 
-    border-color:var(--verde);
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
+.menu a.ativo {
+    background: white;
+    color: var(--verde-escuro);
+    font-weight: 600;
+}
+
+/* =========================================================
+   ÁREA PRINCIPAL
+   ========================================================= */
+
+.main {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+}
+
+/* =========================================================
+   TOPO
+   ========================================================= */
+
+.topo {
+    height: 80px;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+    position: relative;
+    z-index: 10;
+}
+
+.topo h2 {
+    color: var(--marrom-escuro);
+    font-size: 20px;
+}
+
+.topo p {
+    color: var(--cinza);
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* =========================================================
+   USUÁRIO
+   ========================================================= */
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.usuario-info {
+    text-align: right;
+}
+
+.usuario-info strong {
+    display: block;
+    color: var(--marrom-escuro);
+}
+
+.usuario-info span {
+    font-size: 12px;
+    color: var(--cinza);
+}
+
+.usuario-icone {
+    width: 45px;
+    height: 45px;
+
+    background: var(--verde);
+    color: white;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+/* =========================================================
+   CONTEÚDO DAS PÁGINAS
+   ========================================================= */
+
+.conteudo {
+    padding: 30px;
+}
+
+/* =========================================================
+   TÍTULO DA PÁGINA
+   ========================================================= */
+
+.titulo-pagina {
+    margin-bottom: 25px;
+}
+
+.titulo-pagina h1 {
+    color: var(--marrom-escuro);
+    font-size: 30px;
+}
+
+.titulo-pagina p {
+    color: var(--cinza);
+    margin-top: 5px;
+}
+
+/* =========================================================
+   BANNER / HERO
+   ========================================================= */
+
+.hero {
+    margin: 30px;
+
+    min-height: 300px;
+
+    border-radius: 25px;
+
+    padding: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            rgba(27, 94, 32, 0.65),
+            rgba(62, 39, 35, 0.65)
+        ),
+        url("imagensagroleite/banner-agroleite.png");
+
+    background-size: cover;
+    background-position: center;
+
+    box-shadow: var(--sombra);
+}
+
+.hero h1,
+.hero h2 {
+    font-size: 38px;
+    max-width: 700px;
+}
+
+.hero p {
+    margin-top: 15px;
+    max-width: 700px;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+
+    gap: 22px;
+
+    margin: 30px;
+}
+
+.card {
+    background: white;
+
+    padding: 28px;
+
+    border-radius: 20px;
+
+    box-shadow: var(--sombra);
+
+    transition: 0.3s;
+
+    border-top: 5px solid var(--verde);
+}
+
+.card:hover {
+    transform: translateY(-6px);
 
     box-shadow:
-    0 0 8px rgba(46,125,50,.25);
-
+        0 15px 35px
+        rgba(62, 39, 35, 0.18);
 }
 
+.icone {
+    width: 65px;
+    height: 65px;
 
+    background: #e8f5e9;
 
+    border-radius: 15px;
 
-/* DUAS COLUNAS */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.form-linha{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-    gap:20px;
-
+    font-size: 32px;
 }
 
+.card h3 {
+    color: var(--verde-escuro);
+    margin-top: 18px;
+    font-size: 20px;
+}
 
+.card p {
+    color: var(--cinza);
+    margin: 10px 0 20px;
+    line-height: 1.6;
+}
 
+.card button {
+    background: var(--verde);
+    color: white;
 
-/* =====================================================
+    padding: 11px 18px;
+
+    border-radius: 9px;
+
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+.card button:hover {
+    background: var(--verde-escuro);
+}
+
+/* =========================================================
+   PAINEL INFERIOR
+   ========================================================= */
+
+.inferior {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 25px;
+
+    margin: 30px;
+}
+
+.caixa {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow: var(--sombra);
+}
+
+.caixa h2 {
+    color: var(--verde-escuro);
+
+    margin-bottom: 20px;
+
+    font-size: 20px;
+}
+
+/* =========================================================
+   LISTAS
+   ========================================================= */
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.item {
+    background: #f7f7f7;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    border-left: 4px solid var(--verde);
+
+    color: #555;
+}
+
+/* =========================================================
+   FORMULÁRIOS
+   ========================================================= */
+
+.formulario {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow: var(--sombra);
+
+    max-width: 1000px;
+}
+
+.form-grupo {
+    margin-bottom: 20px;
+}
+
+.form-grupo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+
+    color: var(--marrom-escuro);
+}
+
+.form-grupo input,
+.form-grupo select,
+.form-grupo textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+
+    background: #fafafa;
+}
+
+.form-grupo input:focus,
+.form-grupo select:focus,
+.form-grupo textarea:focus {
+    border-color: var(--verde);
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(46, 125, 50, 0.1);
+}
+
+.form-grupo textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* =========================================================
+   FORMULÁRIO EM DUAS COLUNAS
+   ========================================================= */
+
+.form-linha {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+/* =========================================================
    TABELAS
-===================================================== */
+   ========================================================= */
 
+.tabela-container {
+    background: white;
 
-.tabela-container{
+    padding: 25px;
 
-    background:white;
+    border-radius: 20px;
 
-    padding:25px;
+    box-shadow: var(--sombra);
 
-    border-radius:20px;
-
-    box-shadow:var(--sombra);
-
-    overflow-x:auto;
-
+    overflow-x: auto;
 }
 
+.tabela {
+    width: 100%;
 
+    border-collapse: collapse;
 
-.tabela{
-
-    width:100%;
-
-    border-collapse:collapse;
-
+    margin-top: 10px;
 }
 
+.tabela th {
+    background: var(--verde-escuro);
 
+    color: white;
 
-.tabela th{
+    padding: 14px;
 
-    background:#E8F5E9;
+    text-align: left;
 
-    color:var(--verde-escuro);
-
-    padding:15px;
-
-    text-align:left;
-
+    font-size: 14px;
 }
 
+.tabela td {
+    padding: 13px;
 
+    border-bottom: 1px solid #eee;
 
-.tabela td{
+    color: #555;
 
-    padding:15px;
-
-    border-bottom:1px solid #eee;
-
+    font-size: 14px;
 }
 
-
-
-.tabela tr:hover{
-
-    background:#FAFAFA;
-
+.tabela tr:hover {
+    background: #f5f5f5;
 }
 
+/* =========================================================
+   ALERTAS / MENSAGENS
+   ========================================================= */
 
+.mensagem-sucesso {
+    background: #e8f5e9;
 
+    color: #2e7d32;
 
-/* =====================================================
-   PESQUISA
-===================================================== */
+    padding: 14px 18px;
 
+    border-radius: 10px;
 
-.pesquisa{
+    margin-bottom: 20px;
 
-    background:white;
-
-    padding:20px;
-
-    border-radius:20px;
-
-    box-shadow:var(--sombra);
-
-    margin-bottom:25px;
-
+    border-left: 5px solid #2e7d32;
 }
 
+.mensagem-erro {
+    background: #ffebee;
 
+    color: #c62828;
 
-.pesquisa input{
+    padding: 14px 18px;
 
-    width:100%;
+    border-radius: 10px;
 
-    padding:15px;
+    margin-bottom: 20px;
 
-    border-radius:12px;
-
-    border:1px solid #ddd;
-
-    font-size:16px;
-
+    border-left: 5px solid #c62828;
 }
 
-
-
-
-
-/* =====================================================
-   ALERTAS
-===================================================== */
-
-
-.alerta{
-
-    padding:15px 20px;
-
-    border-radius:12px;
-
-    margin-bottom:20px;
-
-}
-
-
-
-.alerta-sucesso{
-
-    background:#E8F5E9;
-
-    color:#1B5E20;
-
-}
-
-
-
-.alerta-erro{
-
-    background:#FFEBEE;
-
-    color:#C62828;
-
-}
-/* =====================================================
-   AGROLEITE - ESTILO GLOBAL
-   PARTE 3 - FINAL
-===================================================== */
-
-
-/* =====================================================
-   LISTAS E PAINÉIS
-===================================================== */
-
-
-.painel{
-
-    background:white;
-
-    padding:30px;
-
-    border-radius:20px;
-
-    box-shadow:var(--sombra);
-
-    margin-bottom:30px;
-
-}
-
-
-.painel h2{
-
-    color:var(--verde-escuro);
-
-    margin-bottom:20px;
-
-}
-
-
-
-.lista{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:15px;
-
-}
-
-
-
-.item-lista{
-
-    background:#F5F7F5;
-
-    padding:18px;
-
-    border-radius:12px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    transition:.3s;
-
-}
-
-
-
-.item-lista:hover{
-
-    background:#E8F5E9;
-
-}
-
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-
-.status{
-
-    padding:6px 14px;
-
-    border-radius:20px;
-
-    font-size:13px;
-
-    font-weight:bold;
-
-}
-
-
-
-.status-ativo{
-
-    background:#E8F5E9;
-
-    color:#1B5E20;
-
-}
-
-
-
-.status-pendente{
-
-    background:#FFF3E0;
-
-    color:#E65100;
-
-}
-
-
-
-.status-finalizado{
-
-    background:#E3F2FD;
-
-    color:#1565C0;
-
-}
-
-
-
-
-/* =====================================================
-   BOTÕES DE AÇÃO DA TABELA
-===================================================== */
-
-
-.acao{
-
-    display:flex;
-
-    gap:8px;
-
-}
-
-
-
-.btn-editar{
-
-    background:#1565C0;
-
-    color:white;
-
-    border:none;
-
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-}
-
-
-
-.btn-excluir{
-
-    background:#C62828;
-
-    color:white;
-
-    border:none;
-
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-}
-
-
-
-.btn-editar:hover,
-
-.btn-excluir:hover{
-
-    opacity:.8;
-
-}
-
-
-
-
-
-/* =====================================================
+/* =========================================================
    RODAPÉ
-===================================================== */
+   ========================================================= */
 
+footer {
+    margin: 35px 30px;
 
-footer{
+    padding: 20px;
 
-    margin-top:40px;
+    text-align: center;
 
-    padding:25px;
+    color: #777;
 
-    text-align:center;
+    font-size: 13px;
 
-    color:#777;
-
+    border-top: 1px solid #ddd;
 }
 
+/* =========================================================
+   PÁGINA DE LOGIN
+   ========================================================= */
 
+.login-body {
+    min-height: 100vh;
 
-footer strong{
+    display: flex;
 
-    color:var(--verde-escuro);
+    align-items: center;
 
-}
-
-
-
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-
-.modal{
-
-    display:none;
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    height:100%;
+    justify-content: center;
 
     background:
-
-    rgba(0,0,0,.5);
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:2000;
-
+        linear-gradient(
+            135deg,
+            rgba(27, 94, 32, 0.95),
+            rgba(62, 39, 35, 0.95)
+        );
 }
 
+.login-container {
+    width: 100%;
+    max-width: 430px;
 
+    background: white;
 
-.modal-conteudo{
+    padding: 40px;
 
-    background:white;
+    border-radius: 25px;
 
-    width:450px;
-
-    padding:30px;
-
-    border-radius:20px;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
-
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.25);
 }
 
+.login-logo {
+    text-align: center;
 
-
-.modal-conteudo h2{
-
-    color:var(--verde-escuro);
-
-    margin-bottom:20px;
-
+    margin-bottom: 30px;
 }
 
-
-
-
-/* =====================================================
-   ANIMAÇÕES
-===================================================== */
-
-
-.fade{
-
-    animation:aparecer .5s ease;
-
+.login-logo .icone {
+    margin: 0 auto 15px;
 }
 
+.login-logo h1 {
+    color: var(--verde-escuro);
 
-
-@keyframes aparecer{
-
-
-from{
-
-    opacity:0;
-
-    transform:translateY(20px);
-
+    font-size: 30px;
 }
 
+.login-logo p {
+    color: var(--cinza);
 
-to{
+    font-size: 13px;
 
-    opacity:1;
-
-    transform:translateY(0);
-
+    margin-top: 5px;
 }
 
+.login-container .btn-principal {
+    width: 100%;
 
+    text-align: center;
+
+    margin-top: 10px;
 }
 
-
-
-.slide{
-
-    animation:slide .5s ease;
-
-}
-
-
-
-@keyframes slide{
-
-
-from{
-
-    transform:translateX(-30px);
-
-    opacity:0;
-
-}
-
-
-to{
-
-    transform:translateX(0);
-
-    opacity:1;
-
-}
-
-
-}
-
-
-
-
-/* =====================================================
-   LOADING
-===================================================== */
-
-
-.loading{
-
-    width:40px;
-
-    height:40px;
-
-    border-radius:50%;
-
-    border:5px solid #ddd;
-
-    border-top-color:var(--verde);
-
-    animation:girar 1s linear infinite;
-
-}
-
-
-
-@keyframes girar{
-
-to{
-
-    transform:rotate(360deg);
-
-}
-
-}
-
-
-
-
-/* =====================================================
+/* =========================================================
    RESPONSIVIDADE
-===================================================== */
+   ========================================================= */
 
+@media (max-width: 900px) {
 
-@media(max-width:1000px){
+    .sidebar {
+        width: 220px;
+    }
 
+    .main {
+        margin-left: 220px;
 
-.sidebar{
+        width: calc(100% - 220px);
+    }
 
-    width:80px;
-
-    padding:20px 10px;
-
-}
-
-
-
-.logo h2,
-
-.logo span,
-
-.menu a span{
-
-    display:none;
+    .inferior {
+        grid-template-columns: 1fr;
+    }
 
 }
 
+@media (max-width: 700px) {
 
+    body {
+        display: block;
+    }
 
-.menu a{
+    .sidebar {
+        position: relative;
 
-    justify-content:center;
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 15px;
+    }
+
+    .logo {
+        margin-bottom: 15px;
+    }
+
+    .logo-icon {
+        font-size: 40px;
+    }
+
+    .logo h1 {
+        font-size: 24px;
+    }
+
+    .menu {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 8px;
+    }
+
+    .menu a {
+        justify-content: center;
+
+        padding: 11px 8px;
+
+        font-size: 12px;
+    }
+
+    .main {
+        margin-left: 0;
+
+        width: 100%;
+    }
+
+    .topo {
+        height: auto;
+
+        padding: 20px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .usuario {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .hero {
+        margin: 20px;
+
+        padding: 40px 25px;
+
+        min-height: 280px;
+    }
+
+    .hero h1,
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .cards {
+        margin: 20px;
+
+        grid-template-columns: 1fr;
+    }
+
+    .inferior {
+        margin: 20px;
+    }
+
+    .conteudo {
+        padding: 20px;
+    }
+
+    .form-linha {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario {
+        padding: 20px;
+    }
+
+    footer {
+        margin: 25px 20px;
+    }
 
 }
 
-
-
-.main{
-
-    margin-left:80px;
-
-    width:calc(100% - 80px);
-
-}
-
-
-
-.form-linha{
-
-    grid-template-columns:1fr;
-
-}
-
-
-
-.inferior{
-
-    grid-template-columns:1fr;
-
-}
-
-
-}
-
-
-
-
-@media(max-width:700px){
-
-
-
-.sidebar{
-
-    position:relative;
-
-    width:100%;
-
-    height:auto;
-
-}
-
-
-
-.layout{
-
-    display:block;
-
-}
-
-
-
-.main{
-
-    margin-left:0;
-
-    width:100%;
-
-}
-
-
-
-.topbar{
-
-    flex-direction:column;
-
-    height:auto;
-
-    gap:15px;
-
-    padding:20px;
-
-}
-
-
-
-.container{
-
-    padding:20px;
-
-}
-
-
-
-.banner{
-
-    height:220px;
-
-    padding:25px;
-
-}
-
-
-
-.banner h1{
-
-    font-size:30px;
-
-}
-
-
-
-.cards,
-
-.indicadores{
-
-    grid-template-columns:1fr;
-
-}
-
-
-
-.formulario{
-
-    padding:20px;
-
-}
-
-
-}
-
-
-
-
-
-/* =====================================================
-   UTILITÁRIOS
-===================================================== */
-
-
-.texto-verde{
-
-    color:var(--verde);
-
-}
-
-
-
-.texto-marrom{
-
-    color:var(--marrom);
-
-}
-
-
-
-.mt-20{
-
-    margin-top:20px;
-
-}
-
-
-
-.mb-20{
-
-    margin-bottom:20px;
-
-}
-
-
-
-.centralizar{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-
-
-.esconder{
-
-    display:none;
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    .menu a {
+        justify-content: flex-start;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 25px;
+    }
+
+    .hero h1,
+    .hero h2 {
+        font-size: 24px;
+    }
 
 }
