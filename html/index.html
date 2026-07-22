@@ -3,21 +3,36 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AGROLEITE - Dashboard</title>
-
-
-<link rel="stylesheet" href="css/estilo.css">
+    <title>AGROLEITE - Dashboard</title>
 
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FONTE -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
 
-<link rel="stylesheet"
-href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <!-- ÍCONES -->
+
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    >
+
+
+    <!-- CSS PRINCIPAL -->
+
+    <link rel="stylesheet" href="css/estilo.css">
 
 
 </head>
@@ -26,676 +41,493 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 <body>
 
 
-<div class="layout">
-
-
-
-<!-- MENU LATERAL -->
+<!-- =====================================================
+     MENU LATERAL
+===================================================== -->
 
 <aside class="sidebar">
 
 
-<div class="logo">
+    <!-- LOGO -->
 
-<div class="animal">
-🐄
-</div>
+    <div class="logo">
 
-<h1>AGROLEITE</h1>
+        <span class="logo-icon">
+            🐄
+        </span>
 
-<span>
-Controle Inteligente para o Campo
-</span>
+        <h1>
+            AGROLEITE
+        </h1>
 
-</div>
+        <p>
+            Controle Inteligente para o Campo
+        </p>
 
-
-
-<nav class="menu">
-
-
-<a href="home.html" class="ativo">
-
-<span class="material-symbols-outlined">
-home
-</span>
-
-Dashboard
-
-</a>
+    </div>
 
 
+    <!-- MENU -->
 
-<a href="clientes.html">
-
-<span class="material-symbols-outlined">
-group
-</span>
-
-Clientes
-
-</a>
+    <nav class="menu">
 
 
+        <a href="index.html" class="ativo">
 
-<a href="servicos.html">
+            <span class="material-symbols-outlined">
+                home
+            </span>
 
-<span class="material-symbols-outlined">
-build
-</span>
+            Dashboard
 
-Serviços
-
-</a>
-
+        </a>
 
 
-<a href="agendamentos.html">
+        <a href="clientes.html">
 
-<span class="material-symbols-outlined">
-calendar_month
-</span>
+            <span class="material-symbols-outlined">
+                group
+            </span>
 
-Agendamentos
+            Clientes
 
-</a>
-
-
-
-<a href="consulta_agendamentos.html">
-
-<span class="material-symbols-outlined">
-assignment
-</span>
-
-Consultas
-
-</a>
+        </a>
 
 
+        <a href="servicos.html">
 
-<a href="sobre.html">
+            <span class="material-symbols-outlined">
+                build
+            </span>
 
-<span class="material-symbols-outlined">
-info
-</span>
+            Serviços
 
-Sobre
-
-</a>
-
+        </a>
 
 
-<a href="index.html">
+        <a href="agendamentos.html">
 
-<span class="material-symbols-outlined">
-logout
-</span>
+            <span class="material-symbols-outlined">
+                calendar_month
+            </span>
 
-Sair
+            Agendamentos
 
-</a>
+        </a>
 
 
-</nav>
+        <a href="consulta_agendamentos.html">
+
+            <span class="material-symbols-outlined">
+                assignment
+            </span>
+
+            Consultas
+
+        </a>
+
+
+        <a href="sobre.html">
+
+            <span class="material-symbols-outlined">
+                info
+            </span>
+
+            Sobre
+
+        </a>
+
+
+        <a href="index.html">
+
+            <span class="material-symbols-outlined">
+                logout
+            </span>
+
+            Sair
+
+        </a>
+
+
+    </nav>
 
 
 </aside>
 
 
 
-
-
-
-<!-- CONTEÚDO -->
+<!-- =====================================================
+     ÁREA PRINCIPAL
+===================================================== -->
 
 <main class="main">
 
 
+    <!-- =================================================
+         TOPO
+    ================================================== -->
 
+    <header class="topo">
 
 
-<!-- TOPO -->
+        <div>
 
+            <h2>
+                Dashboard
+            </h2>
 
-<header class="topbar">
+            <p>
+                Gestão da propriedade leiteira
+            </p>
 
+        </div>
 
-<div>
 
-<h2>
-Dashboard
-</h2>
+        <!-- USUÁRIO -->
 
+        <div class="usuario">
 
-<p>
-Gestão da propriedade leiteira
-</p>
 
+            <div class="usuario-info">
 
-</div>
+                <strong>
+                    Administrador
+                </strong>
 
+                <span>
+                    Funcionário
+                </span>
 
+            </div>
 
-<div class="usuario">
 
+            <div class="usuario-icone">
 
-<div class="usuario-info">
+                A
 
-<strong>
-Administrador
-</strong>
+            </div>
 
-<span>
-Funcionário
-</span>
 
-</div>
+        </div>
 
 
-<div class="avatar">
+    </header>
 
-A
 
-</div>
 
+    <!-- =================================================
+         CONTEÚDO
+    ================================================== -->
 
-</div>
+    <div class="conteudo">
 
 
+        <!-- =================================================
+             BANNER
+        ================================================== -->
 
-</header>
+        <section class="hero">
 
 
+            <h1>
+                Bem-vindo ao AGROLEITE 🐄
+            </h1>
 
 
+            <p>
 
+                Controle clientes, serviços e agendamentos
+                da sua propriedade em um único sistema.
 
+            </p>
 
 
-<div class="container">
+        </section>
 
 
 
+        <!-- =================================================
+             INDICADORES
+        ================================================== -->
 
+        <section class="cards">
 
 
+            <!-- CLIENTES -->
 
-<!-- BANNER -->
+            <div class="card">
 
 
-<section class="banner fade">
+                <div class="icone">
 
+                    👨‍🌾
 
-<div>
+                </div>
 
-<h1>
-Bem-vindo ao AGROLEITE 🐄
-</h1>
 
+                <h3>
+                    Clientes
+                </h3>
 
-<p>
 
-Controle clientes, serviços e agendamentos
-da sua propriedade em um único sistema.
+                <p>
+                    0 clientes cadastrados
+                </p>
 
-</p>
 
+                <a
+                    href="clientes.html"
+                    class="btn-principal"
+                >
 
-</div>
+                    Acessar →
 
+                </a>
 
-</section>
 
+            </div>
 
 
 
+            <!-- SERVIÇOS -->
 
+            <div class="card">
 
 
+                <div class="icone">
 
-<!-- INDICADORES -->
+                    🛠️
 
+                </div>
 
-<section class="indicadores">
 
+                <h3>
+                    Serviços
+                </h3>
 
 
-<div class="indicador">
+                <p>
+                    0 serviços disponíveis
+                </p>
 
 
-<div class="icone">
+                <a
+                    href="servicos.html"
+                    class="btn-principal"
+                >
 
-👨‍🌾
+                    Acessar →
 
-</div>
+                </a>
 
 
-<div>
+            </div>
 
-<h3>
-0
-</h3>
 
-<p>
-Clientes cadastrados
-</p>
 
+            <!-- AGENDAMENTOS -->
 
-</div>
+            <div class="card">
 
 
-</div>
+                <div class="icone">
 
+                    📅
 
+                </div>
 
 
+                <h3>
+                    Agendamentos
+                </h3>
 
 
-<div class="indicador">
+                <p>
+                    0 agendamentos registrados
+                </p>
 
 
-<div class="icone">
+                <a
+                    href="agendamentos.html"
+                    class="btn-principal"
+                >
 
-🛠
+                    Acessar →
 
-</div>
+                </a>
 
 
-<div>
+            </div>
 
-<h3>
-0
-</h3>
 
-<p>
-Serviços disponíveis
-</p>
 
+            <!-- CONSULTAS -->
 
-</div>
+            <div class="card">
 
 
-</div>
+                <div class="icone">
 
+                    📋
 
+                </div>
 
 
+                <h3>
+                    Consultas
+                </h3>
 
 
-<div class="indicador">
+                <p>
+                    Consulte o histórico do sistema.
+                </p>
 
 
-<div class="icone">
+                <a
+                    href="consulta_agendamentos.html"
+                    class="btn-principal"
+                >
 
-📅
+                    Acessar →
 
-</div>
+                </a>
 
 
-<div>
+            </div>
 
-<h3>
-0
-</h3>
 
-<p>
-Agendamentos
-</p>
+        </section>
 
 
-</div>
 
+        <!-- =================================================
+             PAINÉIS
+        ================================================== -->
 
-</div>
+        <div class="inferior">
 
 
+            <!-- PRÓXIMOS AGENDAMENTOS -->
 
+            <section class="caixa">
 
 
+                <h2>
+                    📅 Próximos Agendamentos
+                </h2>
 
-<div class="indicador">
 
+                <div class="lista">
 
-<div class="icone">
 
-🐄
+                    <div class="item">
 
-</div>
+                        Fazenda Esperança
 
+                        <span>
+                            Pendente
+                        </span>
 
-<div>
+                    </div>
 
-<h3>
-0
-</h3>
 
-<p>
-Produção leiteira
-</p>
+                    <div class="item">
 
+                        Sítio Primavera
 
-</div>
+                        <span>
+                            Confirmado
+                        </span>
 
+                    </div>
 
-</div>
 
+                    <div class="item">
 
+                        Fazenda Bela Vista
 
+                        <span>
+                            Finalizado
+                        </span>
 
-</section>
+                    </div>
 
 
+                </div>
 
 
+            </section>
 
 
 
+            <!-- AVISOS -->
 
-<!-- MÓDULOS -->
+            <section class="caixa">
 
 
-<h2 class="texto-verde mb-20">
+                <h2>
+                    📢 Avisos do Sistema
+                </h2>
 
-Módulos do Sistema
 
-</h2>
+                <div class="lista">
 
 
+                    <div class="item">
 
-<section class="cards">
+                        ✔ Sistema funcionando normalmente
 
+                    </div>
 
 
+                    <div class="item">
 
+                        🐄 Novo módulo em desenvolvimento
 
-<div class="card">
+                    </div>
 
 
-<div class="icone">
-👨‍🌾
-</div>
+                    <div class="item">
 
+                        📅 Verifique os próximos atendimentos
 
-<h2>
-Clientes
-</h2>
+                    </div>
 
 
-<p>
-Cadastre produtores e consulte informações.
-</p>
+                </div>
 
 
-<a href="clientes.html"
-class="btn btn-verde">
+            </section>
 
-Acessar →
 
-</a>
+        </div>
 
 
-</div>
+        <!-- =================================================
+             RODAPÉ
+        ================================================== -->
 
+        <footer>
 
+            <strong>
+                AGROLEITE
+            </strong>
 
+            <br>
 
+            Controle Inteligente para o Campo
 
+            <br>
 
+            © 2026 Todos os direitos reservados.
 
-<div class="card">
+        </footer>
 
 
-<div class="icone">
-🛠
-</div>
-
-
-<h2>
-Serviços
-</h2>
-
-
-<p>
-Gerencie os serviços oferecidos.
-</p>
-
-
-<a href="servicos.html"
-class="btn btn-verde">
-
-Acessar →
-
-</a>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<div class="icone">
-📅
-</div>
-
-
-<h2>
-Agendamentos
-</h2>
-
-
-<p>
-Organize visitas e atendimentos.
-</p>
-
-
-<a href="agendamentos.html"
-class="btn btn-verde">
-
-Acessar →
-
-</a>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<div class="icone">
-📋
-</div>
-
-
-<h2>
-Consultas
-</h2>
-
-
-<p>
-Visualize históricos e registros.
-</p>
-
-
-<a href="consulta_agendamentos.html"
-class="btn btn-verde">
-
-Acessar →
-
-</a>
-
-
-</div>
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- PAINÉIS -->
-
-
-<div class="mt-20">
-
-
-
-<section class="painel">
-
-
-<h2>
-📅 Próximos Agendamentos
-</h2>
-
-
-<div class="lista">
-
-
-<div class="item-lista">
-
-Fazenda Esperança
-
-<span class="status status-pendente">
-Pendente
-</span>
-
-</div>
-
-
-
-<div class="item-lista">
-
-Sítio Primavera
-
-<span class="status status-ativo">
-Confirmado
-</span>
-
-</div>
-
-
-
-<div class="item-lista">
-
-Fazenda Bela Vista
-
-<span class="status status-finalizado">
-Finalizado
-</span>
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<section class="painel">
-
-
-<h2>
-📢 Avisos do Sistema
-</h2>
-
-
-
-<div class="lista">
-
-
-<div class="item-lista">
-
-✔ Sistema funcionando normalmente
-
-</div>
-
-
-
-<div class="item-lista">
-
-🐄 Novo módulo em desenvolvimento
-
-</div>
-
-
-
-<div class="item-lista">
-
-📅 Verifique os próximos atendimentos
-
-</div>
-
-
-</div>
-
-
-
-</section>
-
-
-
-</div>
-
-
-
-
-
-
-
-<footer>
-
-<strong>
-AGROLEITE
-</strong>
-
-<br>
-
-Controle Inteligente para o Campo
-
-<br>
-
-© 2026 Todos os direitos reservados.
-
-</footer>
-
-
-
-
-
-
-
-</div>
+    </div>
 
 
 </main>
-
-
-
-</div>
 
 
 </body>
