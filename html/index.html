@@ -1,210 +1,170 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AGROLEITE - Login</title>
-
-
-    <!-- FONTE -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+<title>AGROLEITE - Login</title>
 
 
-    <!-- ÍCONES -->
+<!-- FONTE -->
 
-    <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-    >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+>
 
 
-    <!-- ESTILO PRINCIPAL -->
+<!-- CSS -->
 
-    <link rel="stylesheet" href="css/estilo.css">
-
+<link rel="stylesheet" href="css/estilo.css">
+```
 
 </head>
 
-
 <body class="login-body">
 
-
-    <!-- =====================================================
-         CONTAINER DE LOGIN
-    ====================================================== -->
-
-    <div class="login-container">
+```
+<div class="login-container">
 
 
-        <!-- =================================================
-             LOGO
-        ================================================== -->
+    <!-- LOGO -->
 
-        <div class="login-logo">
+    <div class="login-logo">
 
-
-            <div class="icone">
-
-                🐄
-
-            </div>
-
-
-            <h1>
-                AGROLEITE
-            </h1>
-
-
-            <p>
-                Controle Inteligente para o Campo
-            </p>
-
-
+        <div class="icone">
+            🐄
         </div>
 
+        <h1>
+            AGROLEITE
+        </h1>
 
-
-        <!-- =================================================
-             TÍTULO
-        ================================================== -->
-
-        <div class="titulo-pagina">
-
-            <h1>
-                Bem-vindo!
-            </h1>
-
-            <p>
-                Entre no sistema para continuar.
-            </p>
-
-        </div>
-
-
-
-        <!-- =================================================
-             FORMULÁRIO
-        ================================================== -->
-
-        <form
-            action="home.html"
-            method="GET"
-        >
-
-
-            <!-- USUÁRIO -->
-
-            <div class="form-grupo">
-
-                <label for="usuario">
-                    Usuário
-                </label>
-
-
-                <input
-                    type="text"
-                    id="usuario"
-                    name="usuario"
-                    placeholder="Digite seu usuário"
-                    required
-                >
-
-            </div>
-
-
-
-            <!-- SENHA -->
-
-            <div class="form-grupo">
-
-                <label for="senha">
-                    Senha
-                </label>
-
-
-                <input
-                    type="password"
-                    id="senha"
-                    name="senha"
-                    placeholder="Digite sua senha"
-                    required
-                >
-
-            </div>
-
-
-
-            <!-- LEMBRAR -->
-
-            <div class="lembrar-login">
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        name="lembrar"
-                    >
-
-                    Lembrar-me
-
-                </label>
-
-
-                <a href="#">
-                    Esqueci minha senha
-                </a>
-
-            </div>
-
-
-
-            <!-- BOTÃO ENTRAR -->
-
-            <button
-                type="submit"
-                class="btn-principal"
-            >
-
-                Entrar no Sistema
-
-            </button>
-
-
-        </form>
-
-
-
-        <!-- =================================================
-             RODAPÉ DO LOGIN
-        ================================================== -->
-
-        <div class="login-footer">
-
-            <p>
-                AGROLEITE
-            </p>
-
-            <span>
-                Gestão inteligente para propriedades leiteiras.
-            </span>
-
-        </div>
-
+        <p>
+            Controle Inteligente para o Campo
+        </p>
 
     </div>
 
+
+    <!-- TÍTULO -->
+
+    <div class="login-titulo">
+
+        <h2>
+            Bem-vindo!
+        </h2>
+
+        <p>
+            Faça login para acessar o sistema.
+        </p>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+
+    <form action="home.html" method="GET">
+
+
+        <div class="form-grupo">
+
+            <label for="usuario">
+                Usuário
+            </label>
+
+            <input
+                type="text"
+                id="usuario"
+                name="usuario"
+                placeholder="Digite seu usuário"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-grupo">
+
+            <label for="senha">
+                Senha
+            </label>
+
+            <input
+                type="password"
+                id="senha"
+                name="senha"
+                placeholder="Digite sua senha"
+                required
+            >
+
+        </div>
+
+
+        <div class="lembrar-login">
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    name="lembrar"
+                >
+
+                Lembrar-me
+
+            </label>
+
+
+            <a href="#">
+                Esqueci minha senha
+            </a>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="btn-principal"
+        >
+
+            Entrar no Sistema
+
+        </button>
+
+
+    </form>
+
+
+    <!-- RODAPÉ -->
+
+    <div class="login-footer">
+
+        <strong>
+            AGROLEITE
+        </strong>
+
+        <p>
+            Gestão inteligente para propriedades leiteiras.
+        </p>
+
+        <span>
+            © 2026 Todos os direitos reservados.
+        </span>
+
+    </div>
+
+
+</div>
+```
 
 </body>
 
