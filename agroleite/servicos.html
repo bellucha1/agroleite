@@ -1,76 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGROLEITE | Catálogo de Serviços</title>
-
+    <title>AGROLEITE | Serviços</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="../css/estilo.css">
 </head>
-
 <body>
 
-    <!-- MENU LATERAL -->
     <aside class="sidebar">
         <div class="logo">
             <div class="logo-img">🐄</div>
             <h1>AGROLEITE</h1>
             <p>Controle Inteligente para o Campo</p>
         </div>
-
         <nav>
-            <a href="home.html">
-                <span class="material-symbols-outlined">home</span>
-                Home
-            </a>
-
-            <a href="clientes.html">
-                <span class="material-symbols-outlined">group</span>
-                Clientes
-            </a>
-
-            <a class="ativo" href="servicos.html">
-                <span class="material-symbols-outlined">construction</span>
-                Serviços
-            </a>
-
-            <a href="agendamentos.html">
-                <span class="material-symbols-outlined">calendar_month</span>
-                Agendamentos
-            </a>
-
-            <a href="consulta_agendamentos.html">
-                <span class="material-symbols-outlined">assignment</span>
-                Consultas
-            </a>
-
-            <a href="sobre.html">
-                <span class="material-symbols-outlined">info</span>
-                Sobre
-            </a>
-
-            <a href="../index.html">
-                <span class="material-symbols-outlined">logout</span>
-                Sair
-            </a>
+            <a href="home.html"><span class="material-symbols-outlined">home</span> Home</a>
+            <a href="clientes.html"><span class="material-symbols-outlined">group</span> Clientes</a>
+            <a class="ativo" href="servicos.html"><span class="material-symbols-outlined">construction</span> Serviços</a>
+            <a href="agendamentos.html"><span class="material-symbols-outlined">calendar_month</span> Agendamentos</a>
+            <a href="consulta_agendamentos.html"><span class="material-symbols-outlined">assignment</span> Consultas</a>
+            <a href="sobre.html"><span class="material-symbols-outlined">info</span> Sobre</a>
+            <a href="../index.html"><span class="material-symbols-outlined">logout</span> Sair</a>
         </nav>
     </aside>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main">
-
-        <!-- CABEÇALHO -->
         <header class="topo">
             <div>
                 <h2>Catálogo de Serviços</h2>
                 <p>Serviços oferecidos pelo AGROLEITE</p>
             </div>
-
             <div class="usuario">
                 <div class="avatar">A</div>
                 <div>
@@ -80,95 +44,61 @@
             </div>
         </header>
 
-        <section class="caixa" style="margin: 30px;">
-            <div class="topo-caixa">
+        <section style="padding: 28px 36px;">
+            <div class="caixa">
                 <h2>Serviços Disponíveis</h2>
+                <p style="margin-bottom: 18px; color: #666; font-size: 14px;">
+                    Os valores são preenchidos automaticamente ao selecionar o serviço no agendamento.
+                </p>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Serviço</th>
+                                <th>Valor (R$)</th>
+                                <th>Tempo Estimado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-servicos">
+                            <tr><td colspan="3" style="text-align:center;color:#888;padding:24px;">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <p style="margin-bottom: 20px; color: #555;">
-                Os valores abaixo são fixos e serão preenchidos automaticamente
-                quando o serviço for selecionado no agendamento.
-            </p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Serviço</th>
-                        <th>Valor (R$)</th>
-                        <th>Tempo Estimado</th>
-                    </tr>
-                </thead>
-                <tbody id="lista-servicos">
-                </tbody>
-            </table>
         </section>
 
-        <!-- RODAPÉ -->
         <footer>
             <strong>AGROLEITE</strong>
             <p>Controle Inteligente para o Campo</p>
             <p>© 2026 Todos os direitos reservados.</p>
         </footer>
-
     </main>
 
     <script>
-        const catalogoServicos = [
-            {
-                descricao: "Análise da Qualidade do Leite",
-                preco: 120.00,
-                tempo: "2 horas"
-            },
-            {
-                descricao: "Coleta de Amostras",
-                preco: 80.00,
-                tempo: "1 hora"
-            },
-            {
-                descricao: "Visita Técnica",
-                preco: 250.00,
-                tempo: "4 horas"
-            },
-            {
-                descricao: "Consultoria em Nutrição Animal",
-                preco: 350.00,
-                tempo: "5 horas"
-            },
-            {
-                descricao: "Diagnóstico da Propriedade",
-                preco: 450.00,
-                tempo: "6 horas"
-            },
-            {
-                descricao: "Treinamento de Ordenha",
-                preco: 300.00,
-                tempo: "3 horas"
-            },
-            {
-                descricao: "Avaliação Sanitária do Rebanho",
-                preco: 180.00,
-                tempo: "2 horas"
-            },
-            {
-                descricao: "Planejamento Alimentar",
-                preco: 280.00,
-                tempo: "3 horas"
+        async function carregarServicos() {
+            const tbody = document.getElementById('lista-servicos');
+            try {
+                const res = await fetch('/listar-servicos');
+                const dados = await res.json();
+
+                if (!dados.length) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#888;padding:24px;">Nenhum serviço cadastrado.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = dados.map(s => `
+                    <tr>
+                        <td>${s.descricao}</td>
+                        <td>R$ ${Number(s.preco).toFixed(2).replace('.', ',')}</td>
+                        <td>${s.tempo_estimado} hora(s)</td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#c62828;padding:24px;">Erro ao carregar. Servidor online?</td></tr>';
             }
-        ];
+        }
 
-        const tabela = document.getElementById("lista-servicos");
-
-        catalogoServicos.forEach(servico => {
-            tabela.innerHTML += `
-                <tr>
-                    <td>${servico.descricao}</td>
-                    <td>R$ ${servico.preco.toFixed(2)}</td>
-                    <td>${servico.tempo}</td>
-                </tr>
-            `;
-        });
+        carregarServicos();
     </script>
-
 </body>
-
 </html>
