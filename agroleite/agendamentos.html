@@ -8,7 +8,7 @@
 
     <title>AGROLEITE | Agendamentos</title>
 
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
 
 </head>
 
@@ -28,202 +28,31 @@
 
         <a href="home.html">🏠 Home</a>
         <a href="clientes.html">👨‍🌾 Clientes</a>
-        <a href="servicos.html">🛠 Serviços</a>
-        <a href="agendamentos.html" class="ativo">📅 Agendamentos</a>
+        <a href="servicos.html">🛠️ Serviços</a>
+        <a href="agendamentos.html">📅 Agendamentos</a>
         <a href="consulta_agendamentos.html">📋 Consultas</a>
+        <a href="../index.html">🚪 Sair</a>
 
     </nav>
 
 </header>
 
-<main class="container">
-
 <section class="banner">
-
-<h1>Controle de Agendamentos</h1>
-
-<p>
-
-Cadastre atendimentos, selecione os serviços e acompanhe o tempo previsto.
-
-</p>
-
+    <h1>Agendamentos</h1>
+    <p>Marque e gerencie os atendimentos</p>
 </section>
 
-<div class="grid">
-
-<!-- DADOS -->
-
-<section class="card">
-
-<h2>Dados do Agendamento</h2>
-
-<label>Cliente</label>
-
-<select id="cliente">
-
-<option value="">Selecione um cliente</option>
-
-</select>
-
-<label>Data</label>
-
-<input type="date" id="data">
-
-<label>Hora</label>
-
-<input type="time" id="hora">
-
-</section>
-
-<!-- SERVIÇOS -->
-
-<section class="card">
-
-<h2>Adicionar Serviço</h2>
-
-<label>Serviço</label>
-
-<select id="servico">
-
-<option value="">Selecione um serviço</option>
-
-</select>
-
-<label>Valor</label>
-
-<input type="text" readonly placeholder="R$ 0,00">
-
-<label>Tempo Estimado</label>
-
-<input type="text" readonly placeholder="0 horas">
-
-<button class="btn">
-
-➕ Adicionar Serviço
-
-</button>
-
-</section>
-
+<div class="container">
+    <div class="card">
+        <h2>Novo Agendamento</h2>
+        <p>Funcionalidade em desenvolvimento / integração com o backend.</p>
+    </div>
 </div>
-
-<section class="card">
-
-<h2>Serviços Selecionados</h2>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Serviço</th>
-
-<th>Valor</th>
-
-<th>Tempo</th>
-
-<th>Ação</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<td colspan="4">
-
-Nenhum serviço adicionado.
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</section>
-
-<div class="resumo">
-
-<div class="card-resumo">
-
-<h3>Total</h3>
-
-<p>R$ 0,00</p>
-
-</div>
-
-<div class="card-resumo">
-
-<h3>Tempo Estimado</h3>
-
-<p>0 horas</p>
-
-</div>
-
-</div>
-
-<section class="acoes">
-
-<button class="btn-principal">
-
-💾 Salvar Agendamento
-
-</button>
-
-<button class="btn-secundario">
-
-🗑 Limpar Dados
-
-</button>
-
-</section>
-
-<section class="card">
-
-<h2>Informações</h2>
-
-<ul>
-
-<li>✔ Escolha um cliente cadastrado.</li>
-
-<li>✔ Selecione um ou mais serviços.</li>
-
-<li>✔ Confira os valores antes de salvar.</li>
-
-<li>✔ Os agendamentos poderão ser consultados posteriormente.</li>
-
-</ul>
-
-</section>
-
-</main>
 
 <footer>
-
-<p>
-
-<strong>AGROLEITE</strong>
-
-</p>
-
-<p>
-
-Controle Inteligente para o Campo
-
-</p>
-
-<p>
-
-© 2026 Todos os direitos reservados.
-
-</p>
-
+    <strong>AGROLEITE</strong>
+    <p>Controle Inteligente para o Campo</p>
+    <p>© 2026 Todos os direitos reservados.</p>
 </footer>
 
 </body>
