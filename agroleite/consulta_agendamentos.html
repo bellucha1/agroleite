@@ -1,14 +1,20 @@
-```html
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AGROLEITE - Consulta de Agendamentos</title>
+<title>AGROLEITE | Consulta de Agendamentos</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
 
 <link rel="stylesheet" href="estilo.css">
 
@@ -16,33 +22,46 @@
 
 <body>
 
+<!-- MENU -->
+
 <nav>
 
+<h2>🐄 AGROLEITE</h2>
+
+<div>
+
 <a href="home.html">Home</a>
-
 <a href="clientes.html">Clientes</a>
-
 <a href="servicos.html">Serviços</a>
-
 <a href="agendamentos.html">Agendamentos</a>
+<a class="ativo" href="consulta_agendamentos.html">Consultas</a>
 
-<a href="consulta_agendamentos.html">Consulta Agendamentos</a>
+</div>
 
 </nav>
 
+<!-- BANNER -->
+
 <header class="banner">
 
-<h1>Histórico de Agendamentos</h1>
+<h1>Consulta de Agendamentos</h1>
 
-<p>Consulte todos os atendimentos cadastrados.</p>
+<p>
+
+Visualize todos os atendimentos realizados e pesquise
+rapidamente pelo nome do cliente.
+
+</p>
 
 </header>
 
-<div class="container">
+<!-- CONTEÚDO -->
 
-<div class="card">
+<main class="container">
 
-<h2>Pesquisar</h2>
+<section class="pesquisa">
+
+<h2>Pesquisar Cliente</h2>
 
 <input
 type="text"
@@ -50,9 +69,17 @@ id="pesquisa"
 placeholder="Digite o nome do cliente..."
 onkeyup="listarAgendamentos()">
 
-</div>
+</section>
 
-<div class="card">
+<section class="tabela-card">
+
+<div class="titulo">
+
+<h2>Histórico de Agendamentos</h2>
+
+<span id="totalRegistros"></span>
+
+</div>
 
 <table>
 
@@ -61,17 +88,11 @@ onkeyup="listarAgendamentos()">
 <tr>
 
 <th>Cliente</th>
-
 <th>Data</th>
-
 <th>Hora</th>
-
 <th>Serviços</th>
-
 <th>Total</th>
-
 <th>Tempo</th>
-
 <th>Ações</th>
 
 </tr>
@@ -84,95 +105,159 @@ onkeyup="listarAgendamentos()">
 
 </table>
 
-</div>
+</section>
 
-</div>
+</main>
+
+<footer>
+
+<p>
+
+AGROLEITE © 2026
+
+</p>
+
+<p>
+
+Controle Inteligente para o Campo
+
+</p>
+
+</footer>
 
 <script>
 
 function listarAgendamentos(){
 
-    const tabela=document.getElementById("tabela");
+const tabela=document.getElementById("tabela");
 
-    tabela.innerHTML="";
+const pesquisa=document
+.getElementById("pesquisa")
+.value
+.toLowerCase();
 
-    const pesquisa=
-        document.getElementById("pesquisa").value.toLowerCase();
+const total=document.getElementById("totalRegistros");
 
-    let lista=
-        JSON.parse(localStorage.getItem("agendamentos")) || [];
+tabela.innerHTML="";
 
-    lista.forEach((agendamento,indice)=>{
+let lista=JSON.parse(localStorage.getItem("agendamentos")) || [];
 
-        if(!agendamento.cliente.toLowerCase().includes(pesquisa))
-            return;
+let encontrados=0;
 
-        let nomes=[];
+lista.forEach((agendamento,indice)=>{
 
-        let total=0;
+if(!agendamento.cliente.toLowerCase().includes(pesquisa))
+return;
 
-        let tempo=0;
+encontrados++;
 
-        agendamento.servicos.forEach(servico=>{
+let nomes=[];
 
-            nomes.push(servico.nome);
+let valor=0;
 
-            total+=servico.preco;
+let tempo=0;
 
-            tempo+=servico.tempo;
+agendamento.servicos.forEach(servico=>{
 
-        });
+nomes.push(servico.nome);
 
-        tabela.innerHTML+=`
+valor+=Number(servico.preco);
 
-        <tr>
+tempo+=Number(servico.tempo);
 
-        <td>${agendamento.cliente}</td>
+});
 
-        <td>${agendamento.data}</td>
+tabela.innerHTML+=`
 
-        <td>${agendamento.hora}</td>
+<tr>
 
-        <td>${nomes.join("<br>")}</td>
+<td>${agendamento.cliente}</td>
 
-        <td>R$ ${total.toFixed(2)}</td>
+<td>${agendamento.data}</td>
 
-        <td>${tempo} h</td>
+<td>${agendamento.hora}</td>
 
-        <td>
+<td>${nomes.join("<br>")}</td>
 
-        <button onclick="excluir(${indice})">
+<td>R$ ${valor.toFixed(2)}</td>
 
-        Excluir
+<td>${tempo} h</td>
 
-        </button>
+<td>
 
-        </td>
+<button onclick="visualizar(${indice})">
 
-        </tr>
+👁
 
-        `;
+</button>
 
-    });
+<button onclick="excluir(${indice})">
+
+🗑
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+total.innerHTML=encontrados+" registro(s)";
+
+}
+
+function visualizar(indice){
+
+let lista=JSON.parse(localStorage.getItem("agendamentos")) || [];
+
+let ag=lista[indice];
+
+let texto="CLIENTE: "+ag.cliente+"\n\n";
+
+texto+="DATA: "+ag.data+"\n";
+
+texto+="HORÁRIO: "+ag.hora+"\n\n";
+
+texto+="SERVIÇOS:\n";
+
+let total=0;
+
+ag.servicos.forEach(servico=>{
+
+texto+="• "+servico.nome+"\n";
+
+total+=Number(servico.preco);
+
+});
+
+texto+="\nTOTAL: R$ "+total.toFixed(2);
+
+alert(texto);
 
 }
 
 function excluir(indice){
 
-    if(!confirm("Deseja excluir este agendamento?"))
-        return;
+if(!confirm("Deseja realmente excluir este agendamento?"))
 
-    let lista=
-        JSON.parse(localStorage.getItem("agendamentos")) || [];
+return;
 
-    lista.splice(indice,1);
+let lista=JSON.parse(localStorage.getItem("agendamentos")) || [];
 
-    localStorage.setItem(
-        "agendamentos",
-        JSON.stringify(lista)
-    );
+lista.splice(indice,1);
 
-    listarAgendamentos();
+localStorage.setItem(
+
+"agendamentos",
+
+JSON.stringify(lista)
+
+);
+
+listarAgendamentos();
 
 }
 
@@ -183,4 +268,3 @@ listarAgendamentos();
 </body>
 
 </html>
-```
