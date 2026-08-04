@@ -1,84 +1,175 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROLEITE | Clientes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="../css/estilo.css">
-    <title>AGROLEITE - Cadastro de Clientes</title>
+    <style>
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 20px;
+        }
+        .msg {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            display: none;
+        }
+        .msg.ok { display: block; background: #e8f5e9; color: #1B5E20; border: 1px solid #c8e6c9; }
+        .msg.erro { display: block; background: #fdecea; color: #c62828; border: 1px solid #ef9a9a; }
+        @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+    </style>
 </head>
-
 <body>
 
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="clientes.html">Clientes</a>
-        <a href="servicos.html">Serviços</a>
-        <a href="agendamentos.html">Agendamentos</a>
-        <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
-        <a href="../index.html">Sair</a>
-    </nav>
-
-    <header class="banner">
-        <h1>Gestão de Clientes</h1>
-        <p>Cadastre produtores, cooperativas e clientes do sistema AGROLEITE</p>
-    </header>
-
-    <div class="container">
-
-        <div class="card">
-            <h2>Novo Cadastro de Cliente</h2>
-
-            <label>Nome Completo</label>
-            <input type="text" id="nome">
-
-            <label>CPF</label>
-            <input type="text" id="cpf">
-
-            <label>Telefone</label>
-            <input type="text" id="telefone">
-
-            <label>E-mail</label>
-            <input type="email" id="email">
-
-            <button onclick="salvarCliente()">Salvar Cliente</button>
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-img">🐄</div>
+            <h1>AGROLEITE</h1>
+            <p>Controle Inteligente para o Campo</p>
         </div>
+        <nav>
+            <a href="home.html"><span class="material-symbols-outlined">home</span> Home</a>
+            <a class="ativo" href="clientes.html"><span class="material-symbols-outlined">group</span> Clientes</a>
+            <a href="servicos.html"><span class="material-symbols-outlined">construction</span> Serviços</a>
+            <a href="agendamentos.html"><span class="material-symbols-outlined">calendar_month</span> Agendamentos</a>
+            <a href="consulta_agendamentos.html"><span class="material-symbols-outlined">assignment</span> Consultas</a>
+            <a href="sobre.html"><span class="material-symbols-outlined">info</span> Sobre</a>
+            <a href="../index.html"><span class="material-symbols-outlined">logout</span> Sair</a>
+        </nav>
+    </aside>
 
-        <div class="card">
-            <h2>Clientes Cadastrados</h2>
-            <div id="lista-clientes"></div>
-        </div>
+    <main class="main">
+        <header class="topo">
+            <div>
+                <h2>Gestão de Clientes</h2>
+                <p>Cadastre produtores e cooperativas</p>
+            </div>
+            <div class="usuario">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Administrador</strong>
+                    <p>Funcionário</p>
+                </div>
+            </div>
+        </header>
 
-    </div>
+        <section style="padding: 28px 36px;">
+            <div id="msg" class="msg"></div>
+
+            <div class="grid-2">
+                <div class="caixa">
+                    <h2>Novo Cliente</h2>
+                    <form id="form-cliente" onsubmit="return salvarCliente(event)">
+                        <label for="nome">Nome Completo *</label>
+                        <input type="text" id="nome" required placeholder="Nome do produtor ou cooperativa">
+
+                        <label for="cpf">CPF / CNPJ *</label>
+                        <input type="text" id="cpf" required placeholder="000.000.000-00">
+
+                        <label for="telefone">Telefone *</label>
+                        <input type="text" id="telefone" required placeholder="(00) 00000-0000">
+
+                        <button type="submit" class="btn-principal" style="width:auto;margin-top:20px;padding:12px 28px;">
+                            Salvar Cliente
+                        </button>
+                    </form>
+                </div>
+
+                <div class="caixa">
+                    <h2>Clientes Cadastrados</h2>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>CPF/CNPJ</th>
+                                    <th>Telefone</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-clientes">
+                                <tr><td colspan="3" style="text-align:center;color:#888;padding:24px;">Carregando...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <strong>AGROLEITE</strong>
+            <p>Controle Inteligente para o Campo</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+    </main>
 
     <script>
-        function salvarCliente() {
-            const nome = document.getElementById("nome").value;
-            const cpf = document.getElementById("cpf").value;
-            const telefone = document.getElementById("telefone").value;
-
-            fetch("/salvar-cliente", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `nome=${encodeURIComponent(nome)}&cpf=${encodeURIComponent(cpf)}&telefone=${encodeURIComponent(telefone)}`
-            })
-            .then(() => {
-                alert("Cliente salvo!");
-                listarClientes();
-            })
-            .catch(err => alert("Erro ao salvar: " + err));
+        function mostrarMsg(texto, tipo) {
+            const el = document.getElementById('msg');
+            el.className = 'msg ' + tipo;
+            el.textContent = texto;
+            if (tipo === 'ok') setTimeout(() => { el.className = 'msg'; }, 3000);
         }
 
-        function listarClientes() {
-            fetch("/listar-clientes")
-                .then(r => r.json())
-                .then(dados => {
-                    const div = document.getElementById("lista-clientes");
-                    div.innerHTML = "<ul>" + dados.map(c => `<li>${c.nome} - ${c.cpf} - ${c.telefone}</li>`).join("") + "</ul>";
-                })
-                .catch(err => console.error("Erro ao listar clientes:", err));
+        async function salvarCliente(e) {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value.trim();
+            const cpf = document.getElementById('cpf').value.trim();
+            const telefone = document.getElementById('telefone').value.trim();
+
+            try {
+                const res = await fetch('/salvar-cliente', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome, cpf, telefone })
+                });
+                const data = await res.json();
+
+                if (!data.success) {
+                    mostrarMsg(data.error || 'Erro ao salvar.', 'erro');
+                    return false;
+                }
+
+                mostrarMsg('Cliente salvo com sucesso!', 'ok');
+                document.getElementById('form-cliente').reset();
+                listarClientes();
+            } catch (err) {
+                mostrarMsg('Falha na comunicação com o servidor.', 'erro');
+            }
+            return false;
+        }
+
+        async function listarClientes() {
+            const tbody = document.getElementById('lista-clientes');
+            try {
+                const res = await fetch('/listar-clientes');
+                const dados = await res.json();
+
+                if (!dados.length) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#888;padding:24px;">Nenhum cliente cadastrado.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = dados.map(c => `
+                    <tr>
+                        <td>${c.nome}</td>
+                        <td>${c.cpf}</td>
+                        <td>${c.telefone}</td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#c62828;padding:24px;">Erro ao carregar. Servidor online?</td></tr>';
+            }
         }
 
         listarClientes();
     </script>
-
 </body>
 </html>
