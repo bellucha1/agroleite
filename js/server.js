@@ -65,6 +65,25 @@ db.serialize(() => {
         stmt.finalize();
         console.log('✅ Serviços padrão inseridos no banco.');
     });
+
+    // Clientes de exemplo (só se a tabela estiver vazia)
+    db.get('SELECT COUNT(*) AS total FROM clientes', (err, row) => {
+        if (err || !row || row.total > 0) return;
+
+        const exemplos = [
+            ['Fazenda Esperança', '123.456.789-00', '(14) 99999-1001'],
+            ['Sítio Primavera', '987.654.321-00', '(14) 98888-2002'],
+            ['Cooperativa Vale do Leite', '12.345.678/0001-90', '(14) 97777-3003'],
+            ['Fazenda Bela Vista', '111.222.333-44', '(14) 96666-4004']
+        ];
+
+        const stmt = db.prepare(
+            'INSERT INTO clientes (nome, cpf, telefone) VALUES (?, ?, ?)'
+        );
+        exemplos.forEach(c => stmt.run(c));
+        stmt.finalize();
+        console.log('✅ Clientes de exemplo inseridos no banco.');
+    });
 });
 
 /* ---------- CLIENTES ---------- */
