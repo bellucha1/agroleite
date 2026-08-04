@@ -2,268 +2,209 @@
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROLEITE | Consulta de Agendamentos</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AGROLEITE | Consulta de Agendamentos</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
-
-<link rel="stylesheet" href="estilo.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
 
 <body>
 
-<!-- MENU -->
-
-<nav>
-
-<h2>🐄 AGROLEITE</h2>
-
-<div>
-
-<a href="home.html">Home</a>
-<a href="clientes.html">Clientes</a>
-<a href="servicos.html">Serviços</a>
-<a href="agendamentos.html">Agendamentos</a>
-<a class="ativo" href="consulta_agendamentos.html">Consultas</a>
-
-</div>
-
-</nav>
-
-<!-- BANNER -->
-
-<header class="banner">
-
-<h1>Consulta de Agendamentos</h1>
-
-<p>
-
-Visualize todos os atendimentos realizados e pesquise
-rapidamente pelo nome do cliente.
-
-</p>
-
-</header>
-
-<!-- CONTEÚDO -->
-
-<main class="container">
-
-<section class="pesquisa">
-
-<h2>Pesquisar Cliente</h2>
-
-<input
-type="text"
-id="pesquisa"
-placeholder="Digite o nome do cliente..."
-onkeyup="listarAgendamentos()">
-
-</section>
-
-<section class="tabela-card">
-
-<div class="titulo">
-
-<h2>Histórico de Agendamentos</h2>
-
-<span id="totalRegistros"></span>
-
-</div>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Cliente</th>
-<th>Data</th>
-<th>Hora</th>
-<th>Serviços</th>
-<th>Total</th>
-<th>Tempo</th>
-<th>Ações</th>
-
-</tr>
-
-</thead>
-
-<tbody id="tabela">
-
-</tbody>
-
-</table>
-
-</section>
-
-</main>
-
-<footer>
-
-<p>
-
-AGROLEITE © 2026
-
-</p>
-
-<p>
-
-Controle Inteligente para o Campo
-
-</p>
-
-</footer>
-
-<script>
-
-function listarAgendamentos(){
-
-const tabela=document.getElementById("tabela");
-
-const pesquisa=document
-.getElementById("pesquisa")
-.value
-.toLowerCase();
-
-const total=document.getElementById("totalRegistros");
-
-tabela.innerHTML="";
-
-let lista=JSON.parse(localStorage.getItem("agendamentos")) || [];
-
-let encontrados=0;
-
-lista.forEach((agendamento,indice)=>{
-
-if(!agendamento.cliente.toLowerCase().includes(pesquisa))
-return;
-
-encontrados++;
-
-let nomes=[];
-
-let valor=0;
-
-let tempo=0;
-
-agendamento.servicos.forEach(servico=>{
-
-nomes.push(servico.nome);
-
-valor+=Number(servico.preco);
-
-tempo+=Number(servico.tempo);
-
-});
-
-tabela.innerHTML+=`
-
-<tr>
-
-<td>${agendamento.cliente}</td>
-
-<td>${agendamento.data}</td>
-
-<td>${agendamento.hora}</td>
-
-<td>${nomes.join("<br>")}</td>
-
-<td>R$ ${valor.toFixed(2)}</td>
-
-<td>${tempo} h</td>
-
-<td>
-
-<button onclick="visualizar(${indice})">
-
-👁
-
-</button>
-
-<button onclick="excluir(${indice})">
-
-🗑
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-total.innerHTML=encontrados+" registro(s)";
-
-}
-
-function visualizar(indice){
-
-let lista=JSON.parse(localStorage.getItem("agendamentos")) || [];
-
-let ag=lista[indice];
-
-let texto="CLIENTE: "+ag.cliente+"\n\n";
-
-texto+="DATA: "+ag.data+"\n";
-
-texto+="HORÁRIO: "+ag.hora+"\n\n";
-
-texto+="SERVIÇOS:\n";
-
-let total=0;
-
-ag.servicos.forEach(servico=>{
-
-texto+="• "+servico.nome+"\n";
-
-total+=Number(servico.preco);
-
-});
-
-texto+="\nTOTAL: R$ "+total.toFixed(2);
-
-alert(texto);
-
-}
-
-function excluir(indice){
-
-if(!confirm("Deseja realmente excluir este agendamento?"))
-
-return;
-
-let lista=JSON.parse(localStorage.getItem("agendamentos")) || [];
-
-lista.splice(indice,1);
-
-localStorage.setItem(
-
-"agendamentos",
-
-JSON.stringify(lista)
-
-);
-
-listarAgendamentos();
-
-}
-
-listarAgendamentos();
-
-</script>
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-img">🐄</div>
+            <h1>AGROLEITE</h1>
+            <p>Controle Inteligente para o Campo</p>
+        </div>
+
+        <nav>
+            <a href="home.html">
+                <span class="material-symbols-outlined">home</span>
+                Home
+            </a>
+
+            <a href="clientes.html">
+                <span class="material-symbols-outlined">group</span>
+                Clientes
+            </a>
+
+            <a href="servicos.html">
+                <span class="material-symbols-outlined">construction</span>
+                Serviços
+            </a>
+
+            <a href="agendamentos.html">
+                <span class="material-symbols-outlined">calendar_month</span>
+                Agendamentos
+            </a>
+
+            <a class="ativo" href="consulta_agendamentos.html">
+                <span class="material-symbols-outlined">assignment</span>
+                Consultas
+            </a>
+
+            <a href="sobre.html">
+                <span class="material-symbols-outlined">info</span>
+                Sobre
+            </a>
+
+            <a href="index.html">
+                <span class="material-symbols-outlined">logout</span>
+                Sair
+            </a>
+        </nav>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main">
+
+        <!-- CABEÇALHO -->
+        <header class="topo">
+            <div>
+                <h2>Consulta de Agendamentos</h2>
+                <p>Visualize e pesquise todos os atendimentos realizados</p>
+            </div>
+
+            <div class="usuario">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Administrador</strong>
+                    <p>Funcionário</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- PESQUISA -->
+        <section class="pesquisa">
+            <h2>Pesquisar Cliente</h2>
+            <input
+                type="text"
+                id="pesquisa"
+                placeholder="Digite o nome do cliente..."
+                onkeyup="listarAgendamentos()"
+            >
+        </section>
+
+        <!-- TABELA -->
+        <section class="tabela-card">
+            <div class="titulo">
+                <h2>Histórico de Agendamentos</h2>
+                <span id="totalRegistros"></span>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Serviços</th>
+                        <th>Total</th>
+                        <th>Tempo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela">
+                </tbody>
+            </table>
+        </section>
+
+        <!-- RODAPÉ -->
+        <footer>
+            <strong>AGROLEITE</strong>
+            <p>Controle Inteligente para o Campo</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        function listarAgendamentos() {
+            const tabela = document.getElementById("tabela");
+            const pesquisa = document.getElementById("pesquisa").value.toLowerCase();
+            const total = document.getElementById("totalRegistros");
+
+            tabela.innerHTML = "";
+
+            let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
+            let encontrados = 0;
+
+            lista.forEach((agendamento, indice) => {
+                if (!agendamento.cliente.toLowerCase().includes(pesquisa)) return;
+
+                encontrados++;
+
+                let nomes = [];
+                let valor = 0;
+                let tempo = 0;
+
+                agendamento.servicos.forEach(servico => {
+                    nomes.push(servico.nome);
+                    valor += Number(servico.preco);
+                    tempo += Number(servico.tempo);
+                });
+
+                tabela.innerHTML += `
+                    <tr>
+                        <td>${agendamento.cliente}</td>
+                        <td>${agendamento.data}</td>
+                        <td>${agendamento.hora}</td>
+                        <td>${nomes.join("<br>")}</td>
+                        <td>R$ ${valor.toFixed(2)}</td>
+                        <td>${tempo} h</td>
+                        <td>
+                            <button onclick="visualizar(${indice})" title="Visualizar">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                            <button onclick="excluir(${indice})" title="Excluir">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            total.innerHTML = encontrados + " registro(s)";
+        }
+
+        function visualizar(indice) {
+            let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
+            let ag = lista[indice];
+
+            let texto = "CLIENTE: " + ag.cliente + "\n\n";
+            texto += "DATA: " + ag.data + "\n";
+            texto += "HORÁRIO: " + ag.hora + "\n\n";
+            texto += "SERVIÇOS:\n";
+
+            let total = 0;
+            ag.servicos.forEach(servico => {
+                texto += "• " + servico.nome + "\n";
+                total += Number(servico.preco);
+            });
+
+            texto += "\nTOTAL: R$ " + total.toFixed(2);
+            alert(texto);
+        }
+
+        function excluir(indice) {
+            if (!confirm("Deseja realmente excluir este agendamento?")) return;
+
+            let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
+            lista.splice(indice, 1);
+            localStorage.setItem("agendamentos", JSON.stringify(lista));
+
+            listarAgendamentos();
+        }
+
+        // Carrega a lista ao abrir a página
+        listarAgendamentos();
+    </script>
 
 </body>
 
