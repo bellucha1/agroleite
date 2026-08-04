@@ -1,108 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGROLEITE | Consulta de Agendamentos</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="../css/estilo.css">
+    <style>
+        .filtros { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+        .filtros input { max-width: 280px; margin: 0; }
+        .acoes-btn { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 8px; color: #2E7D32; margin: 0 2px; transition: 0.2s; }
+        .acoes-btn:hover { background: #e8f5e9; }
+        .acoes-btn.excluir { color: #c62828; }
+        .acoes-btn.excluir:hover { background: #fdecea; }
+        .acoes-btn .material-symbols-outlined { font-size: 20px; }
+        .modal-fundo { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+        .modal-fundo.aberto { display: flex; }
+        .modal { background: #fff; border-radius: 16px; padding: 28px; max-width: 520px; width: 100%; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .modal h3 { color: #1B5E20; margin-bottom: 16px; font-size: 20px; }
+        .modal .linha { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .modal .linha span { color: #666; }
+        .modal .linha strong { color: #333; }
+        .modal ul { margin: 12px 0; }
+        .modal ul li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; display: flex; justify-content: space-between; }
+        .modal .fechar { margin-top: 18px; width: 100%; }
+        .vazio { text-align: center; padding: 40px; color: #888; }
+        #total-registros { margin-top: 14px; font-size: 13px; color: #666; }
+    </style>
 </head>
-
 <body>
 
-    <!-- MENU LATERAL -->
     <aside class="sidebar">
         <div class="logo">
             <div class="logo-img">🐄</div>
             <h1>AGROLEITE</h1>
             <p>Controle Inteligente para o Campo</p>
         </div>
-
         <nav>
-            <a href="home.html">
-                <span class="material-symbols-outlined">home</span>
-                Home
-            </a>
-
-            <a href="clientes.html">
-                <span class="material-symbols-outlined">group</span>
-                Clientes
-            </a>
-
-            <a href="servicos.html">
-                <span class="material-symbols-outlined">construction</span>
-                Serviços
-            </a>
-
-            <a href="agendamentos.html">
-                <span class="material-symbols-outlined">calendar_month</span>
-                Agendamentos
-            </a>
-
-            <a class="ativo" href="consulta_agendamentos.html">
-                <span class="material-symbols-outlined">assignment</span>
-                Consultas
-            </a>
-
-            <a href="sobre.html">
-                <span class="material-symbols-outlined">info</span>
-                Sobre
-            </a>
-
-            <a href="../index.html">
-                <span class="material-symbols-outlined">logout</span>
-                Sair
-            </a>
+            <a href="home.html"><span class="material-symbols-outlined">home</span> Home</a>
+            <a href="clientes.html"><span class="material-symbols-outlined">group</span> Clientes</a>
+            <a href="servicos.html"><span class="material-symbols-outlined">construction</span> Serviços</a>
+            <a href="agendamentos.html"><span class="material-symbols-outlined">calendar_month</span> Agendamentos</a>
+            <a class="ativo" href="consulta_agendamentos.html"><span class="material-symbols-outlined">assignment</span> Consultas</a>
+            <a href="sobre.html"><span class="material-symbols-outlined">info</span> Sobre</a>
+            <a href="../index.html"><span class="material-symbols-outlined">logout</span> Sair</a>
         </nav>
     </aside>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main">
-
-        <!-- CABEÇALHO -->
         <header class="topo">
             <div>
                 <h2>Consulta de Agendamentos</h2>
-                <p>Visualize e pesquise todos os atendimentos realizados</p>
+                <p>Visualize e gerencie todos os atendimentos</p>
             </div>
-
             <div class="usuario">
                 <div class="avatar">A</div>
-                <div>
-                    <strong>Administrador</strong>
-                    <p>Funcionário</p>
-                </div>
+                <div><strong>Administrador</strong><p>Funcionário</p></div>
             </div>
         </header>
 
-        <section class="caixa" style="margin: 30px;">
-            <div class="topo-caixa">
-                <h2>Histórico de Agendamentos</h2>
-                <input type="text" id="pesquisa" placeholder="Pesquisar cliente..." onkeyup="listarAgendamentos()" style="padding:8px; width:250px; border-radius:6px; border:1px solid #ccc;">
+        <section style="padding: 28px 36px;">
+            <div class="caixa">
+                <div class="filtros">
+                    <input type="text" id="pesquisa" placeholder="Pesquisar por cliente ou responsável..." oninput="filtrar()">
+                    <a href="agendamentos.html" class="botao" style="padding:10px 20px;font-size:13px;">+ Novo Agendamento</a>
+                </div>
+
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Cliente</th>
+                                <th>Data</th>
+                                <th>Responsável</th>
+                                <th>Total</th>
+                                <th>Tempo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-agendamentos">
+                            <tr><td colspan="7" class="vazio">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p id="total-registros"></p>
             </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Data</th>
-                        <th>Hora</th>
-                        <th>Serviços</th>
-                        <th>Valor</th>
-                        <th>Tempo</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tabela-agendamentos">
-                </tbody>
-            </table>
-
-            <p id="total-registros" style="margin-top:15px; color:#555;"></p>
         </section>
 
         <footer>
@@ -110,90 +96,129 @@
             <p>Controle Inteligente para o Campo</p>
             <p>© 2026 Todos os direitos reservados.</p>
         </footer>
-
     </main>
 
+    <div class="modal-fundo" id="modal">
+        <div class="modal">
+            <h3>Detalhes do Agendamento</h3>
+            <div id="modal-conteudo"></div>
+            <button class="btn fechar" onclick="fecharModal()">Fechar</button>
+        </div>
+    </div>
+
     <script>
-        function listarAgendamentos() {
-            let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
-            let tabela = document.getElementById("tabela-agendamentos");
-            let total = document.getElementById("total-registros");
-            let pesquisa = document.getElementById("pesquisa").value.toLowerCase();
+        let listaCompleta = [];
 
-            tabela.innerHTML = "";
-            let encontrados = 0;
-
-            lista.forEach((agendamento, indice) => {
-                if (pesquisa && !agendamento.cliente.toLowerCase().includes(pesquisa)) return;
-
-                encontrados++;
-
-                let nomes = [];
-                let valor = 0;
-                let tempo = 0;
-
-                agendamento.servicos.forEach(servico => {
-                    nomes.push(servico.nome);
-                    valor += Number(servico.preco);
-                    tempo += Number(servico.tempo);
-                });
-
-                tabela.innerHTML += `
-                    <tr>
-                        <td>${agendamento.cliente}</td>
-                        <td>${agendamento.data}</td>
-                        <td>${agendamento.hora}</td>
-                        <td>${nomes.join("<br>")}</td>
-                        <td>R$ ${valor.toFixed(2)}</td>
-                        <td>${tempo} h</td>
-                        <td>
-                            <button onclick="visualizar(${indice})" title="Visualizar">
-                                <span class="material-symbols-outlined">visibility</span>
-                            </button>
-                            <button onclick="excluir(${indice})" title="Excluir">
-                                <span class="material-symbols-outlined">delete</span>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            total.innerHTML = encontrados + " registro(s)";
+        async function carregarAgendamentos() {
+            const tbody = document.getElementById('tabela-agendamentos');
+            try {
+                const res = await fetch('/listar-agendamentos');
+                listaCompleta = await res.json();
+                renderizar(listaCompleta);
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="7" class="vazio">Erro ao carregar agendamentos. O servidor está rodando?</td></tr>';
+            }
         }
 
-        function visualizar(indice) {
-            let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
-            let ag = lista[indice];
-
-            let texto = "CLIENTE: " + ag.cliente + "\n\n";
-            texto += "DATA: " + ag.data + "\n";
-            texto += "HORÁRIO: " + ag.hora + "\n\n";
-            texto += "SERVIÇOS:\n";
-
-            let total = 0;
-            ag.servicos.forEach(servico => {
-                texto += "• " + servico.nome + "\n";
-                total += Number(servico.preco);
-            });
-
-            texto += "\nTOTAL: R$ " + total.toFixed(2);
-            alert(texto);
+        function filtrar() {
+            const termo = document.getElementById('pesquisa').value.toLowerCase().trim();
+            if (!termo) { renderizar(listaCompleta); return; }
+            const filtrados = listaCompleta.filter(a =>
+                (a.nome_cliente || '').toLowerCase().includes(termo) ||
+                (a.responsavel || '').toLowerCase().includes(termo)
+            );
+            renderizar(filtrados);
         }
 
-        function excluir(indice) {
-            if (!confirm("Deseja realmente excluir este agendamento?")) return;
-
-            let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
-            lista.splice(indice, 1);
-            localStorage.setItem("agendamentos", JSON.stringify(lista));
-
-            listarAgendamentos();
+        function renderizar(lista) {
+            const tbody = document.getElementById('tabela-agendamentos');
+            const total = document.getElementById('total-registros');
+            if (!lista.length) {
+                tbody.innerHTML = '<tr><td colspan="7" class="vazio">Nenhum agendamento encontrado.</td></tr>';
+                total.textContent = '0 registro(s)';
+                return;
+            }
+            tbody.innerHTML = lista.map(a => {
+                const dataFmt = formatarData(a.data);
+                return `<tr>
+                    <td>#${a.id}</td>
+                    <td>${a.nome_cliente || '—'}</td>
+                    <td>${dataFmt}</td>
+                    <td>${a.responsavel || '—'}</td>
+                    <td>R$ ${Number(a.total).toFixed(2).replace('.', ',')}</td>
+                    <td>${a.tempo_total} h</td>
+                    <td>
+                        <button class="acoes-btn" title="Ver detalhes" onclick="verDetalhes(${a.id})">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                        <button class="acoes-btn excluir" title="Excluir" onclick="excluirAgendamento(${a.id})">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </td>
+                </tr>`;
+            }).join('');
+            total.textContent = lista.length + ' registro(s)';
         }
 
-        // Carrega a lista ao abrir a página
-        listarAgendamentos();
+        function formatarData(dataStr) {
+            if (!dataStr) return '—';
+            const partes = dataStr.split('-');
+            if (partes.length === 3) return `${partes[2]}/${partes[1]}/${partes[0]}`;
+            return dataStr;
+        }
+
+        async function verDetalhes(id) {
+            const ag = listaCompleta.find(a => a.id === id);
+            if (!ag) return;
+            let html = `
+                <div class="linha"><span>Nº</span><strong>#${ag.id}</strong></div>
+                <div class="linha"><span>Cliente</span><strong>${ag.nome_cliente}</strong></div>
+                <div class="linha"><span>Telefone</span><strong>${ag.telefone_cliente || '—'}</strong></div>
+                <div class="linha"><span>Data</span><strong>${formatarData(ag.data)}</strong></div>
+                <div class="linha"><span>Responsável</span><strong>${ag.responsavel}</strong></div>
+                <div class="linha"><span>Tempo total</span><strong>${ag.tempo_total} h</strong></div>
+                <div class="linha"><span>Valor total</span><strong>R$ ${Number(ag.total).toFixed(2).replace('.', ',')}</strong></div>
+                <h3 style="margin-top:18px;font-size:16px;">Serviços</h3>
+                <ul id="lista-itens"><li>Carregando...</li></ul>`;
+            document.getElementById('modal-conteudo').innerHTML = html;
+            document.getElementById('modal').classList.add('aberto');
+
+            try {
+                const res = await fetch('/detalhes-agendamento/' + id);
+                const itens = await res.json();
+                const ul = document.getElementById('lista-itens');
+                if (!itens.length) { ul.innerHTML = '<li>Nenhum serviço vinculado.</li>'; return; }
+                ul.innerHTML = itens.map(i => `
+                    <li>
+                        <span>${i.descricao} (${i.tempo_estimado}h)</span>
+                        <strong>R$ ${Number(i.preco_cobrado).toFixed(2).replace('.', ',')}</strong>
+                    </li>`).join('');
+            } catch (e) {
+                document.getElementById('lista-itens').innerHTML = '<li>Erro ao carregar serviços.</li>';
+            }
+        }
+
+        function fecharModal() {
+            document.getElementById('modal').classList.remove('aberto');
+        }
+
+        async function excluirAgendamento(id) {
+            if (!confirm('Deseja realmente excluir o agendamento #' + id + '?')) return;
+            try {
+                const res = await fetch('/excluir-agendamento/' + id, { method: 'DELETE' });
+                const resultado = await res.json();
+                if (resultado.success) carregarAgendamentos();
+                else alert(resultado.error || 'Erro ao excluir.');
+            } catch (e) {
+                alert('Falha na comunicação com o servidor.');
+            }
+        }
+
+        document.getElementById('modal').addEventListener('click', function (e) {
+            if (e.target === this) fecharModal();
+        });
+
+        carregarAgendamentos();
     </script>
-
 </body>
-
 </html>
