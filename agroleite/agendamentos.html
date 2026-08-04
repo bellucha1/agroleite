@@ -1,136 +1,116 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AGROLEITE - Agendamentos</title>
+    <title>AGROLEITE | Agendamentos</title>
 
-<link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estilo.css">
 
 </head>
 
 <body>
 
-<nav>
-    <a href="home.html">Home</a>
-    <a href="clientes.html">Clientes</a>
-    <a href="servicos.html">Serviços</a>
-    <a href="agendamentos.html">Agendamentos</a>
-    <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
-</nav>
+<header>
 
-<header class="banner">
-    <h1>Controle de Agendamentos</h1>
-    <p>Cadastre atendimentos para os clientes</p>
+    <div class="logo">
+
+        <h1>🐄 AGROLEITE</h1>
+
+        <p>Controle Inteligente para o Campo</p>
+
+    </div>
+
+    <nav>
+
+        <a href="home.html">🏠 Home</a>
+        <a href="clientes.html">👨‍🌾 Clientes</a>
+        <a href="servicos.html">🛠 Serviços</a>
+        <a href="agendamentos.html" class="ativo">📅 Agendamentos</a>
+        <a href="consulta_agendamentos.html">📋 Consultas</a>
+
+    </nav>
+
 </header>
 
-<div class="container">
+<main class="container">
 
-<div class="card">
+<section class="banner">
 
-<h2>Novo Agendamento</h2>
+<h1>Controle de Agendamentos</h1>
+
+<p>
+
+Cadastre atendimentos, selecione os serviços e acompanhe o tempo previsto.
+
+</p>
+
+</section>
+
+<div class="grid">
+
+<!-- DADOS -->
+
+<section class="card">
+
+<h2>Dados do Agendamento</h2>
 
 <label>Cliente</label>
 
 <select id="cliente">
 
-    <option>João Victor</option>
-    <option>Isabella Juliana</option>
-    <option>Pedro Emanuel</option>
-    <option>Roselaine Clei</option>
+<option value="">Selecione um cliente</option>
 
 </select>
-
-<br><br>
 
 <label>Data</label>
 
 <input type="date" id="data">
 
-<br><br>
-
 <label>Hora</label>
 
 <input type="time" id="hora">
 
-<hr>
+</section>
+
+<!-- SERVIÇOS -->
+
+<section class="card">
 
 <h2>Adicionar Serviço</h2>
 
 <label>Serviço</label>
 
-<select id="servico" onchange="selecionarServico()">
+<select id="servico">
 
-<option value="">Selecione...</option>
-
-<option value="0">
-Análise da Qualidade do Leite
-</option>
-
-<option value="1">
-Coleta de Amostras
-</option>
-
-<option value="2">
-Visita Técnica
-</option>
-
-<option value="3">
-Consultoria em Nutrição Animal
-</option>
-
-<option value="4">
-Diagnóstico da Propriedade
-</option>
-
-<option value="5">
-Treinamento de Ordenha
-</option>
-
-<option value="6">
-Avaliação Sanitária do Rebanho
-</option>
-
-<option value="7">
-Planejamento Alimentar
-</option>
+<option value="">Selecione um serviço</option>
 
 </select>
 
-<br><br>
+<label>Valor</label>
 
-<label>Valor (R$)</label>
-
-<input
-type="text"
-id="valor"
-readonly>
-
-<br><br>
+<input type="text" readonly placeholder="R$ 0,00">
 
 <label>Tempo Estimado</label>
 
-<input
-type="text"
-id="tempo"
-readonly>
+<input type="text" readonly placeholder="0 horas">
 
-<br><br>
+<button class="btn">
 
-<button onclick="adicionarServico()">
-
-Adicionar Serviço
+➕ Adicionar Serviço
 
 </button>
 
+</section>
+
 </div>
 
-<div class="card">
+<section class="card">
 
-<h2>Serviços do Agendamento</h2>
+<h2>Serviços Selecionados</h2>
 
 <table>
 
@@ -144,221 +124,108 @@ Adicionar Serviço
 
 <th>Tempo</th>
 
+<th>Ação</th>
+
 </tr>
 
 </thead>
 
-<tbody id="lista">
+<tbody>
+
+<tr>
+
+<td colspan="4">
+
+Nenhum serviço adicionado.
+
+</td>
+
+</tr>
 
 </tbody>
 
 </table>
 
-<br>
+</section>
 
-<h3 id="total">
+<div class="resumo">
 
-Total: R$ 0,00
+<div class="card-resumo">
 
-</h3>
+<h3>Total</h3>
 
-<h3 id="tempoTotal">
-
-Tempo Total: 0 horas
-
-</h3>
-
-<br>
-
-<button onclick="salvarAgendamento()">
-
-Salvar Agendamento
-
-</button>
+<p>R$ 0,00</p>
 
 </div>
 
-</div><script>
+<div class="card-resumo">
 
-const catalogo = [
+<h3>Tempo Estimado</h3>
 
-    {
-        nome:"Análise da Qualidade do Leite",
-        preco:120,
-        tempo:2
-    },
+<p>0 horas</p>
 
-    {
-        nome:"Coleta de Amostras",
-        preco:80,
-        tempo:1
-    },
+</div>
 
-    {
-        nome:"Visita Técnica",
-        preco:250,
-        tempo:4
-    },
+</div>
 
-    {
-        nome:"Consultoria em Nutrição Animal",
-        preco:350,
-        tempo:5
-    },
+<section class="acoes">
 
-    {
-        nome:"Diagnóstico da Propriedade",
-        preco:450,
-        tempo:6
-    },
+<button class="btn-principal">
 
-    {
-        nome:"Treinamento de Ordenha",
-        preco:300,
-        tempo:3
-    },
+💾 Salvar Agendamento
 
-    {
-        nome:"Avaliação Sanitária do Rebanho",
-        preco:180,
-        tempo:2
-    },
+</button>
 
-    {
-        nome:"Planejamento Alimentar",
-        preco:280,
-        tempo:3
-    }
+<button class="btn-secundario">
 
-];
+🗑 Limpar Dados
 
-let carrinho = [];
+</button>
 
-function selecionarServico(){
+</section>
 
-    const indice = document.getElementById("servico").value;
+<section class="card">
 
-    if(indice===""){
-        document.getElementById("valor").value="";
-        document.getElementById("tempo").value="";
-        return;
-    }
+<h2>Informações</h2>
 
-    document.getElementById("valor").value =
-        "R$ " + catalogo[indice].preco.toFixed(2);
+<ul>
 
-    document.getElementById("tempo").value =
-        catalogo[indice].tempo + " hora(s)";
-}
+<li>✔ Escolha um cliente cadastrado.</li>
 
-function adicionarServico(){
+<li>✔ Selecione um ou mais serviços.</li>
 
-    const indice=document.getElementById("servico").value;
+<li>✔ Confira os valores antes de salvar.</li>
 
-    if(indice===""){
-        alert("Selecione um serviço.");
-        return;
-    }
+<li>✔ Os agendamentos poderão ser consultados posteriormente.</li>
 
-    carrinho.push(catalogo[indice]);
+</ul>
 
-    atualizarTabela();
+</section>
 
-}
+</main>
 
-function atualizarTabela(){
+<footer>
 
-    let tbody=document.getElementById("lista");
+<p>
 
-    tbody.innerHTML="";
+<strong>AGROLEITE</strong>
 
-    let total=0;
+</p>
 
-    let horas=0;
+<p>
 
-    carrinho.forEach(servico=>{
+Controle Inteligente para o Campo
 
-        total+=servico.preco;
+</p>
 
-        horas+=servico.tempo;
+<p>
 
-        tbody.innerHTML+=`
+© 2026 Todos os direitos reservados.
 
-        <tr>
+</p>
 
-            <td>${servico.nome}</td>
-
-            <td>R$ ${servico.preco.toFixed(2)}</td>
-
-            <td>${servico.tempo} h</td>
-
-        </tr>
-
-        `;
-
-    });
-
-    document.getElementById("total").innerHTML=
-    "Total: R$ "+total.toFixed(2);
-
-    document.getElementById("tempoTotal").innerHTML=
-    "Tempo Total: "+horas+" hora(s)";
-
-}
-
-function salvarAgendamento(){
-
-    const cliente=document.getElementById("cliente").value;
-
-    const data=document.getElementById("data").value;
-
-    const hora=document.getElementById("hora").value;
-
-    if(cliente==="" || data==="" || hora===""){
-
-        alert("Preencha todos os campos.");
-
-        return;
-
-    }
-
-    if(carrinho.length===0){
-
-        alert("Adicione pelo menos um serviço.");
-
-        return;
-
-    }
-
-    const agendamento={
-
-        cliente:cliente,
-
-        data:data,
-
-        hora:hora,
-
-        servicos:carrinho
-
-    };
-
-    let lista=
-        JSON.parse(localStorage.getItem("agendamentos")) || [];
-
-    lista.push(agendamento);
-
-    localStorage.setItem(
-        "agendamentos",
-        JSON.stringify(lista)
-    );
-
-    alert("Agendamento salvo com sucesso!");
-
-    location.reload();
-
-}
-
-</script>
+</footer>
 
 </body>
+
 </html>
