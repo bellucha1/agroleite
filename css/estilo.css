@@ -1,343 +1,772 @@
 /* ==========================================================
-   AGROLEITE
-   ESTILO.CSS
+   AGROLEITE - ESTILO.CSS (organizado)
    ========================================================== */
 
-/* RESET */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+/* ---------- RESET ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-    background:#eef3ef;
-    color:#333;
+body {
+    background: #eef3ef;
+    color: #333;
+    min-height: 100vh;
 }
 
-/* LINKS */
-
-a{
-    text-decoration:none;
-    color:inherit;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-/* LAYOUT */
+ul {
+    list-style: none;
+}
 
-.layout{
-    display:flex;
-    min-height:100vh;
+img {
+    max-width: 100%;
+    display: block;
 }
 
 /* ==========================================================
-   MENU LATERAL
+   MENU LATERAL (sidebar)
    ========================================================== */
-
-.sidebar{
-
-    width:270px;
-
-    background:linear-gradient(180deg,#1B5E20,#2E7D32);
-
-    color:#fff;
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    height:100vh;
-
-    padding:25px;
-
-    overflow:auto;
-
-    box-shadow:5px 0 20px rgba(0,0,0,.15);
-
+.sidebar {
+    width: 270px;
+    background: linear-gradient(180deg, #1B5E20, #2E7D32);
+    color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    padding: 28px 20px;
+    overflow-y: auto;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
 }
 
-/* LOGO */
-
-.logo{
-
-    text-align:center;
-
-    margin-bottom:40px;
-
+/* Logo */
+.sidebar .logo,
+.logo {
+    text-align: center;
+    margin-bottom: 36px;
+    flex-shrink: 0;
 }
 
-.logo-icon{
-
-    width:90px;
-
-    height:90px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:rgba(255,255,255,.15);
-
-    font-size:46px;
-
-    margin-bottom:15px;
-
+.logo-img,
+.logo-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    font-size: 42px;
 }
 
-.logo h1{
-
-    font-size:30px;
-
-    font-weight:700;
-
-    letter-spacing:1px;
-
+.logo h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.2;
 }
 
-.logo p{
-
-    margin-top:10px;
-
-    font-size:13px;
-
-    opacity:.8;
-
+.logo p {
+    margin-top: 8px;
+    font-size: 12px;
+    opacity: 0.85;
+    line-height: 1.4;
 }
 
-/* MENU */
-
-.menu{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
+/* Itens do menu — um abaixo do outro */
+.sidebar nav,
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
 }
 
-.menu a{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    padding:15px 18px;
-
-    border-radius:12px;
-
-    transition:.3s;
-
-    font-size:15px;
-
-    font-weight:500;
-
+.sidebar nav a,
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    transition: 0.25s ease;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
 }
 
-.menu a:hover{
-
-    background:rgba(255,255,255,.18);
-
-    transform:translateX(8px);
-
+.sidebar nav a:hover,
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateX(6px);
 }
 
-.menu a.ativo{
-
-    background:#ffffff;
-
-    color:#1B5E20;
-
-    font-weight:600;
-
+.sidebar nav a.ativo,
+.menu a.ativo {
+    background: #ffffff;
+    color: #1B5E20;
+    font-weight: 600;
 }
 
-.menu .material-symbols-outlined{
-
-    font-size:24px;
-
+.sidebar nav .material-symbols-outlined,
+.menu .material-symbols-outlined {
+    font-size: 22px;
+    flex-shrink: 0;
 }
 
 /* ==========================================================
    ÁREA PRINCIPAL
    ========================================================== */
+.main {
+    margin-left: 270px;
+    width: calc(100% - 270px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
-.main{
+/* ---------- TOPO ---------- */
+.topo {
+    height: 80px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
 
-    margin-left:270px;
+.topo h2 {
+    color: #1B5E20;
+    font-size: 24px;
+    font-weight: 600;
+}
 
-    width:calc(100% - 270px);
+.topo p {
+    color: #777;
+    font-size: 13px;
+    margin-top: 2px;
+}
 
-    min-height:100vh;
+/* Usuário no topo */
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
+.usuario .avatar,
+.usuario-icone {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #2E7D32;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.usuario strong {
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
+
+.usuario p {
+    font-size: 12px;
+    color: #888;
+    margin: 0;
+}
+
+/* ---------- CONTEÚDO INTERNO ---------- */
+.main > section,
+.conteudo {
+    padding: 28px 36px;
 }
 
 /* ==========================================================
-   TOPO
+   HERO / BANNER
    ========================================================== */
-
-.topo{
-
-    height:85px;
-
-    background:#fff;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:0 40px;
-
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-
-}
-
-.topo h2{
-
-    color:#1B5E20;
-
-    font-size:28px;
-
-}
-
-.topo p{
-
-    color:#666;
-
-    margin-top:5px;
-
-}
-
-/* USUÁRIO */
-
-.usuario{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-.usuario-info{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:flex-end;
-
-}
-
-.usuario-info strong{
-
-    color:#333;
-
-}
-
-.usuario-info span{
-
-    color:#888;
-
-    font-size:13px;
-
-}
-
-.usuario-icone{
-
-    width:50px;
-
-    height:50px;
-
-    border-radius:50%;
-
-    background:#2E7D32;
-
-    color:#fff;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-weight:bold;
-
-    font-size:20px;
-
-}
-
-/* ==========================================================
-   CONTEÚDO
-   ========================================================== */
-
-.conteudo{
-
-    padding:35px;
-
-}
-
-/* ==========================================================
-   BANNER
-   ========================================================== */
-
-.hero{
-
-    border-radius:25px;
-
-    padding:70px;
-
-    color:#fff;
-
+.hero {
+    margin: 28px 36px 0;
+    border-radius: 20px;
+    padding: 56px 48px;
+    color: #fff;
     background:
-
-        linear-gradient(
-            rgba(0,0,0,.45),
-            rgba(0,0,0,.45)
-        ),
-
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url("../imagensagroleite/banner-agroleite.png");
-
-    background-size:cover;
-
-    background-position:center;
-
-    box-shadow:0 12px 25px rgba(0,0,0,.15);
-
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
 }
 
-.hero h1{
-
-    font-size:42px;
-
-    margin-bottom:20px;
-
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 14px;
+    font-weight: 700;
 }
 
-.hero p{
+.hero p {
+    max-width: 600px;
+    line-height: 1.7;
+    font-size: 16px;
+    margin-bottom: 24px;
+    opacity: 0.95;
+}
 
-    max-width:700px;
+.hero .botao,
+.btn-principal,
+.botao {
+    display: inline-block;
+    background: #fff;
+    color: #1B5E20;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s;
+}
 
-    line-height:1.8;
+.hero .botao:hover,
+.btn-principal:hover,
+.botao:hover {
+    background: #e8f5e9;
+    transform: translateY(-2px);
+}
 
-    font-size:18px;
+/* ==========================================================
+   CARDS (atalhos / módulos)
+   ========================================================== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 28px 36px;
+}
 
+.card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 22px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: 0.25s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+}
+
+.card .material-symbols-outlined {
+    font-size: 36px;
+    color: #2E7D32;
+}
+
+.card h3 {
+    font-size: 18px;
+    color: #1B5E20;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: 13px;
+    color: #777;
+    flex: 1;
+}
+
+.card a {
+    color: #2E7D32;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================
+   PAINÉIS (tabelas + avisos)
+   ========================================================== */
+.painel {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+    padding: 0 36px 28px;
+}
+
+.caixa {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.caixa h2 {
+    font-size: 18px;
+    color: #1B5E20;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+/* Tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead th {
+    text-align: left;
+    padding: 12px 14px;
+    background: #e8f5e9;
+    color: #1B5E20;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 2px solid #c8e6c9;
+}
+
+table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #444;
+}
+
+table tbody tr:hover {
+    background: #f5faf5;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Lista de avisos */
+.caixa ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.caixa ul li:last-child {
+    border-bottom: none;
+}
+
+/* ==========================================================
+   ATALHOS RÁPIDOS
+   ========================================================== */
+.atalhos {
+    padding: 0 36px 28px;
+}
+
+.atalhos h2 {
+    font-size: 18px;
+    color: #1B5E20;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.atalhos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.atalhos-grid a {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 16px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    transition: 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.atalhos-grid a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    background: #e8f5e9;
+}
+
+.atalhos-grid a span {
+    font-size: 32px;
+}
+
+.atalhos-grid a p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* ==========================================================
+   RODAPÉ
+   ========================================================== */
+footer,
+.main > footer {
+    margin-top: auto;
+    padding: 28px 36px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+}
+
+footer strong {
+    display: block;
+    color: #1B5E20;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+footer p {
+    font-size: 13px;
+    color: #888;
+    margin: 2px 0;
+}
+
+/* ==========================================================
+   PÁGINA DE LOGIN
+   ========================================================== */
+.login-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #43A047 100%);
+    padding: 24px;
+}
+
+.login-container {
+    background: #fff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.login-logo .icone {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.login-logo h1 {
+    font-size: 28px;
+    color: #1B5E20;
+    font-weight: 700;
+}
+
+.login-logo p {
+    font-size: 13px;
+    color: #777;
+    margin-top: 6px;
+}
+
+.login-titulo {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.login-titulo h2 {
+    font-size: 22px;
+    color: #333;
+    font-weight: 600;
+}
+
+.login-titulo p {
+    font-size: 14px;
+    color: #888;
+    margin-top: 6px;
+}
+
+.form-grupo {
+    margin-bottom: 18px;
+}
+
+.form-grupo label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.form-grupo input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: 0.2s;
+    outline: none;
+}
+
+.form-grupo input:focus {
+    border-color: #2E7D32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+}
+
+.lembrar-login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    font-size: 13px;
+    color: #666;
+}
+
+.lembrar-login label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.lembrar-login a {
+    color: #2E7D32;
+    font-weight: 500;
+}
+
+.lembrar-login a:hover {
+    text-decoration: underline;
+}
+
+.btn-principal {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #1B5E20, #2E7D32);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-principal:hover {
+    background: linear-gradient(135deg, #2E7D32, #43A047);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(46, 125, 50, 0.3);
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.login-footer strong {
+    color: #1B5E20;
+    font-size: 14px;
+}
+
+.login-footer p {
+    font-size: 12px;
+    color: #888;
+    margin: 4px 0;
+}
+
+.login-footer span {
+    font-size: 11px;
+    color: #aaa;
+}
+
+/* ==========================================================
+   FORMULÁRIOS GENÉRICOS (clientes, serviços, etc.)
+   ========================================================== */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 36px;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 6px;
+    margin-top: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+    background: #fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #2E7D32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+button,
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #2E7D32;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-top: 16px;
+}
+
+button:hover,
+.btn:hover {
+    background: #1B5E20;
+}
+
+/* Banner simples (páginas antigas) */
+.banner {
+    background: linear-gradient(135deg, #1B5E20, #2E7D32);
+    color: #fff;
+    padding: 40px 36px;
+    text-align: center;
+}
+
+.banner h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.banner p {
+    opacity: 0.9;
+    font-size: 15px;
+}
+
+/* Nav horizontal (páginas antigas sem sidebar) */
+body > nav {
+    background: #1B5E20;
+    padding: 14px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+body > nav a {
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+body > nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================
+   RESPONSIVO
+   ========================================================== */
+@media (max-width: 1100px) {
+    .cards,
+    .atalhos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .painel {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .cards,
+    .atalhos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        margin: 16px;
+        padding: 36px 24px;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .topo {
+        padding: 0 16px;
+        height: auto;
+        min-height: 70px;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .main > section,
+    .cards,
+    .painel,
+    .atalhos,
+    .conteudo {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 }
