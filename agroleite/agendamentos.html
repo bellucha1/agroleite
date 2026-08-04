@@ -1,60 +1,227 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AGROLEITE | Agendamentos</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="../css/estilo.css">
-
+    <style>
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-grid .full { grid-column: 1 / -1; }
+        .servicos-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-height: 280px; overflow-y: auto; padding: 4px; }
+        .servico-item { display: flex; align-items: flex-start; gap: 10px; background: #f5faf5; border: 1.5px solid #c8e6c9; border-radius: 10px; padding: 12px 14px; cursor: pointer; transition: 0.2s; }
+        .servico-item:hover { border-color: #2E7D32; background: #e8f5e9; }
+        .servico-item.selecionado { border-color: #1B5E20; background: #c8e6c9; }
+        .servico-item input { width: auto; margin-top: 3px; accent-color: #2E7D32; }
+        .servico-item .info { flex: 1; }
+        .servico-item .info strong { display: block; font-size: 14px; color: #1B5E20; }
+        .servico-item .info span { font-size: 12px; color: #666; }
+        .resumo { background: #e8f5e9; border-radius: 12px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+        .resumo .valor { font-size: 22px; font-weight: 700; color: #1B5E20; }
+        .resumo .tempo { font-size: 15px; color: #555; }
+        .msg { padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; font-size: 14px; display: none; }
+        .msg.ok { display: block; background: #e8f5e9; color: #1B5E20; border: 1px solid #c8e6c9; }
+        .msg.erro { display: block; background: #fdecea; color: #c62828; border: 1px solid #ef9a9a; }
+        .caixa form label { margin-top: 0; }
+        @media (max-width: 768px) { .form-grid, .servicos-lista { grid-template-columns: 1fr; } }
+    </style>
 </head>
-
 <body>
 
-<header>
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-img">🐄</div>
+            <h1>AGROLEITE</h1>
+            <p>Controle Inteligente para o Campo</p>
+        </div>
+        <nav>
+            <a href="home.html"><span class="material-symbols-outlined">home</span> Home</a>
+            <a href="clientes.html"><span class="material-symbols-outlined">group</span> Clientes</a>
+            <a href="servicos.html"><span class="material-symbols-outlined">construction</span> Serviços</a>
+            <a class="ativo" href="agendamentos.html"><span class="material-symbols-outlined">calendar_month</span> Agendamentos</a>
+            <a href="consulta_agendamentos.html"><span class="material-symbols-outlined">assignment</span> Consultas</a>
+            <a href="sobre.html"><span class="material-symbols-outlined">info</span> Sobre</a>
+            <a href="../index.html"><span class="material-symbols-outlined">logout</span> Sair</a>
+        </nav>
+    </aside>
 
-    <div class="logo">
+    <main class="main">
+        <header class="topo">
+            <div>
+                <h2>Novo Agendamento</h2>
+                <p>Selecione o cliente, a data e os serviços desejados</p>
+            </div>
+            <div class="usuario">
+                <div class="avatar">A</div>
+                <div><strong>Administrador</strong><p>Funcionário</p></div>
+            </div>
+        </header>
 
-        <h1>🐄 AGROLEITE</h1>
+        <section style="padding: 28px 36px;">
+            <div id="msg" class="msg"></div>
 
-        <p>Controle Inteligente para o Campo</p>
+            <div class="caixa">
+                <h2>Dados do Agendamento</h2>
+                <form id="form-agendamento" onsubmit="return salvarAgendamento(event)">
+                    <div class="form-grid">
+                        <div>
+                            <label for="cliente_id">Cliente *</label>
+                            <select id="cliente_id" required>
+                                <option value="">Carregando clientes...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="data">Data *</label>
+                            <input type="date" id="data" required>
+                        </div>
+                        <div class="full">
+                            <label for="responsavel">Responsável pelo atendimento *</label>
+                            <input type="text" id="responsavel" placeholder="Nome do técnico / funcionário" required>
+                        </div>
+                        <div class="full">
+                            <label>Serviços * <small style="color:#888;font-weight:400">(marque um ou mais)</small></label>
+                            <div id="servicos-lista" class="servicos-lista">
+                                <p style="color:#888;">Carregando serviços...</p>
+                            </div>
+                        </div>
+                    </div>
 
-    </div>
+                    <div class="resumo">
+                        <div>
+                            <div class="tempo">Tempo estimado: <strong id="tempo-total">0 h</strong></div>
+                            <div class="valor">Total: R$ <span id="valor-total">0,00</span></div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn-principal" style="width:auto;padding:12px 28px;">Salvar Agendamento</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
 
-    <nav>
+        <footer>
+            <strong>AGROLEITE</strong>
+            <p>Controle Inteligente para o Campo</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+    </main>
 
-        <a href="home.html">🏠 Home</a>
-        <a href="clientes.html">👨‍🌾 Clientes</a>
-        <a href="servicos.html">🛠️ Serviços</a>
-        <a href="agendamentos.html">📅 Agendamentos</a>
-        <a href="consulta_agendamentos.html">📋 Consultas</a>
-        <a href="../index.html">🚪 Sair</a>
+    <script>
+        let catalogoServicos = [];
+        document.getElementById('data').min = new Date().toISOString().split('T')[0];
 
-    </nav>
+        function mostrarMsg(texto, tipo) {
+            const el = document.getElementById('msg');
+            el.className = 'msg ' + tipo;
+            el.textContent = texto;
+            if (tipo === 'ok') setTimeout(() => { el.className = 'msg'; }, 4000);
+        }
 
-</header>
+        async function carregarClientes() {
+            try {
+                const res = await fetch('/listar-clientes');
+                const dados = await res.json();
+                const select = document.getElementById('cliente_id');
+                if (!dados.length) {
+                    select.innerHTML = '<option value="">Nenhum cliente cadastrado</option>';
+                    return;
+                }
+                select.innerHTML = '<option value="">Selecione o cliente</option>' +
+                    dados.map(c => `<option value="${c.id}">${c.nome} — ${c.telefone || c.cpf}</option>`).join('');
+            } catch (e) {
+                document.getElementById('cliente_id').innerHTML = '<option value="">Erro ao carregar clientes</option>';
+            }
+        }
 
-<section class="banner">
-    <h1>Agendamentos</h1>
-    <p>Marque e gerencie os atendimentos</p>
-</section>
+        async function carregarServicos() {
+            try {
+                const res = await fetch('/listar-servicos');
+                catalogoServicos = await res.json();
+                const box = document.getElementById('servicos-lista');
+                if (!catalogoServicos.length) {
+                    box.innerHTML = '<p style="color:#888;">Nenhum serviço cadastrado.</p>';
+                    return;
+                }
+                box.innerHTML = catalogoServicos.map(s => `
+                    <label class="servico-item" id="item-${s.id}">
+                        <input type="checkbox" value="${s.id}" data-preco="${s.preco}" data-tempo="${s.tempo_estimado}" onchange="atualizarResumo()">
+                        <div class="info">
+                            <strong>${s.descricao}</strong>
+                            <span>R$ ${Number(s.preco).toFixed(2)} · ${s.tempo_estimado}h</span>
+                        </div>
+                    </label>
+                `).join('');
+            } catch (e) {
+                document.getElementById('servicos-lista').innerHTML = '<p style="color:#c62828;">Erro ao carregar serviços.</p>';
+            }
+        }
 
-<div class="container">
-    <div class="card">
-        <h2>Novo Agendamento</h2>
-        <p>Funcionalidade em desenvolvimento / integração com o backend.</p>
-    </div>
-</div>
+        function atualizarResumo() {
+            const checks = document.querySelectorAll('#servicos-lista input[type="checkbox"]');
+            let total = 0, tempo = 0;
+            checks.forEach(cb => {
+                const item = document.getElementById('item-' + cb.value);
+                if (cb.checked) {
+                    total += Number(cb.dataset.preco);
+                    tempo += Number(cb.dataset.tempo);
+                    item.classList.add('selecionado');
+                } else {
+                    item.classList.remove('selecionado');
+                }
+            });
+            document.getElementById('valor-total').textContent = total.toFixed(2).replace('.', ',');
+            document.getElementById('tempo-total').textContent = tempo + ' h';
+        }
 
-<footer>
-    <strong>AGROLEITE</strong>
-    <p>Controle Inteligente para o Campo</p>
-    <p>© 2026 Todos os direitos reservados.</p>
-</footer>
+        async function salvarAgendamento(e) {
+            e.preventDefault();
+            const cliente_id = document.getElementById('cliente_id').value;
+            const data = document.getElementById('data').value;
+            const responsavel = document.getElementById('responsavel').value.trim();
+            const checks = document.querySelectorAll('#servicos-lista input[type="checkbox"]:checked');
 
+            if (!checks.length) {
+                mostrarMsg('Selecione ao menos um serviço.', 'erro');
+                return false;
+            }
+
+            const servicos = [];
+            let total = 0, tempo_total = 0;
+            checks.forEach(cb => {
+                const preco = Number(cb.dataset.preco);
+                const tempo = Number(cb.dataset.tempo);
+                servicos.push({ id: Number(cb.value), preco });
+                total += preco;
+                tempo_total += tempo;
+            });
+
+            try {
+                const res = await fetch('/salvar-agendamento', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ cliente_id: Number(cliente_id), data, responsavel, total, tempo_total, servicos })
+                });
+                const resultado = await res.json();
+                if (!resultado.success) {
+                    mostrarMsg(resultado.error || 'Erro ao salvar.', 'erro');
+                    return false;
+                }
+                mostrarMsg('Agendamento salvo com sucesso! Nº ' + resultado.id, 'ok');
+                document.getElementById('form-agendamento').reset();
+                atualizarResumo();
+                setTimeout(() => { window.location.href = 'consulta_agendamentos.html'; }, 1500);
+            } catch (err) {
+                mostrarMsg('Falha na comunicação com o servidor.', 'erro');
+            }
+            return false;
+        }
+
+        carregarClientes();
+        carregarServicos();
+    </script>
 </body>
-
 </html>
