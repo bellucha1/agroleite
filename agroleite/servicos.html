@@ -1,40 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="estilo.css">
-    <title>AGROLEITE - Catálogo de Serviços</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROLEITE | Catálogo de Serviços</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
 
 <body>
 
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="clientes.html">Clientes</a>
-        <a href="servicos.html">Serviços</a>
-        <a href="agendamentos.html">Agendamentos</a>
-        <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
-    </nav>
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-img">🐄</div>
+            <h1>AGROLEITE</h1>
+            <p>Controle Inteligente para o Campo</p>
+        </div>
 
-    <header class="banner">
-        <h1>Catálogo de Serviços</h1>
-        <p>Serviços oferecidos pelo AGROLEITE</p>
-    </header>
+        <nav>
+            <a href="home.html">
+                <span class="material-symbols-outlined">home</span>
+                Home
+            </a>
 
-    <div class="container">
+            <a href="clientes.html">
+                <span class="material-symbols-outlined">group</span>
+                Clientes
+            </a>
 
-        <div class="card">
+            <a class="ativo" href="servicos.html">
+                <span class="material-symbols-outlined">construction</span>
+                Serviços
+            </a>
 
-            <h2>Serviços Disponíveis</h2>
+            <a href="agendamentos.html">
+                <span class="material-symbols-outlined">calendar_month</span>
+                Agendamentos
+            </a>
 
-            <p style="margin-bottom:20px;">
+            <a href="consulta_agendamentos.html">
+                <span class="material-symbols-outlined">assignment</span>
+                Consultas
+            </a>
+
+            <a href="sobre.html">
+                <span class="material-symbols-outlined">info</span>
+                Sobre
+            </a>
+
+            <a href="index.html">
+                <span class="material-symbols-outlined">logout</span>
+                Sair
+            </a>
+        </nav>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main">
+
+        <!-- CABEÇALHO -->
+        <header class="topo">
+            <div>
+                <h2>Catálogo de Serviços</h2>
+                <p>Serviços oferecidos pelo AGROLEITE</p>
+            </div>
+
+            <div class="usuario">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Administrador</strong>
+                    <p>Funcionário</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTEÚDO -->
+        <section class="tabela-card">
+            <div class="titulo">
+                <h2>Serviços Disponíveis</h2>
+            </div>
+
+            <p style="margin-bottom: 20px; color: #555;">
                 Os valores abaixo são fixos e serão preenchidos automaticamente
                 quando o serviço for selecionado no agendamento.
             </p>
 
             <table>
-
                 <thead>
                     <tr>
                         <th>Serviço</th>
@@ -42,78 +99,67 @@
                         <th>Tempo Estimado</th>
                     </tr>
                 </thead>
-
-                <tbody id="lista-servicos"></tbody>
-
+                <tbody id="lista-servicos">
+                </tbody>
             </table>
+        </section>
 
-        </div>
+        <!-- RODAPÉ -->
+        <footer>
+            <strong>AGROLEITE</strong>
+            <p>Controle Inteligente para o Campo</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
 
-    </div>
-
-    <footer>
-        <p>&copy; 2026 AGROLEITE - Sistema de Gestão Rural</p>
-        <p>Desenvolvido para o setor agropecuário 🐄</p>
-    </footer>
+    </main>
 
     <script>
-
         const catalogoServicos = [
-
             {
                 descricao: "Análise da Qualidade do Leite",
                 preco: 120.00,
                 tempo: "2 horas"
             },
-
             {
                 descricao: "Coleta de Amostras",
                 preco: 80.00,
                 tempo: "1 hora"
             },
-
             {
                 descricao: "Visita Técnica",
                 preco: 250.00,
                 tempo: "4 horas"
             },
-
             {
                 descricao: "Consultoria em Nutrição Animal",
                 preco: 350.00,
                 tempo: "5 horas"
             },
-
             {
                 descricao: "Diagnóstico da Propriedade",
                 preco: 450.00,
                 tempo: "6 horas"
             },
-
             {
                 descricao: "Treinamento de Ordenha",
                 preco: 300.00,
                 tempo: "3 horas"
             },
-
             {
                 descricao: "Avaliação Sanitária do Rebanho",
                 preco: 180.00,
                 tempo: "2 horas"
             },
-
             {
                 descricao: "Planejamento Alimentar",
                 preco: 280.00,
                 tempo: "3 horas"
             }
-
         ];
 
         const tabela = document.getElementById("lista-servicos");
 
         catalogoServicos.forEach(servico => {
-
             tabela.innerHTML += `
                 <tr>
                     <td>${servico.descricao}</td>
@@ -121,9 +167,7 @@
                     <td>${servico.tempo}</td>
                 </tr>
             `;
-
         });
-
     </script>
 
 </body>
