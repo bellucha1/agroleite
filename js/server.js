@@ -104,9 +104,50 @@ app.post('/salvar-cliente', (req, res) => {
 });
 
 app.get('/listar-clientes', (req, res) => {
-    db.all('SELECT * FROM clientes ORDER BY nome ASC', [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
+    const page = parseInt(req.query.page, 10);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 5, 1), 50);
+    const busca = (req.query.busca || '').trim();
+
+    let where = '';
+    const params = [];
+
+    if (busca) {
+        where = ' WHERE nome LIKE ? OR cpf LIKE ? OR telefone LIKE ?';
+        const termo = '%' + busca + '%';
+        params.push(termo, termo, termo);
+    }
+
+    // Sem page = lista completa (compatível com Home e Agendamentos)
+    if (!page || page < 1) {
+        db.all('SELECT * FROM clientes' + where + ' ORDER BY nome ASC', params, (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(rows);
+        });
+        return;
+    }
+
+    db.get('SELECT COUNT(*) AS total FROM clientes' + where, params, (errCount, rowCount) => {
+        if (errCount) return res.status(500).json({ error: errCount.message });
+
+        const total = rowCount.total || 0;
+        const totalPages = Math.max(Math.ceil(total / limit), 1);
+        const paginaAtual = Math.min(page, totalPages);
+        const offset = (paginaAtual - 1) * limit;
+
+        db.all(
+            'SELECT * FROM clientes' + where + ' ORDER BY nome ASC LIMIT ? OFFSET ?',
+            [...params, limit, offset],
+            (err, rows) => {
+                if (err) return res.status(500).json({ error: err.message });
+                res.json({
+                    clientes: rows,
+                    total,
+                    page: paginaAtual,
+                    limit,
+                    totalPages
+                });
+            }
+        );
     });
 });
 
