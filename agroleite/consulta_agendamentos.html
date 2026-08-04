@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
                 Sobre
             </a>
 
-            <a href="index.html">
+            <a href="../index.html">
                 <span class="material-symbols-outlined">logout</span>
                 Sair
             </a>
@@ -80,22 +80,10 @@
             </div>
         </header>
 
-        <!-- PESQUISA -->
-        <section class="pesquisa">
-            <h2>Pesquisar Cliente</h2>
-            <input
-                type="text"
-                id="pesquisa"
-                placeholder="Digite o nome do cliente..."
-                onkeyup="listarAgendamentos()"
-            >
-        </section>
-
-        <!-- TABELA -->
-        <section class="tabela-card">
-            <div class="titulo">
+        <section class="caixa" style="margin: 30px;">
+            <div class="topo-caixa">
                 <h2>Histórico de Agendamentos</h2>
-                <span id="totalRegistros"></span>
+                <input type="text" id="pesquisa" placeholder="Pesquisar cliente..." onkeyup="listarAgendamentos()" style="padding:8px; width:250px; border-radius:6px; border:1px solid #ccc;">
             </div>
 
             <table>
@@ -105,17 +93,18 @@
                         <th>Data</th>
                         <th>Hora</th>
                         <th>Serviços</th>
-                        <th>Total</th>
+                        <th>Valor</th>
                         <th>Tempo</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
-                <tbody id="tabela">
+                <tbody id="tabela-agendamentos">
                 </tbody>
             </table>
+
+            <p id="total-registros" style="margin-top:15px; color:#555;"></p>
         </section>
 
-        <!-- RODAPÉ -->
         <footer>
             <strong>AGROLEITE</strong>
             <p>Controle Inteligente para o Campo</p>
@@ -126,17 +115,16 @@
 
     <script>
         function listarAgendamentos() {
-            const tabela = document.getElementById("tabela");
-            const pesquisa = document.getElementById("pesquisa").value.toLowerCase();
-            const total = document.getElementById("totalRegistros");
+            let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
+            let tabela = document.getElementById("tabela-agendamentos");
+            let total = document.getElementById("total-registros");
+            let pesquisa = document.getElementById("pesquisa").value.toLowerCase();
 
             tabela.innerHTML = "";
-
-            let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
             let encontrados = 0;
 
             lista.forEach((agendamento, indice) => {
-                if (!agendamento.cliente.toLowerCase().includes(pesquisa)) return;
+                if (pesquisa && !agendamento.cliente.toLowerCase().includes(pesquisa)) return;
 
                 encontrados++;
 
