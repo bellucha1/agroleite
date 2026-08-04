@@ -9,6 +9,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="../css/estilo.css">
+    <style>
+        .lista-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .lista-topo h2 { margin: 0; }
+        .busca-box {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex: 1;
+            min-width: 200px;
+            max-width: 320px;
+        }
+        .busca-box input { margin: 0; flex: 1; }
+        .por-pagina {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        .por-pagina select {
+            width: auto;
+            padding: 8px 10px;
+            margin: 0;
+        }
+        .paginacao {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+        .paginacao-info { font-size: 13px; color: #666; }
+        .paginacao-botoes { display: flex; align-items: center; gap: 6px; }
+        .paginacao-botoes button {
+            margin: 0;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border-radius: 8px;
+            border: 1.5px solid #c8e6c9;
+            background: #fff;
+            color: #1B5E20;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .paginacao-botoes button:hover:not(:disabled) { background: #e8f5e9; }
+        .paginacao-botoes button.ativo {
+            background: #2E7D32;
+            color: #fff;
+            border-color: #2E7D32;
+        }
+        .paginacao-botoes button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
 
@@ -46,10 +115,27 @@
 
         <section style="padding: 28px 36px;">
             <div class="caixa">
-                <h2>Serviços Disponíveis</h2>
-                <p style="margin-bottom: 18px; color: #666; font-size: 14px;">
+                <div class="lista-topo">
+                    <h2>Serviços Disponíveis</h2>
+                    <div class="busca-box">
+                        <input type="text" id="busca" placeholder="Buscar serviço..." oninput="onBusca()">
+                    </div>
+                </div>
+
+                <p style="margin-bottom: 14px; color: #666; font-size: 14px;">
                     Os valores são preenchidos automaticamente ao selecionar o serviço no agendamento.
                 </p>
+
+                <div class="por-pagina">
+                    <span>Por página:</span>
+                    <select id="limit" onchange="mudarLimit()">
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+
                 <div style="overflow-x:auto;">
                     <table>
                         <thead>
@@ -64,6 +150,11 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="paginacao">
+                    <div class="paginacao-info" id="paginacao-info">—</div>
+                    <div class="paginacao-botoes" id="paginacao-botoes"></div>
+                </div>
             </div>
         </section>
 
@@ -75,30 +166,111 @@
     </main>
 
     <script>
-        async function carregarServicos() {
-            const tbody = document.getElementById('lista-servicos');
-            try {
-                const res = await fetch('/listar-servicos');
-                const dados = await res.json();
+        let paginaAtual = 1;
+        let totalPaginas = 1;
+        let totalRegistros = 0;
+        let buscaTimer = null;
 
-                if (!dados.length) {
-                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#888;padding:24px;">Nenhum serviço cadastrado.</td></tr>';
+        function onBusca() {
+            clearTimeout(buscaTimer);
+            buscaTimer = setTimeout(() => {
+                paginaAtual = 1;
+                listarServicos();
+            }, 300);
+        }
+
+        function mudarLimit() {
+            paginaAtual = 1;
+            listarServicos();
+        }
+
+        function irParaPagina(p) {
+            if (p < 1 || p > totalPaginas || p === paginaAtual) return;
+            paginaAtual = p;
+            listarServicos();
+        }
+
+        function renderPaginacao() {
+            const info = document.getElementById('paginacao-info');
+            const botoes = document.getElementById('paginacao-botoes');
+            const limit = parseInt(document.getElementById('limit').value, 10);
+
+            if (totalRegistros === 0) {
+                info.textContent = 'Nenhum registro';
+                botoes.innerHTML = '';
+                return;
+            }
+
+            const inicio = (paginaAtual - 1) * limit + 1;
+            const fim = Math.min(paginaAtual * limit, totalRegistros);
+            info.textContent = `Mostrando ${inicio}–${fim} de ${totalRegistros} serviço(s)`;
+
+            let html = `
+                <button type="button" onclick="irParaPagina(1)" ${paginaAtual === 1 ? 'disabled' : ''} title="Primeira">«</button>
+                <button type="button" onclick="irParaPagina(${paginaAtual - 1})" ${paginaAtual === 1 ? 'disabled' : ''} title="Anterior">‹</button>
+            `;
+
+            let inicioPag = Math.max(1, paginaAtual - 2);
+            let fimPag = Math.min(totalPaginas, inicioPag + 4);
+            inicioPag = Math.max(1, fimPag - 4);
+
+            for (let i = inicioPag; i <= fimPag; i++) {
+                html += `<button type="button" class="${i === paginaAtual ? 'ativo' : ''}" onclick="irParaPagina(${i})">${i}</button>`;
+            }
+
+            html += `
+                <button type="button" onclick="irParaPagina(${paginaAtual + 1})" ${paginaAtual === totalPaginas ? 'disabled' : ''} title="Próxima">›</button>
+                <button type="button" onclick="irParaPagina(${totalPaginas})" ${paginaAtual === totalPaginas ? 'disabled' : ''} title="Última">»</button>
+            `;
+
+            botoes.innerHTML = html;
+        }
+
+        async function listarServicos() {
+            const tbody = document.getElementById('lista-servicos');
+            const limit = document.getElementById('limit').value;
+            const busca = document.getElementById('busca').value.trim();
+
+            const params = new URLSearchParams({
+                page: paginaAtual,
+                limit: limit
+            });
+            if (busca) params.set('busca', busca);
+
+            try {
+                const res = await fetch('/listar-servicos?' + params.toString());
+                const data = await res.json();
+
+                const lista = data.servicos || [];
+                totalRegistros = data.total || 0;
+                totalPaginas = data.totalPages || 1;
+                paginaAtual = data.page || 1;
+
+                if (!lista.length) {
+                    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:#888;padding:24px;">
+                        ${busca ? 'Nenhum serviço encontrado para a busca.' : 'Nenhum serviço cadastrado.'}
+                    </td></tr>`;
+                    renderPaginacao();
                     return;
                 }
 
-                tbody.innerHTML = dados.map(s => `
+                tbody.innerHTML = lista.map(s => `
                     <tr>
                         <td>${s.descricao}</td>
                         <td>R$ ${Number(s.preco).toFixed(2).replace('.', ',')}</td>
                         <td>${s.tempo_estimado} hora(s)</td>
                     </tr>
                 `).join('');
+
+                renderPaginacao();
             } catch (e) {
                 tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#c62828;padding:24px;">Erro ao carregar. Servidor online?</td></tr>';
+                document.getElementById('paginacao-info').textContent = '—';
+                document.getElementById('paginacao-botoes').innerHTML = '';
             }
         }
 
-        carregarServicos();
+        listarServicos();
     </script>
 </body>
 </html>

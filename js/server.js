@@ -43,7 +43,6 @@ db.serialize(() => {
         FOREIGN KEY (servico_id) REFERENCES servicos (id)
     )`);
 
-    // Serviços padrão (só insere se a tabela estiver vazia)
     db.get('SELECT COUNT(*) AS total FROM servicos', (err, row) => {
         if (err || !row || row.total > 0) return;
 
@@ -66,7 +65,6 @@ db.serialize(() => {
         console.log('✅ Serviços padrão inseridos no banco.');
     });
 
-    // Clientes de exemplo (só se a tabela estiver vazia)
     db.get('SELECT COUNT(*) AS total FROM clientes', (err, row) => {
         if (err || !row || row.total > 0) return;
 
@@ -117,7 +115,6 @@ app.get('/listar-clientes', (req, res) => {
         params.push(termo, termo, termo);
     }
 
-    // Sem page = lista completa (compatível com Home e Agendamentos)
     if (!page || page < 1) {
         db.all('SELECT * FROM clientes' + where + ' ORDER BY nome ASC', params, (err, rows) => {
             if (err) return res.status(500).json({ error: err.message });
@@ -165,9 +162,48 @@ app.post('/salvar-servico', (req, res) => {
 });
 
 app.get('/listar-servicos', (req, res) => {
-    db.all('SELECT * FROM servicos ORDER BY descricao ASC', [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
+    const page = parseInt(req.query.page, 10);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 5, 1), 50);
+    const busca = (req.query.busca || '').trim();
+
+    let where = '';
+    const params = [];
+
+    if (busca) {
+        where = ' WHERE descricao LIKE ?';
+        params.push('%' + busca + '%');
+    }
+
+    if (!page || page < 1) {
+        db.all('SELECT * FROM servicos' + where + ' ORDER BY descricao ASC', params, (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(rows);
+        });
+        return;
+    }
+
+    db.get('SELECT COUNT(*) AS total FROM servicos' + where, params, (errCount, rowCount) => {
+        if (errCount) return res.status(500).json({ error: errCount.message });
+
+        const total = rowCount.total || 0;
+        const totalPages = Math.max(Math.ceil(total / limit), 1);
+        const paginaAtual = Math.min(page, totalPages);
+        const offset = (paginaAtual - 1) * limit;
+
+        db.all(
+            'SELECT * FROM servicos' + where + ' ORDER BY descricao ASC LIMIT ? OFFSET ?',
+            [...params, limit, offset],
+            (err, rows) => {
+                if (err) return res.status(500).json({ error: err.message });
+                res.json({
+                    servicos: rows,
+                    total,
+                    page: paginaAtual,
+                    limit,
+                    totalPages
+                });
+            }
+        );
     });
 });
 
