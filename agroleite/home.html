@@ -1,76 +1,152 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGROLEITE | Home</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="../css/estilo.css">
+    <style>
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            padding: 28px 36px 0;
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 22px 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .stat-card .icone {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+        .stat-card .icone.verde { background: #e8f5e9; color: #2E7D32; }
+        .stat-card .icone.azul { background: #e3f2fd; color: #1565c0; }
+        .stat-card .icone.laranja { background: #fff3e0; color: #ef6c00; }
+        .stat-card .icone.roxo { background: #f3e5f5; color: #7b1fa2; }
+        .stat-card .num {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1B5E20;
+            line-height: 1.1;
+        }
+        .stat-card .label {
+            font-size: 13px;
+            color: #777;
+            margin-top: 2px;
+        }
+        .painel-home {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 28px 36px;
+        }
+        .caixa .topo-caixa {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .caixa .topo-caixa h2 {
+            margin: 0;
+            font-size: 17px;
+            color: #1B5E20;
+        }
+        .caixa .topo-caixa a {
+            font-size: 13px;
+            color: #2E7D32;
+            font-weight: 600;
+        }
+        .caixa .topo-caixa a:hover { text-decoration: underline; }
+        .vazio-msg {
+            text-align: center;
+            padding: 28px 12px;
+            color: #999;
+            font-size: 14px;
+        }
+        .lista-simples li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+        .lista-simples li:last-child { border-bottom: none; }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge.ok { background: #e8f5e9; color: #1B5E20; }
+        .badge.info { background: #e3f2fd; color: #1565c0; }
+        @media (max-width: 1100px) {
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .painel-home { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .stats { grid-template-columns: 1fr; padding: 16px; }
+            .painel-home { padding: 16px; }
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- MENU LATERAL -->
     <aside class="sidebar">
         <div class="logo">
             <div class="logo-img">🐄</div>
             <h1>AGROLEITE</h1>
             <p>Controle Inteligente para o Campo</p>
         </div>
-
         <nav>
             <a class="ativo" href="home.html">
-                <span class="material-symbols-outlined">home</span>
-                Home
+                <span class="material-symbols-outlined">home</span> Home
             </a>
-
             <a href="clientes.html">
-                <span class="material-symbols-outlined">group</span>
-                Clientes
+                <span class="material-symbols-outlined">group</span> Clientes
             </a>
-
             <a href="servicos.html">
-                <span class="material-symbols-outlined">construction</span>
-                Serviços
+                <span class="material-symbols-outlined">construction</span> Serviços
             </a>
-
             <a href="agendamentos.html">
-                <span class="material-symbols-outlined">calendar_month</span>
-                Agendamentos
+                <span class="material-symbols-outlined">calendar_month</span> Agendamentos
             </a>
-
             <a href="consulta_agendamentos.html">
-                <span class="material-symbols-outlined">assignment</span>
-                Consultas
+                <span class="material-symbols-outlined">assignment</span> Consultas
             </a>
-
             <a href="sobre.html">
-                <span class="material-symbols-outlined">info</span>
-                Sobre
+                <span class="material-symbols-outlined">info</span> Sobre
             </a>
-
             <a href="../index.html">
-                <span class="material-symbols-outlined">logout</span>
-                Sair
+                <span class="material-symbols-outlined">logout</span> Sair
             </a>
         </nav>
     </aside>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main">
-
-        <!-- CABEÇALHO -->
         <header class="topo">
             <div>
                 <h2>Dashboard</h2>
                 <p>Bem-vindo ao sistema AGROLEITE</p>
             </div>
-
             <div class="usuario">
                 <div class="avatar">A</div>
                 <div>
@@ -80,18 +156,45 @@
             </div>
         </header>
 
-        <!-- HERO -->
         <section class="hero">
-
             <div class="hero-texto">
                 <h1>Controle Inteligente para o Campo</h1>
                 <p>Gerencie clientes, serviços e agendamentos de forma simples e eficiente.</p>
-                <a href="clientes.html" class="botao">Cadastrar Cliente</a>
+                <a href="agendamentos.html" class="botao">Novo Agendamento</a>
             </div>
-
         </section>
 
-        <!-- CARDS -->
+        <section class="stats">
+            <div class="stat-card">
+                <div class="icone verde"><span class="material-symbols-outlined">group</span></div>
+                <div>
+                    <div class="num" id="stat-clientes">—</div>
+                    <div class="label">Clientes</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icone azul"><span class="material-symbols-outlined">construction</span></div>
+                <div>
+                    <div class="num" id="stat-servicos">—</div>
+                    <div class="label">Serviços</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icone laranja"><span class="material-symbols-outlined">calendar_month</span></div>
+                <div>
+                    <div class="num" id="stat-agendamentos">—</div>
+                    <div class="label">Agendamentos</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icone roxo"><span class="material-symbols-outlined">payments</span></div>
+                <div>
+                    <div class="num" id="stat-total">—</div>
+                    <div class="label">Total (R$)</div>
+                </div>
+            </div>
+        </section>
+
         <section class="cards">
             <div class="card">
                 <span class="material-symbols-outlined">group</span>
@@ -99,21 +202,18 @@
                 <p>Cadastre e gerencie produtores</p>
                 <a href="clientes.html">Abrir →</a>
             </div>
-
             <div class="card">
                 <span class="material-symbols-outlined">construction</span>
                 <h3>Serviços</h3>
                 <p>Catálogo de serviços disponíveis</p>
                 <a href="servicos.html">Abrir →</a>
             </div>
-
             <div class="card">
                 <span class="material-symbols-outlined">calendar_month</span>
                 <h3>Agendamentos</h3>
                 <p>Marque novos atendimentos</p>
                 <a href="agendamentos.html">Abrir →</a>
             </div>
-
             <div class="card">
                 <span class="material-symbols-outlined">assignment</span>
                 <h3>Consultas</h3>
@@ -122,77 +222,187 @@
             </div>
         </section>
 
-        <!-- PAINÉIS -->
-        <section class="painel">
+        <section class="painel-home">
             <div class="caixa">
-                <h2>Próximos Agendamentos</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Cliente</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Fazenda Esperança</td>
-                            <td>Pendente</td>
-                        </tr>
-                        <tr>
-                            <td>Sítio Primavera</td>
-                            <td>Confirmado</td>
-                        </tr>
-                        <tr>
-                            <td>Fazenda Bela Vista</td>
-                            <td>Finalizado</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="topo-caixa">
+                    <h2>Clientes Cadastrados</h2>
+                    <a href="clientes.html">Ver todos →</a>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>CPF/CNPJ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-clientes">
+                            <tr><td colspan="3" class="vazio-msg">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="caixa">
-                <h2>Avisos</h2>
-                <ul>
-                    <li>✔ Sistema funcionando normalmente.</li>
-                    <li>🐄 Novas funcionalidades em desenvolvimento.</li>
-                    <li>📅 Confira seus próximos atendimentos.</li>
-                    <li>💾 Faça backup regularmente.</li>
+                <div class="topo-caixa">
+                    <h2>Catálogo de Serviços</h2>
+                    <a href="servicos.html">Ver todos →</a>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Serviço</th>
+                                <th>Valor</th>
+                                <th>Tempo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-servicos">
+                            <tr><td colspan="3" class="vazio-msg">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="caixa">
+                <div class="topo-caixa">
+                    <h2>Agendamentos Recentes</h2>
+                    <a href="consulta_agendamentos.html">Ver todos →</a>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Data</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-agendamentos">
+                            <tr><td colspan="3" class="vazio-msg">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="caixa">
+                <div class="topo-caixa">
+                    <h2>Resumo do Sistema</h2>
+                </div>
+                <ul class="lista-simples" id="lista-resumo">
+                    <li><span>Carregando informações...</span></li>
                 </ul>
             </div>
         </section>
 
-        <!-- ACESSO RÁPIDO -->
         <section class="atalhos">
             <h2>Acesso Rápido</h2>
             <div class="atalhos-grid">
-                <a href="clientes.html">
-                    <span>👨‍🌾</span>
-                    <p>Novo Cliente</p>
-                </a>
-                <a href="servicos.html">
-                    <span>🛠️</span>
-                    <p>Novo Serviço</p>
-                </a>
-                <a href="agendamentos.html">
-                    <span>📅</span>
-                    <p>Novo Agendamento</p>
-                </a>
-                <a href="consulta_agendamentos.html">
-                    <span>📋</span>
-                    <p>Consultar</p>
-                </a>
+                <a href="clientes.html"><span>👨‍🌾</span><p>Novo Cliente</p></a>
+                <a href="servicos.html"><span>🛠️</span><p>Ver Serviços</p></a>
+                <a href="agendamentos.html"><span>📅</span><p>Novo Agendamento</p></a>
+                <a href="consulta_agendamentos.html"><span>📋</span><p>Consultar</p></a>
             </div>
         </section>
 
-        <!-- RODAPÉ -->
         <footer>
             <strong>AGROLEITE</strong>
             <p>Controle Inteligente para o Campo</p>
             <p>© 2026 Todos os direitos reservados.</p>
         </footer>
-
     </main>
 
-</body>
+    <script>
+        function formatarData(dataStr) {
+            if (!dataStr) return '—';
+            const p = dataStr.split('-');
+            if (p.length === 3) return p[2] + '/' + p[1] + '/' + p[0];
+            return dataStr;
+        }
 
+        function formatarMoeda(v) {
+            return Number(v || 0).toFixed(2).replace('.', ',');
+        }
+
+        async function carregarDashboard() {
+            let clientes = [], servicos = [], agendamentos = [];
+
+            try {
+                const [rC, rS, rA] = await Promise.all([
+                    fetch('/listar-clientes'),
+                    fetch('/listar-servicos'),
+                    fetch('/listar-agendamentos')
+                ]);
+                clientes = await rC.json();
+                servicos = await rS.json();
+                agendamentos = await rA.json();
+            } catch (e) {
+                document.getElementById('tabela-clientes').innerHTML =
+                    '<tr><td colspan="3" class="vazio-msg">Erro ao carregar. Servidor online?</td></tr>';
+                document.getElementById('tabela-servicos').innerHTML =
+                    '<tr><td colspan="3" class="vazio-msg">Erro ao carregar.</td></tr>';
+                document.getElementById('tabela-agendamentos').innerHTML =
+                    '<tr><td colspan="3" class="vazio-msg">Erro ao carregar.</td></tr>';
+                return;
+            }
+
+            document.getElementById('stat-clientes').textContent = clientes.length;
+            document.getElementById('stat-servicos').textContent = servicos.length;
+            document.getElementById('stat-agendamentos').textContent = agendamentos.length;
+
+            const somaTotal = agendamentos.reduce((acc, a) => acc + Number(a.total || 0), 0);
+            document.getElementById('stat-total').textContent = formatarMoeda(somaTotal);
+
+            const tbodyC = document.getElementById('tabela-clientes');
+            if (!clientes.length) {
+                tbodyC.innerHTML = '<tr><td colspan="3" class="vazio-msg">Nenhum cliente cadastrado ainda.<br><a href="clientes.html">Cadastrar agora</a></td></tr>';
+            } else {
+                tbodyC.innerHTML = clientes.slice(0, 8).map(c => `
+                    <tr>
+                        <td>${c.nome}</td>
+                        <td>${c.telefone || '—'}</td>
+                        <td>${c.cpf || '—'}</td>
+                    </tr>
+                `).join('');
+            }
+
+            const tbodyS = document.getElementById('tabela-servicos');
+            if (!servicos.length) {
+                tbodyS.innerHTML = '<tr><td colspan="3" class="vazio-msg">Nenhum serviço cadastrado.</td></tr>';
+            } else {
+                tbodyS.innerHTML = servicos.slice(0, 8).map(s => `
+                    <tr>
+                        <td>${s.descricao}</td>
+                        <td>R$ ${formatarMoeda(s.preco)}</td>
+                        <td>${s.tempo_estimado}h</td>
+                    </tr>
+                `).join('');
+            }
+
+            const tbodyA = document.getElementById('tabela-agendamentos');
+            if (!agendamentos.length) {
+                tbodyA.innerHTML = '<tr><td colspan="3" class="vazio-msg">Nenhum agendamento ainda.<br><a href="agendamentos.html">Criar agora</a></td></tr>';
+            } else {
+                tbodyA.innerHTML = agendamentos.slice(0, 8).map(a => `
+                    <tr>
+                        <td>${a.nome_cliente || '—'}</td>
+                        <td>${formatarData(a.data)}</td>
+                        <td>R$ ${formatarMoeda(a.total)}</td>
+                    </tr>
+                `).join('');
+            }
+
+            document.getElementById('lista-resumo').innerHTML = `
+                <li><span>Clientes cadastrados</span><span class="badge ok">${clientes.length}</span></li>
+                <li><span>Serviços no catálogo</span><span class="badge info">${servicos.length}</span></li>
+                <li><span>Agendamentos registrados</span><span class="badge ok">${agendamentos.length}</span></li>
+                <li><span>Valor total dos agendamentos</span><strong style="color:#1B5E20">R$ ${formatarMoeda(somaTotal)}</strong></li>
+                <li><span>Sistema</span><span class="badge ok">Online</span></li>
+            `;
+        }
+
+        carregarDashboard();
+    </script>
+</body>
 </html>
