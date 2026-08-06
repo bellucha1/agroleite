@@ -76,6 +76,7 @@
                                 <th>Nº</th>
                                 <th>Cliente</th>
                                 <th>Data</th>
+                                <th>Hora</th>
                                 <th>Responsável</th>
                                 <th>Total</th>
                                 <th>Tempo</th>
@@ -83,7 +84,7 @@
                             </tr>
                         </thead>
                         <tbody id="tabela-agendamentos">
-                            <tr><td colspan="7" class="vazio">Carregando...</td></tr>
+                            <tr><td colspan="8" class="vazio">Carregando...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -116,7 +117,7 @@
                 listaCompleta = await res.json();
                 renderizar(listaCompleta);
             } catch (e) {
-                tbody.innerHTML = '<tr><td colspan="7" class="vazio">Erro ao carregar agendamentos. O servidor está rodando?</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" class="vazio">Erro ao carregar. Servidor online?</td></tr>';
             }
         }
 
@@ -134,7 +135,7 @@
             const tbody = document.getElementById('tabela-agendamentos');
             const total = document.getElementById('total-registros');
             if (!lista.length) {
-                tbody.innerHTML = '<tr><td colspan="7" class="vazio">Nenhum agendamento encontrado.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" class="vazio">Nenhum agendamento encontrado.</td></tr>';
                 total.textContent = '0 registro(s)';
                 return;
             }
@@ -144,6 +145,7 @@
                     <td>#${a.id}</td>
                     <td>${a.nome_cliente || '—'}</td>
                     <td>${dataFmt}</td>
+                    <td>${a.hora || '—'}</td>
                     <td>${a.responsavel || '—'}</td>
                     <td>R$ ${Number(a.total).toFixed(2).replace('.', ',')}</td>
                     <td>${a.tempo_total} h</td>
@@ -175,6 +177,7 @@
                 <div class="linha"><span>Cliente</span><strong>${ag.nome_cliente}</strong></div>
                 <div class="linha"><span>Telefone</span><strong>${ag.telefone_cliente || '—'}</strong></div>
                 <div class="linha"><span>Data</span><strong>${formatarData(ag.data)}</strong></div>
+                <div class="linha"><span>Horário</span><strong>${ag.hora || '—'}</strong></div>
                 <div class="linha"><span>Responsável</span><strong>${ag.responsavel}</strong></div>
                 <div class="linha"><span>Tempo total</span><strong>${ag.tempo_total} h</strong></div>
                 <div class="linha"><span>Valor total</span><strong>R$ ${Number(ag.total).toFixed(2).replace('.', ',')}</strong></div>
