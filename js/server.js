@@ -28,11 +28,14 @@ db.serialize(() => {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         cliente_id INTEGER NOT NULL,
         data TEXT NOT NULL,
+        hora TEXT,
         responsavel TEXT NOT NULL,
         total REAL NOT NULL,
         tempo_total INTEGER NOT NULL,
         FOREIGN KEY (cliente_id) REFERENCES clientes (id)
     )`);
+
+    db.run(`ALTER TABLE agendamentos ADD COLUMN hora TEXT`, () => {});
 
     db.run(`CREATE TABLE IF NOT EXISTS itens_agendamento (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,14 +50,14 @@ db.serialize(() => {
         if (err || !row || row.total > 0) return;
 
         const padrao = [
-            ['Análise da Qualidade do Leite', 120, 2],
-            ['Coleta de Amostras', 80, 1],
-            ['Visita Técnica', 250, 4],
-            ['Consultoria em Nutrição Animal', 350, 5],
-            ['Diagnóstico da Propriedade', 450, 6],
-            ['Treinamento de Ordenha', 300, 3],
-            ['Avaliação Sanitária do Rebanho', 180, 2],
-            ['Planejamento Alimentar', 280, 3]
+            ['Análise da Qualidade do Leite', 120.00, 2],
+            ['Coleta de Amostras', 80.00, 1],
+            ['Visita Técnica', 250.00, 4],
+            ['Consultoria em Nutrição Animal', 350.00, 5],
+            ['Diagnóstico da Propriedade', 450.00, 6],
+            ['Treinamento de Ordenha', 300.00, 3],
+            ['Avaliação Sanitária do Rebanho', 180.00, 2],
+            ['Planejamento Alimentar', 280.00, 3]
         ];
 
         const stmt = db.prepare(
@@ -84,7 +87,6 @@ db.serialize(() => {
     });
 });
 
-/* ---------- CLIENTES ---------- */
 app.post('/salvar-cliente', (req, res) => {
     const { nome, cpf, telefone } = req.body;
     if (!nome || !cpf || !telefone) {
@@ -93,7 +95,7 @@ app.post('/salvar-cliente', (req, res) => {
 
     db.run(
         'INSERT INTO clientes (nome, cpf, telefone) VALUES (?, ?, ?)',
-        [nome, cpf, telefone],
+        [nome.trim(), cpf.trim(), telefone.trim()],
         function (err) {
             if (err) return res.status(500).json({ success: false, error: err.message });
             res.json({ success: true, id: this.lastID });
@@ -148,12 +150,26 @@ app.get('/listar-clientes', (req, res) => {
     });
 });
 
-/* ---------- SERVIÇOS ---------- */
 app.post('/salvar-servico', (req, res) => {
-    const { descricao, preco, tempo_estimado } = req.body;
+    let { descricao, preco, tempo_estimado } = req.body;
+
+    if (!descricao || descricao.trim() === '') {
+        return res.status(400).json({ success: false, error: 'Informe a descrição do serviço.' });
+    }
+
+    preco = Number(String(preco).replace(',', '.'));
+    tempo_estimado = parseInt(tempo_estimado, 10);
+
+    if (isNaN(preco) || preco < 0) {
+        return res.status(400).json({ success: false, error: 'Informe um valor válido (R$).' });
+    }
+    if (isNaN(tempo_estimado) || tempo_estimado < 1 || tempo_estimado > 12) {
+        return res.status(400).json({ success: false, error: 'Tempo estimado deve ser entre 1 e 12 horas.' });
+    }
+
     db.run(
         'INSERT INTO servicos (descricao, preco, tempo_estimado) VALUES (?, ?, ?)',
-        [descricao, preco, tempo_estimado],
+        [descricao.trim(), preco, tempo_estimado],
         function (err) {
             if (err) return res.status(500).json({ success: false, error: err.message });
             res.json({ success: true, id: this.lastID });
@@ -207,49 +223,55 @@ app.get('/listar-servicos', (req, res) => {
     });
 });
 
-/* ---------- AGENDAMENTOS ---------- */
 app.post('/salvar-agendamento', (req, res) => {
-    const { cliente_id, data, responsavel, total, tempo_total, servicos } = req.body;
+    const { cliente_id, data, hora, responsavel, total, tempo_total, servicos } = req.body;
 
     if (!cliente_id || !data || !responsavel) {
         return res.status(400).json({ success: false, error: 'Cliente, data e responsável são obrigatórios.' });
+    }
+    if (!hora) {
+        return res.status(400).json({ success: false, error: 'Selecione o horário do atendimento.' });
     }
     if (!servicos || !Array.isArray(servicos) || servicos.length === 0) {
         return res.status(400).json({ success: false, error: 'Selecione ao menos um serviço.' });
     }
 
     const sqlMestre = `
-        INSERT INTO agendamentos (cliente_id, data, responsavel, total, tempo_total)
-        VALUES (?, ?, ?, ?, ?)`;
+        INSERT INTO agendamentos (cliente_id, data, hora, responsavel, total, tempo_total)
+        VALUES (?, ?, ?, ?, ?, ?)`;
 
-    db.run(sqlMestre, [cliente_id, data, responsavel, total || 0, tempo_total || 0], function (err) {
-        if (err) return res.status(500).json({ success: false, error: err.message });
+    db.run(
+        sqlMestre,
+        [cliente_id, data, hora, responsavel.trim(), total || 0, tempo_total || 0],
+        function (err) {
+            if (err) return res.status(500).json({ success: false, error: err.message });
 
-        const agendamentoId = this.lastID;
-        const stmt = db.prepare(
-            'INSERT INTO itens_agendamento (agendamento_id, servico_id, preco_cobrado) VALUES (?, ?, ?)'
-        );
+            const agendamentoId = this.lastID;
+            const stmt = db.prepare(
+                'INSERT INTO itens_agendamento (agendamento_id, servico_id, preco_cobrado) VALUES (?, ?, ?)'
+            );
 
-        servicos.forEach(item => {
-            stmt.run(agendamentoId, item.id, item.preco);
-        });
+            servicos.forEach(item => {
+                stmt.run(agendamentoId, item.id, item.preco);
+            });
 
-        stmt.finalize(errFinalize => {
-            if (errFinalize) {
-                return res.status(500).json({ success: false, error: errFinalize.message });
-            }
-            res.json({ success: true, id: agendamentoId });
-        });
-    });
+            stmt.finalize(errFinalize => {
+                if (errFinalize) {
+                    return res.status(500).json({ success: false, error: errFinalize.message });
+                }
+                res.json({ success: true, id: agendamentoId });
+            });
+        }
+    );
 });
 
 app.get('/listar-agendamentos', (req, res) => {
     const sql = `
-        SELECT a.id, a.data, a.responsavel, a.total, a.tempo_total,
+        SELECT a.id, a.data, a.hora, a.responsavel, a.total, a.tempo_total,
                c.nome AS nome_cliente, c.telefone AS telefone_cliente
         FROM agendamentos a
         INNER JOIN clientes c ON a.cliente_id = c.id
-        ORDER BY a.data DESC, a.id DESC`;
+        ORDER BY a.data DESC, a.hora ASC, a.id DESC`;
 
     db.all(sql, [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
