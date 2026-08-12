@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROLEITE | Contato</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <style>
+        .contato-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 28px 36px;
+        }
+        .contato-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .contato-info h2 {
+            color: #1B5E20;
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+        .info-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1B5E20;
+            flex-shrink: 0;
+        }
+        .info-content h3 {
+            margin: 0 0 4px 0;
+            color: #1B5E20;
+            font-size: 15px;
+        }
+        .info-content p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .info-content a {
+            color: #2E7D32;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .info-content a:hover {
+            text-decoration: underline;
+        }
+        .contato-form {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        .contato-form h2 {
+            color: #1B5E20;
+            margin: 0 0 20px 0;
+            font-size: 20px;
+        }
+        .form-grupo {
+            margin-bottom: 18px;
+        }
+        .form-grupo label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .form-grupo input,
+        .form-grupo textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .form-grupo input:focus,
+        .form-grupo textarea:focus {
+            outline: none;
+            border-color: #2E7D32;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+        .form-grupo textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-submit {
+            background: #2E7D32;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .form-submit:hover {
+            background: #1B5E20;
+        }
+        @media (max-width: 900px) {
+            .contato-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-img">🐄</div>
+            <h1>AGROLEITE</h1>
+            <p>Controle Inteligente para o Campo</p>
+        </div>
+        <nav>
+            <a href="home.html">
+                <span class="material-symbols-outlined">home</span> Home
+            </a>
+            <a href="clientes.html">
+                <span class="material-symbols-outlined">group</span> Clientes
+            </a>
+            <a href="servicos.html">
+                <span class="material-symbols-outlined">construction</span> Serviços
+            </a>
+            <a href="agendamentos.html">
+                <span class="material-symbols-outlined">calendar_month</span> Agendamentos
+            </a>
+            <a href="consulta_agendamentos.html">
+                <span class="material-symbols-outlined">assignment</span> Consultas
+            </a>
+            <a class="ativo" href="contato.html">
+                <span class="material-symbols-outlined">mail</span> Contato
+            </a>
+            <a href="mensagens.html">
+                <span class="material-symbols-outlined">mark_email_unread</span> Mensagens
+            </a>
+            <a href="sobre.html">
+                <span class="material-symbols-outlined">info</span> Sobre
+            </a>
+            <a href="../index.html">
+                <span class="material-symbols-outlined">logout</span> Sair
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <header class="topo">
+            <div>
+                <h2>Entre em Contato</h2>
+                <p>Estamos aqui para ajudar você</p>
+            </div>
+            <div class="usuario">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Administrador</strong>
+                    <p>Funcionário</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="contato-container">
+            <div class="contato-info">
+                <h2>Nosso Contato</h2>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <span class="material-symbols-outlined">location_on</span>
+                    </div>
+                    <div class="info-content">
+                        <h3>Endereço</h3>
+                        <p>Rua Agrícola, 123<br>
+                        Zona Rural - Estado<br>
+                        Brasil, CEP 00000-000</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <span class="material-symbols-outlined">phone</span>
+                    </div>
+                    <div class="info-content">
+                        <h3>Telefone</h3>
+                        <p><a href="tel:+554699900000">(46) 99900-0000</a></p>
+                        <p style="margin-top: 4px; font-size: 12px;">Seg-Sex: 8h às 18h</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <span class="material-symbols-outlined">mail</span>
+                    </div>
+                    <div class="info-content">
+                        <h3>E-mail</h3>
+                        <p><a href="mailto:contato@agroleite.com.br">contato@agroleite.com.br</a></p>
+                        <p style="margin-top: 4px; font-size: 12px;">Respondemos em até 24h</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="info-content">
+                        <h3>Horário de Funcionamento</h3>
+                        <p>Segunda a Sexta: 8h às 18h<br>
+                        Sábado: 8h às 13h<br>
+                        Domingo: Fechado</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contato-form">
+                <h2>Envie uma Mensagem</h2>
+                <form id="form-contato" onsubmit="return enviarContato(event)">
+                    <div class="form-grupo">
+                        <label for="nome">Nome *</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="assunto">Assunto *</label>
+                        <input type="text" id="assunto" name="assunto" required placeholder="Qual o motivo do contato?">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" required placeholder="Descreva sua mensagem aqui..."></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function enviarContato(event) {
+            event.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+            const assunto = document.getElementById('assunto').value;
+            const mensagem = document.getElementById('mensagem').value;
+            
+            // Obter mensagens existentes
+            const dados = localStorage.getItem('agroleite_mensagens');
+            let mensagens = dados ? JSON.parse(dados) : [];
+            
+            // Criar novo ID
+            const novoId = mensagens.length > 0 ? Math.max(...mensagens.map(m => m.id)) + 1 : 1;
+            
+            // Adicionar nova mensagem
+            mensagens.push({
+                id: novoId,
+                nome: nome,
+                email: email,
+                telefone: telefone,
+                assunto: assunto,
+                mensagem: mensagem,
+                data: new Date().toISOString(),
+                lida: false
+            });
+            
+            // Salvar no localStorage
+            localStorage.setItem('agroleite_mensagens', JSON.stringify(mensagens));
+            
+            // Mostrar confirmação e redirecionar
+            alert(`Obrigado, ${nome}! Sua mensagem foi recebida com sucesso.\nVocê será redirecionado para a página de mensagens.`);
+            
+            // Redirecionar para a página de mensagens
+            window.location.href = 'mensagens.html';
+        }
+    </script>
+
+    <script>
+        // Atualizar badge de notificação de mensagens
+        function atualizarBadgeNotificacao() {
+            const dados = localStorage.getItem('agroleite_mensagens');
+            const mensagens = dados ? JSON.parse(dados) : [];
+            const naoLidas = mensagens.filter(m => !m.lida).length;
+            
+            const badges = document.querySelectorAll('#badge-notificacao');
+            badges.forEach(badge => {
+                if (naoLidas > 0) {
+                    badge.textContent = naoLidas;
+                    badge.style.display = 'flex';
+                } else {
+                    badge.style.display = 'none';
+                }
+            });
+        }
+        
+        // Atualizar ao carregar a página
+        atualizarBadgeNotificacao();
+        
+        // Atualizar a cada 1 segundo para sincronizar com outras abas
+        setInterval(atualizarBadgeNotificacao, 1000);
+    </script>
+
+</body>
+</html>
