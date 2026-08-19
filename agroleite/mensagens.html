@@ -1,1 +1,303 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROLEITE | Mensagens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <style>
+        .mensagens-container { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 28px 36px; }
+        .filtros-msg { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+        .filtros-msg input { margin: 0; flex: 1; min-width: 200px; max-width: 320px; }
+        .btn-acao { background: #f5f5f5; border: 1.5px solid #ddd; color: #666; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.2s; }
+        .btn-acao:hover { background: #e8f5e9; border-color: #c8e6c9; color: #1B5E20; }
+        .lista-mensagens { display: flex; flex-direction: column; gap: 12px; }
+        .mensagem-item { background: #fff; border: 1.5px solid #e0e0e0; border-radius: 12px; padding: 16px; cursor: pointer; transition: 0.2s; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+        .mensagem-item:hover { border-color: #2E7D32; box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1); }
+        .mensagem-item.nao-lida { background: #f5faf5; border-color: #c8e6c9; }
+        .mensagem-conteudo { flex: 1; }
+        .mensagem-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 12px; }
+        .mensagem-header h3 { margin: 0; color: #1B5E20; font-size: 15px; flex: 1; }
+        .mensagem-data { font-size: 12px; color: #999; white-space: nowrap; }
+        .mensagem-email { font-size: 13px; color: #2E7D32; text-decoration: none; margin-bottom: 4px; display: block; }
+        .mensagem-email:hover { text-decoration: underline; }
+        .mensagem-assunto { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 6px; }
+        .mensagem-preview { font-size: 13px; color: #666; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .mensagem-acoes { display: flex; gap: 4px; flex-shrink: 0; }
+        .btn-msg-acao { background: none; border: none; color: #999; cursor: pointer; padding: 6px; border-radius: 6px; transition: 0.2s; }
+        .btn-msg-acao:hover { background: #f0f0f0; color: #666; }
+        .btn-msg-acao.excluir:hover { background: #fdecea; color: #c62828; }
+        .badge-nao-lida { display: inline-block; background: #2E7D32; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; margin-right: 8px; }
+        .vazio-msg { text-align: center; padding: 60px 20px; color: #999; }
+        .vazio-msg .material-symbols-outlined { font-size: 48px; display: block; margin-bottom: 12px; color: #ddd; }
+        .modal-fundo { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+        .modal-fundo.aberto { display: flex; }
+        .modal-msg { background: #fff; border-radius: 16px; max-width: 560px; width: 100%; max-height: 90vh; overflow: auto; padding: 28px; }
+        .modal-msg h2 { margin: 0 0 16px 0; color: #1B5E20; }
+        .modal-info { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+        .modal-info label { color: #999; font-size: 12px; margin-bottom: 4px; font-weight: 600; display: block; }
+        .modal-info p { color: #333; margin: 0; }
+        .modal-msg-texto { color: #555; line-height: 1.8; margin-bottom: 20px; white-space: pre-wrap; word-wrap: break-word; }
+        .modal-acoes { display: flex; gap: 10px; justify-content: flex-end; }
+        .modal-acoes button { padding: 10px 16px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .modal-acoes .btn-fechar { background: #f5f5f5; color: #666; }
+        .modal-acoes .btn-fechar:hover { background: #e0e0e0; }
+        .modal-acoes .btn-excluir { background: #fdecea; color: #c62828; }
+        .modal-acoes .btn-excluir:hover { background: #f5bfbb; }
+        @media (max-width: 900px) {
+            .mensagens-container { padding: 20px 24px; }
+            .modal-info { grid-template-columns: 1fr; }
+            .mensagem-item { flex-direction: column; }
+            .mensagem-acoes { width: 100%; justify-content: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-img">🐄</div>
+            <h1>AGROLEITE</h1>
+            <p>Controle Inteligente para o Campo</p>
+        </div>
+        <nav>
+            <a href="home.html"><span class="material-symbols-outlined">home</span> Home</a>
+            <a href="clientes.html"><span class="material-symbols-outlined">group</span> Clientes</a>
+            <a href="servicos.html"><span class="material-symbols-outlined">construction</span> Serviços</a>
+            <a href="agendamentos.html"><span class="material-symbols-outlined">calendar_month</span> Agendamentos</a>
+            <a href="consulta_agendamentos.html"><span class="material-symbols-outlined">assignment</span> Consultas</a>
+            <a href="contato.html"><span class="material-symbols-outlined">mail</span> Contato</a>
+            <a class="ativo" href="mensagens.html">
+                <span class="material-symbols-outlined">mark_email_unread</span> Mensagens
+                <span id="badge-notificacao" style="display:none;background:#c62828;color:#fff;border-radius:10px;padding:2px 7px;font-size:11px;margin-left:6px;"></span>
+            </a>
+            <a href="sobre.html"><span class="material-symbols-outlined">info</span> Sobre</a>
+            <a href="../index.html"><span class="material-symbols-outlined">logout</span> Sair</a>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <header class="topo">
+            <div>
+                <h2>Mensagens Recebidas</h2>
+                <p>Gerencie contatos e mensagens</p>
+            </div>
+            <div class="usuario">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Administrador</strong>
+                    <p>Funcionário</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="mensagens-container">
+            <div class="caixa">
+                <div class="filtros-msg">
+                    <input type="text" id="busca-msg" placeholder="Buscar por nome, email ou assunto..." oninput="filtrarMensagens()">
+                    <button class="btn-acao" onclick="marcarTodasComoLidas()">Marcar como lidas</button>
+                </div>
+                <div id="lista-mensagens-container" class="lista-mensagens"></div>
+            </div>
+        </section>
+
+        <footer>
+            <strong>AGROLEITE</strong>
+            <p>Controle Inteligente para o Campo</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+    </main>
+
+    <div class="modal-fundo" id="modal-msg">
+        <div class="modal-msg">
+            <div id="modal-conteudo-msg"></div>
+            <div class="modal-acoes">
+                <button class="btn-fechar" onclick="fecharModalMsg()">Fechar</button>
+                <button class="btn-excluir" onclick="excluirMensagemAberta()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+let todasMensagens = [];
+let mensagemAberta = null;
+
+function escapeHtml(text) {
+    if (text == null) return '';
+    return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatarDataMsg(data) {
+    const d = new Date(data);
+    const hoje = new Date();
+    const diferenca = hoje - d;
+    const minutos = Math.floor(diferenca / 60000);
+    const horas = Math.floor(diferenca / 3600000);
+    const dias = Math.floor(diferenca / 86400000);
+    if (minutos < 1) return 'Agora';
+    if (minutos < 60) return minutos + 'm atrás';
+    if (horas < 24) return horas + 'h atrás';
+    if (dias < 7) return dias + 'd atrás';
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' });
+}
+
+function htmlMensagemItem(msg) {
+    return '<div class="mensagem-item ' + (msg.lida ? '' : 'nao-lida') + '" onclick="abrirMensagem(' + msg.id + ')">' +
+        '<div class="mensagem-conteudo">' +
+        '<div class="mensagem-header"><div>' +
+        (msg.lida ? '' : '<span class="badge-nao-lida">Novo</span>') +
+        '<h3>' + escapeHtml(msg.nome) + '</h3></div>' +
+        '<span class="mensagem-data">' + formatarDataMsg(msg.data) + '</span></div>' +
+        '<a href="mailto:' + escapeHtml(msg.email) + '" class="mensagem-email" onclick="event.stopPropagation()">' + escapeHtml(msg.email) + '</a>' +
+        '<div class="mensagem-assunto">Assunto: ' + escapeHtml(msg.assunto) + '</div>' +
+        '<div class="mensagem-preview">' + escapeHtml(msg.mensagem) + '</div></div>' +
+        '<div class="mensagem-acoes">' +
+        '<button class="btn-msg-acao" onclick="event.stopPropagation(); marcarComoLida(' + msg.id + ', ' + (!msg.lida) + ')" title="' + (msg.lida ? 'Marcar como não lida' : 'Marcar como lida') + '">' +
+        '<span class="material-symbols-outlined">' + (msg.lida ? 'drafts' : 'mail') + '</span></button>' +
+        '<button class="btn-msg-acao excluir" onclick="event.stopPropagation(); excluirMensagem(' + msg.id + ')" title="Excluir">' +
+        '<span class="material-symbols-outlined">delete</span></button></div></div>';
+}
+
+async function carregarMensagens() {
+    try {
+        const res = await fetch('/listar-mensagens');
+        if (!res.ok) throw new Error('Falha ao carregar');
+        todasMensagens = await res.json();
+        renderizarMensagens();
+        atualizarNotificacao();
+    } catch (e) {
+        console.error(e);
+        const container = document.getElementById('lista-mensagens-container');
+        if (container) {
+            container.innerHTML = '<div class="vazio-msg"><span class="material-symbols-outlined">error</span><p>Erro ao carregar. Rode <strong>npm start</strong> no servidor.</p></div>';
+        }
+    }
+}
+
+function renderizarMensagens() {
+    const container = document.getElementById('lista-mensagens-container');
+    if (!todasMensagens || todasMensagens.length === 0) {
+        container.innerHTML = '<div class="vazio-msg"><span class="material-symbols-outlined">mail_outline</span><p>Nenhuma mensagem recebida.</p><p style="font-size:13px;margin-top:8px;">Envie pela página <a href="contato.html" style="color:#2E7D32;font-weight:600;">Contato</a>.</p></div>';
+        return;
+    }
+    const ordenadas = [...todasMensagens].sort((a, b) => new Date(b.data) - new Date(a.data));
+    container.innerHTML = ordenadas.map(htmlMensagemItem).join('');
+}
+
+function filtrarMensagens() {
+    const termo = document.getElementById('busca-msg').value.toLowerCase().trim();
+    const container = document.getElementById('lista-mensagens-container');
+    if (!termo) { renderizarMensagens(); return; }
+    const filtradas = todasMensagens.filter(msg =>
+        (msg.nome || '').toLowerCase().includes(termo) ||
+        (msg.email || '').toLowerCase().includes(termo) ||
+        (msg.assunto || '').toLowerCase().includes(termo) ||
+        (msg.mensagem || '').toLowerCase().includes(termo)
+    );
+    if (filtradas.length === 0) {
+        container.innerHTML = '<div class="vazio-msg"><p>Nenhuma mensagem encontrada.</p></div>';
+        return;
+    }
+    const ordenadas = [...filtradas].sort((a, b) => new Date(b.data) - new Date(a.data));
+    container.innerHTML = ordenadas.map(htmlMensagemItem).join('');
+}
+
+async function abrirMensagem(id) {
+    const msg = todasMensagens.find(m => m.id === id);
+    if (!msg) return;
+    mensagemAberta = id;
+    if (!msg.lida) {
+        await marcarComoLida(id, true, false);
+        msg.lida = true;
+    }
+    document.getElementById('modal-conteudo-msg').innerHTML =
+        '<h2>' + escapeHtml(msg.nome) + '</h2>' +
+        '<div class="modal-info">' +
+        '<div><label>De:</label><p><a href="mailto:' + escapeHtml(msg.email) + '" class="mensagem-email">' + escapeHtml(msg.email) + '</a></p></div>' +
+        '<div><label>Telefone:</label><p>' + (escapeHtml(msg.telefone) || '—') + '</p></div>' +
+        '<div><label>Assunto:</label><p>' + escapeHtml(msg.assunto) + '</p></div>' +
+        '<div><label>Data:</label><p>' + new Date(msg.data).toLocaleDateString('pt-BR') + ' às ' + new Date(msg.data).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}) + '</p></div>' +
+        '</div><div class="modal-msg-texto">' + escapeHtml(msg.mensagem) + '</div>';
+    document.getElementById('modal-msg').classList.add('aberto');
+    renderizarMensagens();
+    atualizarNotificacao();
+}
+
+function fecharModalMsg() {
+    document.getElementById('modal-msg').classList.remove('aberto');
+    mensagemAberta = null;
+}
+
+async function marcarComoLida(id, lida, recarregar) {
+    if (recarregar === undefined) recarregar = true;
+    try {
+        const res = await fetch('/marcar-mensagem/' + id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ lida: !!lida })
+        });
+        if (!res.ok) throw new Error('Falha');
+        const msg = todasMensagens.find(m => m.id === id);
+        if (msg) msg.lida = !!lida;
+        if (recarregar) { renderizarMensagens(); atualizarNotificacao(); }
+    } catch (e) {
+        console.error(e);
+        alert('Erro ao atualizar mensagem.');
+    }
+}
+
+async function marcarTodasComoLidas() {
+    try {
+        const res = await fetch('/marcar-todas-lidas', { method: 'PUT' });
+        if (!res.ok) throw new Error('Falha');
+        todasMensagens.forEach(m => m.lida = true);
+        renderizarMensagens();
+        atualizarNotificacao();
+    } catch (e) {
+        console.error(e);
+        alert('Erro ao marcar mensagens como lidas.');
+    }
+}
+
+async function excluirMensagem(id) {
+    if (!confirm('Tem certeza que deseja excluir esta mensagem?')) return;
+    try {
+        const res = await fetch('/excluir-mensagem/' + id, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Falha');
+        todasMensagens = todasMensagens.filter(m => m.id !== id);
+        if (mensagemAberta === id) fecharModalMsg();
+        renderizarMensagens();
+        atualizarNotificacao();
+    } catch (e) {
+        console.error(e);
+        alert('Erro ao excluir mensagem.');
+    }
+}
+
+function excluirMensagemAberta() {
+    if (mensagemAberta !== null) excluirMensagem(mensagemAberta);
+}
+
+function atualizarNotificacao() {
+    const naoLidas = todasMensagens.filter(m => !m.lida).length;
+    const badge = document.getElementById('badge-notificacao');
+    if (!badge) return;
+    if (naoLidas > 0) {
+        badge.textContent = naoLidas;
+        badge.style.display = 'flex';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+carregarMensagens();
+setInterval(carregarMensagens, 5000);
+document.getElementById('modal-msg').addEventListener('click', function(e) {
+    if (e.target.id === 'modal-msg') fecharModalMsg();
+});
+</script>
+</body>
+</html>
